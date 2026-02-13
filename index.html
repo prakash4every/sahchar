@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="hi">
-<head> 
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>सहचर | Sahchar – करुणा और सकारात्मकता का साथी</title>
@@ -12,9 +12,9 @@
 
     <style>
         :root {
-            --primary: #a52a2a;          /* गहरा लाल-भूरा */
+            --primary: #a52a2a;
             --primary-light: #c0392b;
-            --accent: #f4c430;           /* हल्का सुनहरा */
+            --accent: #f4c430;
             --text-dark: #2c3e50;
             --text-light: #34495e;
             --bg: #fdfdfd;
@@ -47,7 +47,7 @@
         header::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            inset: 0;
             background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0%, transparent 60%);
             pointer-events: none;
         }
@@ -169,6 +169,35 @@
             box-shadow: 0 8px 20px rgba(165,42,42,0.25);
         }
 
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .video-card video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -185,14 +214,6 @@
 
         .gallery img:hover {
             transform: scale(1.06);
-        }
-
-        .post {
-            background: white;
-            padding: 1.8rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin: 1.5rem 0;
         }
 
         footer {
@@ -212,112 +233,174 @@
 </head>
 <body>
 
-<header>
-    <h1>सहचर (Sahchar)</h1>
-    <p>सकारात्मक सोच • करुणा • सामाजिक सहयोग • बुद्ध की शिक्षाएँ</p>
+    <header>
+        <h1>सहचर (Sahchar)</h1>
+        <p>सकारात्मक सोच • करुणा • सामाजिक सहयोग • बुद्ध की शिक्षाएँ</p>
 
-    <nav>
-        <a href="#">मुख्य पृष्ठ</a>
-        <a href="#">बुद्ध विचार</a>
-        <a href="#">सामाजिक सेवा</a>
-        <a href="#">गैलरी</a>
-        <a href="#">संपर्क</a>
-    </nav>
-</header>
+        <nav>
+            <a href="#">मुख्य पृष्ठ</a>
+            <a href="#">बुद्ध विचार</a>
+            <a href="#">सामाजिक सेवा</a>
+            <a href="#">गैलरी</a>
+            <a href="#">संपर्क</a>
+        </nav>
+    </header>
 
-<section>
-    <h2>हमारे बारे में</h2>
-    <div class="card" style="text-align:center; max-width:800px; margin:auto;">
-        <p style="font-size:1.15rem;">
-            सहचर एक ऐसा मंच है जहाँ हम भगवान बुद्ध की शिक्षाओं, सकारात्मक संदेशों, 
-            करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं।<br><br>
-            हमारा लक्ष्य है – हर व्यक्ति के मन में शांति और समाज में सहानुभूति का प्रसार करना।
-        </p>
-    </div>
-</section>
-
-<section>
-    <h2>करुणा का संदेश</h2>
-    <div class="card">
-        <p class="quote">
-            “घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”
-        </p>
-        <p style="text-align:center; color:var(--text-light);">
-            – गौतम बुद्ध
-        </p>
-        <div style="text-align:center; margin-top:1.5rem;">
-            <small>12 फरवरी 2026</small>
+    <section>
+        <h2>हमारे बारे में</h2>
+        <div class="card" style="text-align:center; max-width:800px; margin:auto;">
+            <p style="font-size:1.15rem;">
+                सहचर एक ऐसा मंच है जहाँ हम भगवान बुद्ध की शिक्षाओं, सकारात्मक संदेशों, 
+                करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं।<br><br>
+                हमारा लक्ष्य है – हर व्यक्ति के मन में शांति और समाज में सहानुभूति का प्रसार करना।
+            </p>
         </div>
-    </div>
-</section>
+    </section>
 
-<section>
-    <h2>बुद्ध के अमर विचार</h2>
-    <div class="card">
-        <p class="quote">“सभी संकल्प अनित्य हैं।”</p>
-        <p style="text-align:center; margin:1.5rem 0;">
-            जीवन परिवर्तनशील है। इसे समझ लेने वाला दुख से मुक्त होने का मार्ग पा लेता है।
-        </p>
-        <div style="text-align:center;">
-            <a href="#" class="btn">और विचार पढ़ें</a>
+    <section>
+        <h2>करुणा का संदेश</h2>
+        <div class="card">
+            <p class="quote">
+                “घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”
+            </p>
+            <p style="text-align:center; color:var(--text-light);">
+                – गौतम बुद्ध
+            </p>
+            <div style="text-align:center; margin-top:1.5rem;">
+                <small>12 फरवरी 2026</small>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section>
-    <h2>वीडियो गैलरी</h2>
-    <div class="card" style="padding:0.5rem;">
-        <video width="100%" controls style="border-radius:12px;">
-            <source src="1769448585109.mp4" type="video/mp4">
-            आपका ब्राउज़र वीडियो सपोर्ट नहीं करता।
-        </video>
-    </div>
-</section>
-
-<section>
-    <h2>हमारी गैलरी</h2>
-    <div class="gallery">
-        <https://raw.githubusercontent.com/USERNAME/REPO/main/FILENAME.mp4
-        <img src="images/photo2.jpg" alt="सहचर गैलरी 2">
-        <img src="images/photo3.jpg" alt="सहचर गैलरी 3">
-        <img src="images/photo4.jpg" alt="सहचर गैलरी 4">
-        <!-- आप और इमेज यहाँ जोड़ सकते हैं -->
-    </div>
-</section>
-
-<section>
-    <h2>सामाजिक सेवा</h2>
-    <div class="card">
-        <p style="font-size:1.1rem;">
-            हम शिक्षा, स्वास्थ्य जागरूकता, पर्यावरण संरक्षण, गरीबों की सहायता 
-            और अन्य जनकल्याणकारी कार्यों में सक्रिय योगदान देते हैं।
-        </p>
-        <div style="text-align:center; margin-top:2rem;">
-            <a href="#" class="btn">हमारे कार्य जानें</a>
+    <section>
+        <h2>बुद्ध के अमर विचार</h2>
+        <div class="card">
+            <p class="quote">“सभी संकल्प अनित्य हैं।”</p>
+            <p style="text-align:center; margin:1.5rem 0;">
+                जीवन परिवर्तनशील है। इसे समझ लेने वाला दुख से मुक्त होने का मार्ग पा लेता है।
+            </p>
+            <div style="text-align:center;">
+                <a href="#" class="btn">और विचार पढ़ें</a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section>
-    <h2>संपर्क करें</h2>
-    <div class="card" style="text-align:center;">
-        <p style="font-size:1.1rem; margin-bottom:1rem;">
-            Email: <strong>prakash4every@yahoo.com</strong>
+    <section>
+        <h2>वीडियो गैलरी</h2>
+        <p style="text-align:center; color:#555; margin-bottom:2rem;">
+            हमारे संदेशों और विचारों को वीडियो के माध्यम से देखें
         </p>
-        <p style="margin:1.5rem 0;">
-            हमारी Facebook Page पर जुड़ें और नवीनतम अपडेट पाएँ
-        </p>
-        <a href="https://www.facebook.com/share/188ZTezbTo/" 
-           target="_blank" 
-           class="btn" style="font-size:1.1rem;">
-           Facebook पेज पर जाएँ
-        </a>
-    </div>
-</section>
 
-<footer>
-    <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
-</footer>
+        <div class="video-gallery">
+            <!-- सभी वीडियो यहां जोड़े गए हैं (repo से नाम लिए गए) -->
+            <div class="video-card">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448585109.mp4" type="video/mp4">
+                    ब्राउज़र वीडियो सपोर्ट नहीं करता।
+                </video>
+                <div class="video-info">
+                    <h4>करुणा का संदेश</h4>
+                    <small>फरवरी 2026</small>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448476731.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>बुद्ध विचार - प्रेम</h4>
+                    <small>फरवरी 2026</small>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448349817.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>सकारात्मक सोच</h4>
+                    <small>फरवरी 2026</small>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549640292.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>शांति का मार्ग</h4>
+                    <small>फरवरी 2026</small>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549508264.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>करुणा और सहयोग</h4>
+                    <small>फरवरी 2026</small>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549393477.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>बुद्ध शिक्षाएँ</h4>
+                    <small>फरवरी 2026</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>हमारी गैलरी</h2>
+        <div class="gallery">
+            <!-- अभी कोई इमेज नहीं है (repo में images folder नहीं) -->
+            <!-- अगर इमेज अपलोड करें तो यहाँ src="https://raw.githubusercontent.com/prakash4every/sahchar/main/your-image.jpg" डालें -->
+            <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem;">
+                अभी फोटो गैलरी में कोई चित्र उपलब्ध नहीं है।<br>
+                कृपया images अपलोड करें और यहाँ जोड़ें।
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>सामाजिक सेवा</h2>
+        <div class="card">
+            <p style="font-size:1.1rem;">
+                हम शिक्षा, स्वास्थ्य जागरूकता, पर्यावरण संरक्षण, गरीबों की सहायता 
+                और अन्य जनकल्याणकारी कार्यों में सक्रिय योगदान देते हैं।
+            </p>
+            <div style="text-align:center; margin-top:2rem;">
+                <a href="#" class="btn">हमारे कार्य जानें</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>संपर्क करें</h2>
+        <div class="card" style="text-align:center;">
+            <p style="font-size:1.1rem; margin-bottom:1rem;">
+                Email: <strong>prakash4every@yahoo.com</strong>
+            </p>
+            <p style="margin:1.5rem 0;">
+                हमारी Facebook Page पर जुड़ें और नवीनतम अपडेट पाएँ
+            </p>
+            <a href="https://www.facebook.com/share/188ZTezbTo/" 
+               target="_blank" 
+               class="btn" style="font-size:1.1rem;">
+               Facebook पेज पर जाएँ
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
+    </footer>
 
 </body>
 </html>
