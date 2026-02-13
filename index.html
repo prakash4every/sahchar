@@ -1,185 +1,322 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>सहचर | Sahchar</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>सहचर | Sahchar – करुणा और सकारात्मकता का साथी</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        .gallery img{
-    width: 100%;
-    max-width: 250px;
-    margin: 10px;
-    border-radius: 8px;
+        :root {
+            --primary: #a52a2a;          /* गहरा लाल-भूरा */
+            --primary-light: #c0392b;
+            --accent: #f4c430;           /* हल्का सुनहरा */
+            --text-dark: #2c3e50;
+            --text-light: #34495e;
+            --bg: #fdfdfd;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 30px rgba(0,0,0,0.08);
         }
-        body {
+
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #fdfdfd, #f0f4f8);
+            color: var(--text-dark);
+            line-height: 1.7;
         }
 
         header {
-            background: #b30000;
+            background: linear-gradient(135deg, var(--primary) 0%, #7f0000 100%);
             color: white;
-            padding: 20px;
+            padding: 5rem 1rem 4rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Noto Serif Devanagari', serif;
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         nav {
-            margin-top: 10px;
+            margin-top: 1.8rem;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
+            margin: 0 1.2rem;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        nav a:hover,
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.4s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         section {
-            padding: 40px 20px;
-            max-width: 1000px;
-            margin: auto;
+            padding: 4rem 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         h2 {
-            color: #b30000;
-            border-bottom: 2px solid #b30000;
-            padding-bottom: 5px;
+            font-family: 'Noto Serif Devanagari', serif;
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
         }
 
         .card {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.35s ease;
+            margin: 1.5rem 0;
         }
 
-        footer {
-            background: #222;
-            color: white;
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
+        .quote {
+            font-family: 'Noto Serif Devanagari', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
             text-align: center;
-            padding: 15px;
-            margin-top: 40px;
+            margin: 1.5rem 0;
+            font-style: italic;
         }
 
         .btn {
             display: inline-block;
-            padding: 10px 20px;
-            background: #b30000;
+            background: var(--primary);
             color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 1rem;
         }
 
         .btn:hover {
-            background: #800000;
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(165,42,42,0.25);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.06);
+        }
+
+        .post {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 1.5rem 0;
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.3rem; }
+            nav a { margin: 0 0.8rem; font-size: 0.95rem; }
+            section { padding: 3rem 1rem; }
         }
     </style>
 </head>
-
 <body>
 
 <header>
-    <h1>सहचर (Sahchar) – सकारात्मक सोच और सामाजिक सहयोग का मंच</h1>
+    <h1>सहचर (Sahchar)</h1>
+    <p>सकारात्मक सोच • करुणा • सामाजिक सहयोग • बुद्ध की शिक्षाएँ</p>
+
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Buddha Thoughts</a>
-        <a href="#">Social Service</a>
-        <a href="#">Gallery</a>
-        <a href="#">Contact</a>
+        <a href="#">मुख्य पृष्ठ</a>
+        <a href="#">बुद्ध विचार</a>
+        <a href="#">सामाजिक सेवा</a>
+        <a href="#">गैलरी</a>
+        <a href="#">संपर्क</a>
     </nav>
 </header>
 
 <section>
     <h2>हमारे बारे में</h2>
-    <div class="card">
-        <p>
-            सहचर एक ऐसा मंच है जहाँ हम बुद्ध के विचार, सामाजिक जागरूकता, 
-            सकारात्मक संदेश और जनहित की जानकारी साझा करते हैं। 
-            हमारा उद्देश्य है – करुणा, सहयोग और जागरूकता का प्रसार।
+    <div class="card" style="text-align:center; max-width:800px; margin:auto;">
+        <p style="font-size:1.15rem;">
+            सहचर एक ऐसा मंच है जहाँ हम भगवान बुद्ध की शिक्षाओं, सकारात्मक संदेशों, 
+            करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं।<br><br>
+            हमारा लक्ष्य है – हर व्यक्ति के मन में शांति और समाज में सहानुभूति का प्रसार करना।
         </p>
     </div>
 </section>
-<section id="posts">
-    <h2><section>
-    <h2>वीडियो गैलरी</h2>
 
+<section>
+    <h2>करुणा का संदेश</h2>
     <div class="card">
-        <video width="100%" controls>
+        <p class="quote">
+            “घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”
+        </p>
+        <p style="text-align:center; color:var(--text-light);">
+            – गौतम बुद्ध
+        </p>
+        <div style="text-align:center; margin-top:1.5rem;">
+            <small>12 फरवरी 2026</small>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>बुद्ध के अमर विचार</h2>
+    <div class="card">
+        <p class="quote">“सभी संकल्प अनित्य हैं।”</p>
+        <p style="text-align:center; margin:1.5rem 0;">
+            जीवन परिवर्तनशील है। इसे समझ लेने वाला दुख से मुक्त होने का मार्ग पा लेता है।
+        </p>
+        <div style="text-align:center;">
+            <a href="#" class="btn">और विचार पढ़ें</a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>वीडियो गैलरी</h2>
+    <div class="card" style="padding:0.5rem;">
+        <video width="100%" controls style="border-radius:12px;">
             <source src="1769448585109.mp4" type="video/mp4">
-            आपका browser video support नहीं करता।
+            आपका ब्राउज़र वीडियो सपोर्ट नहीं करता।
         </video>
     </div>
-    </section></h2>
-
-    <div class="post">
-        <h3>करुणा का संदेश</h3>
-        <p>“घृणा से घृणा समाप्त नहीं होती, प्रेम से समाप्त होती है।”</p>
-        <small>12 Feb 2026</small>
-    </div>
-
 </section>
+
 <section>
-    <h2>बुद्ध विचार</h2>
-    <div class="card">
-        <h3>“सभी संकल्प अनित्य हैं।”</h3>
-        <p>
-            जीवन परिवर्तनशील है। जो इसे समझ लेता है, वह दुख से मुक्त होने का मार्ग पा लेता है।
-        </p>
-        <a href="#" class="btn">और पढ़ें</a>
+    <h2>हमारी गैलरी</h2>
+    <div class="gallery">
+        <img src="images/photo1.jpg" alt="सहचर गैलरी 1">
+        <img src="images/photo2.jpg" alt="सहचर गैलरी 2">
+        <img src="images/photo3.jpg" alt="सहचर गैलरी 3">
+        <img src="images/photo4.jpg" alt="सहचर गैलरी 4">
+        <!-- आप और इमेज यहाँ जोड़ सकते हैं -->
     </div>
 </section>
 
 <section>
     <h2>सामाजिक सेवा</h2>
     <div class="card">
-        <p>
-            हम सामाजिक सुरक्षा जागरूकता, शिक्षा, और जनहित के विषयों पर 
-            जानकारी साझा करते हैं। 
+        <p style="font-size:1.1rem;">
+            हम शिक्षा, स्वास्थ्य जागरूकता, पर्यावरण संरक्षण, गरीबों की सहायता 
+            और अन्य जनकल्याणकारी कार्यों में सक्रिय योगदान देते हैं।
         </p>
-        <a href="#" class="btn">जानकारी देखें</a>
-    </div>
-</section>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
-</script>
-<section>
-   <section>
-    <h2>गैलरी</h2>
-
-    <div class="card">
-        <div class="gallery">
-            <img src="images/photo1.jpg" alt="Photo 1">
-            <img src="images/photo2.jpg" alt="Photo 2">
-            <img src="images/photo3.jpg" alt="Photo 3">
-            <img src="images/photo4.jpg" alt="Photo 4">
+        <div style="text-align:center; margin-top:2rem;">
+            <a href="#" class="btn">हमारे कार्य जानें</a>
         </div>
     </div>
-   </section> 
+</section>
 
 <section>
     <h2>संपर्क करें</h2>
-    <div class="card">
-        <p>Email: prakash4every@yahoo.com</p>
-        <p>Facebook Page: Sahchar </p>
+    <div class="card" style="text-align:center;">
+        <p style="font-size:1.1rem; margin-bottom:1rem;">
+            Email: <strong>prakash4every@yahoo.com</strong>
+        </p>
+        <p style="margin:1.5rem 0;">
+            हमारी Facebook Page पर जुड़ें और नवीनतम अपडेट पाएँ
+        </p>
         <a href="https://www.facebook.com/share/188ZTezbTo/" 
-   target="_blank" 
-   class="btn">
-   Facebook Page Visit करें
+           target="_blank" 
+           class="btn" style="font-size:1.1rem;">
+           Facebook पेज पर जाएँ
         </a>
     </div>
 </section>
 
 <footer>
-    <p>© 2026 सहचर | सभी अधिकार सुरक्षित</p>
+    <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
 </footer>
 
 </body>
