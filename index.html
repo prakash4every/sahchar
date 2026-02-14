@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+        /* आपका पिछला स्टाइल यथावत */
         :root {
             --primary: #a52a2a;
             --primary-light: #c0392b;
@@ -267,7 +268,7 @@
                 – गौतम बुद्ध
             </p>
             <div style="text-align:center; margin-top:1.5rem;">
-      
+                <small>12 फरवरी 2026</small>
             </div>
         </div>
     </section>
@@ -291,23 +292,16 @@
             हमारे संदेशों और विचारों को वीडियो के माध्यम से देखें
         </p>
 
-        <!-- यह डिव अब पूरी तरह खाली है – JavaScript इसे भरेगा -->
+        <!-- वीडियो गैलरी खाली, JavaScript भरेगा -->
         <div class="video-gallery"></div>
     </section>
 
     <section>
         <h2>हमारी गैलरी</h2>
-        <div class="gallery">
-            <!-- इमेज का लिंक – अगर फ़ाइल मौजूद है तो दिखेगी -->
-            <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/morning-blessing.jpg" 
-                 alt="सुबह की करुणा – नमो बुद्धाय" 
-                 loading="lazy"
-                 style="border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
-
-            <!-- जब तक और इमेज न हों, यह संदेश दिखेगा -->
+        <!-- इमेज गैलरी के लिए कंटेनर, JavaScript भरेगा -->
+        <div class="gallery" id="image-gallery">
             <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem; font-style:italic;">
-                गैलरी में सुबह की शांति वाली तस्वीरें जल्द ही आएँगी 🌿<br>
-                नमो बुद्धाय।
+                गैलरी लोड हो रही है... 🌿
             </p>
         </div>
     </section>
@@ -346,9 +340,9 @@
         <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
     </footer>
 
-    <!-- स्क्रिप्ट – वीडियो गैलरी को डायनामिक बनाती है -->
+    <!-- स्क्रिप्ट सेक्शन: वीडियो और इमेज के लिए ऑटोमेशन -->
     <script>
-        // वीडियो फ़ाइलों के नाम (भविष्य में आप GitHub API से भी ले सकते हैं)
+        // ========== 1. वीडियो गैलरी (आपके array से) ==========
         const videoFiles = [
             "1769448585109.mp4",
             "1769448476731.mp4",
@@ -358,11 +352,9 @@
             "1767549393477.mp4"
         ];
 
-        const galleryContainer = document.querySelector('.video-gallery');
-        if (galleryContainer) {
-            // पुरानी कोई सामग्री हटाएँ (खाली होने पर भी सुरक्षित रहता है)
-            galleryContainer.innerHTML = ''; 
-
+        const videoGallery = document.querySelector('.video-gallery');
+        if (videoGallery) {
+            videoGallery.innerHTML = ''; // खाली करें
             videoFiles.forEach(file => {
                 const card = document.createElement('div');
                 card.className = 'video-card';
@@ -371,13 +363,55 @@
                         <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${file}" type="video/mp4">
                     </video>
                     <div class="video-info">
-                        <h4>${file.replace('.mp4','')}</h4>
+                        <h4>${file.replace('.mp4', '')}</h4>
                         <small>फरवरी 2026</small>
                     </div>
                 `;
-                galleryContainer.appendChild(card);
+                videoGallery.appendChild(card);
             });
         }
+
+        // ========== 2. इमेज गैलरी (GitHub API से ऑटोमैटिक) ==========
+        async function loadImages() {
+            const gallery = document.getElementById('image-gallery');
+            try {
+                // GitHub API से images फ़ोल्डर की सामग्री लें
+                const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images';
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Failed to fetch images');
+                const files = await response.json();
+
+                // केवल इमेज फ़ाइलें चुनें (jpg, jpeg, png, gif, bmp, webp)
+                const imageFiles = files.filter(file => 
+                    file.name.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)
+                );
+
+                if (imageFiles.length === 0) {
+                    gallery.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; padding:2rem;">कोई छवि नहीं मिली</p>';
+                    return;
+                }
+
+                // कंटेनर खाली करें
+                gallery.innerHTML = '';
+
+                // सभी इमेज के लिए img टैग बनाएँ
+                imageFiles.forEach(file => {
+                    const img = document.createElement('img');
+                    img.src = file.download_url; // GitHub का raw URL
+                    img.alt = file.name;
+                    img.loading = 'lazy';
+                    img.style.borderRadius = '12px';
+                    img.style.boxShadow = '0 6px 20px rgba(0,0,0,0.1)';
+                    gallery.appendChild(img);
+                });
+            } catch (error) {
+                console.error('Error loading images:', error);
+                gallery.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; padding:2rem;">गैलरी लोड करने में त्रुटि हुई</p>';
+            }
+        }
+
+        // इमेज लोड करें
+        loadImages();
     </script>
 </body>
 </html>
