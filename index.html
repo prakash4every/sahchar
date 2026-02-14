@@ -411,4 +411,35 @@
     </footer>
 
 </body>
+<script>
+// यह मानकर चल रहा है कि सारी .mp4 फ़ाइलें एक ही फ़ोल्डर में हैं और नामों की सूची पता है।
+// अगर GitHub API से लेना हो तो अलग तरीका होगा।
+const videoFiles = [
+  "1769448585109.mp4",
+  "1769448476731.mp4",
+  "1769448349817.mp4",
+  "1767549640292.mp4",
+  "1767549508264.mp4",
+  "1767549393477.mp4"
+]; // यहाँ नाम हाथ से लिखने पड़ेंगे, लेकिन अगर किसी JSON या API से मिल जाएँ तो पूरी तरह स्वतः हो सकता है।
+
+const galleryContainer = document.querySelector('.video-gallery');
+if (galleryContainer) {
+  galleryContainer.innerHTML = ''; // पुराने हटाओ
+  videoFiles.forEach(file => {
+    const card = document.createElement('div');
+    card.className = 'video-card';
+    card.innerHTML = `
+      <video controls>
+        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${file}" type="video/mp4">
+      </video>
+      <div class="video-info">
+        <h4>${file.replace('.mp4','')}</h4>
+        <small>फरवरी 2026</small>
+      </div>
+    `;
+    galleryContainer.appendChild(card);
+  });
+}
+</script>
 </html>
