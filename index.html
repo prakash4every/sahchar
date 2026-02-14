@@ -360,14 +360,15 @@
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.innerHTML = `
-    <video controls>
+    <video controls preload="none"
+        poster="https://raw.githubusercontent.com/prakash4every/sahchar/main/thumbnails/${file.replace('.mp4','.jpg')}">
         <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${file}" type="video/mp4">
     </video>
-                    <div class="video-info">
-                        <h4>${file.replace('.mp4', '')}</h4>
-                        <small>फरवरी 2026</small>
-                    </div>
-                `;
+    <div class="video-info">
+        <h4>${file.replace('.mp4', '')}</h4>
+        <small>फरवरी 2026</small>
+    </div>
+`;
                 videoGallery.appendChild(card);
             });
         }
