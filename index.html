@@ -360,9 +360,9 @@
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.innerHTML = `
-                    <video controls>
-                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${file}" type="video/mp4">
-                    </video>
+    <video controls preload="none">
+        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${file}" type="video/mp4">
+    </video>
                     <div class="video-info">
                         <h4>${file.replace('.mp4', '')}</h4>
                         <small>फरवरी 2026</small>
