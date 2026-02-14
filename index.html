@@ -291,82 +291,26 @@
             हमारे संदेशों और विचारों को वीडियो के माध्यम से देखें
         </p>
 
-        <div class="video-gallery">
-           
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448476731.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>बुद्ध विचार - प्रेम</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448349817.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>सकारात्मक सोच</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549640292.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>शांति का मार्ग</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549508264.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>करुणा और सहयोग</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549393477.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>बुद्ध शिक्षाएँ</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-        </div>
+        <!-- यह डिव अब पूरी तरह खाली है – JavaScript इसे भरेगा -->
+        <div class="video-gallery"></div>
     </section>
 
     <section>
-    <h2>हमारी गैलरी</h2>
-    <div class="gallery">
-        <!-- अब इमेज दिखेगी अगर अपलोड सही हुई -->
-        <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/morning-blessing.jpg" 
-             alt="सुबह की करुणा – नमो बुद्धाय" 
-             loading="lazy"
-             style="border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+        <h2>हमारी गैलरी</h2>
+        <div class="gallery">
+            <!-- इमेज का लिंक – अगर फ़ाइल मौजूद है तो दिखेगी -->
+            <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/morning-blessing.jpg" 
+                 alt="सुबह की करुणा – नमो बुद्धाय" 
+                 loading="lazy"
+                 style="border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
 
-        <!-- अगर और इमेज हैं तो इसी तरह जोड़ो -->
-        <!-- <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/another-image.jpg" alt="..."> -->
-
-        <!-- अगर अभी कोई इमेज नहीं दिख रही तो fallback मैसेज -->
-        <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem; font-style:italic;">
-            गैलरी में सुबह की शांति वाली तस्वीरें जल्द ही आएँगी 🌿<br>
-            नमो बुद्धाय।
-        </p>
-    </div>
-</section>
+            <!-- जब तक और इमेज न हों, यह संदेश दिखेगा -->
+            <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem; font-style:italic;">
+                गैलरी में सुबह की शांति वाली तस्वीरें जल्द ही आएँगी 🌿<br>
+                नमो बुद्धाय।
+            </p>
+        </div>
+    </section>
 
     <section>
         <h2>सामाजिक सेवा</h2>
@@ -402,36 +346,38 @@
         <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
     </footer>
 
-</body>
-<script>
-// यह मानकर चल रहा है कि सारी .mp4 फ़ाइलें एक ही फ़ोल्डर में हैं और नामों की सूची पता है।
-// अगर GitHub API से लेना हो तो अलग तरीका होगा।
-const videoFiles = [
-  "1769448585109.mp4",
-  "1769448476731.mp4",
-  "1769448349817.mp4",
-  "1767549640292.mp4",
-  "1767549508264.mp4",
-  "1767549393477.mp4"
-]; // यहाँ नाम हाथ से लिखने पड़ेंगे, लेकिन अगर किसी JSON या API से मिल जाएँ तो पूरी तरह स्वतः हो सकता है।
+    <!-- स्क्रिप्ट – वीडियो गैलरी को डायनामिक बनाती है -->
+    <script>
+        // वीडियो फ़ाइलों के नाम (भविष्य में आप GitHub API से भी ले सकते हैं)
+        const videoFiles = [
+            "1769448585109.mp4",
+            "1769448476731.mp4",
+            "1769448349817.mp4",
+            "1767549640292.mp4",
+            "1767549508264.mp4",
+            "1767549393477.mp4"
+        ];
 
-const galleryContainer = document.querySelector('.video-gallery');
-if (galleryContainer) {
-  galleryContainer.innerHTML = ''; // पुराने हटाओ
-  videoFiles.forEach(file => {
-    const card = document.createElement('div');
-    card.className = 'video-card';
-    card.innerHTML = `
-      <video controls>
-        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${file}" type="video/mp4">
-      </video>
-      <div class="video-info">
-        <h4>${file.replace('.mp4','')}</h4>
-        <small>फरवरी 2026</small>
-      </div>
-    `;
-    galleryContainer.appendChild(card);
-  });
-}
-</script>
+        const galleryContainer = document.querySelector('.video-gallery');
+        if (galleryContainer) {
+            // पुरानी कोई सामग्री हटाएँ (खाली होने पर भी सुरक्षित रहता है)
+            galleryContainer.innerHTML = ''; 
+
+            videoFiles.forEach(file => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <video controls>
+                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${file}" type="video/mp4">
+                    </video>
+                    <div class="video-info">
+                        <h4>${file.replace('.mp4','')}</h4>
+                        <small>फरवरी 2026</small>
+                    </div>
+                `;
+                galleryContainer.appendChild(card);
+            });
+        }
+    </script>
+</body>
 </html>
