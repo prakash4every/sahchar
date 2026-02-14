@@ -1,416 +1,131 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>सहचर | Sahchar – करुणा और सकारात्मकता का साथी</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>सहचर | Sahchar</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary: #a52a2a;
-            --primary-light: #c0392b;
-            --accent: #f4c430;
-            --text-dark: #2c3e50;
-            --text-light: #34495e;
-            --bg: #fdfdfd;
-            --card-bg: #ffffff;
-            --shadow: 0 8px 30px rgba(0,0,0,0.08);
-        }
+<style>
+body{
+font-family:Poppins,sans-serif;
+margin:0;
+background:#f5f7fa;
+color:#333;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+header{
+background:linear-gradient(135deg,#8b0000,#b22222);
+color:white;
+text-align:center;
+padding:50px 20px;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to bottom, #fdfdfd, #f0f4f8);
-            color: var(--text-dark);
-            line-height: 1.7;
-        }
+h1{font-family:'Noto Serif Devanagari',serif;}
 
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, #7f0000 100%);
-            color: white;
-            padding: 5rem 1rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+nav{
+margin-top:20px;
+}
 
-        header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0%, transparent 60%);
-            pointer-events: none;
-        }
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:500;
+}
 
-        h1 {
-            font-family: 'Noto Serif Devanagari', serif;
-            font-size: 2.8rem;
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
-        }
+section{
+padding:40px 20px;
+max-width:1100px;
+margin:auto;
+}
 
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+margin:20px 0;
+}
 
-        nav {
-            margin-top: 1.8rem;
-        }
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1.2rem;
-            font-weight: 500;
-            font-size: 1.05rem;
-            transition: all 0.3s;
-            position: relative;
-        }
+.gallery img{
+width:100%;
+border-radius:12px;
+}
 
-        nav a:hover,
-        nav a.active {
-            color: var(--accent);
-        }
+.video-gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+}
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -6px;
-            left: 0;
-            background: var(--accent);
-            transition: width 0.4s ease;
-        }
+video{
+width:100%;
+border-radius:12px;
+}
 
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        section {
-            padding: 4rem 1rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-family: 'Noto Serif Devanagari', serif;
-            color: var(--primary);
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 2.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            width: 80px;
-            height: 3px;
-            background: var(--accent);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 3px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: all 0.35s ease;
-            margin: 1.5rem 0;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-        }
-
-        .quote {
-            font-family: 'Noto Serif Devanagari', serif;
-            font-size: 1.4rem;
-            color: var(--primary);
-            text-align: center;
-            margin: 1.5rem 0;
-            font-style: italic;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 0.9rem 1.8rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            margin-top: 1rem;
-        }
-
-        .btn:hover {
-            background: var(--primary-light);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(165,42,42,0.25);
-        }
-
-        .video-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .video-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-
-        .video-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .video-card video {
-            width: 100%;
-            display: block;
-        }
-
-        .video-info {
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .gallery img {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            transition: transform 0.4s ease;
-            <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/morning-blessing.jpg" 
-     alt="सुबह की करुणा" width="300" style="border-radius:12px;">
-        }
-
-        .gallery img:hover {
-            transform: scale(1.06);
-        }
-
-        footer {
-            background: var(--text-dark);
-            color: white;
-            text-align: center;
-            padding: 2.5rem 1rem;
-            margin-top: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.3rem; }
-            nav a { margin: 0 0.8rem; font-size: 0.95rem; }
-            section { padding: 3rem 1rem; }
-        }
-    </style>
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:25px;
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <h1>सहचर (Sahchar)</h1>
-        <p>सकारात्मक सोच • करुणा • सामाजिक सहयोग • बुद्ध की शिक्षाएँ</p>
+<header>
+<h1>सहचर (Sahchar)</h1>
+<p>करुणा • सकारात्मक सोच • सामाजिक सहयोग</p>
 
-        <nav>
-            <a href="#">मुख्य पृष्ठ</a>
-            <a href="#">बुद्ध विचार</a>
-            <a href="#">सामाजिक सेवा</a>
-            <a href="#">गैलरी</a>
-            <a href="#">संपर्क</a>
-        </nav>
-    </header>
+<nav>
+<a href="#">Home</a>
+<a href="#">Gallery</a>
+<a href="#">Videos</a>
+<a href="#">Contact</a>
+</nav>
+</header>
 
-    <section>
-        <h2>हमारे बारे में</h2>
-        <div class="card" style="text-align:center; max-width:800px; margin:auto;">
-            <p style="font-size:1.15rem;">
-                सहचर एक ऐसा मंच है जहाँ हम भगवान बुद्ध की शिक्षाओं, सकारात्मक संदेशों, 
-                करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं।<br><br>
-                हमारा लक्ष्य है – हर व्यक्ति के मन में शांति और समाज में सहानुभूति का प्रसार करना।
-            </p>
-        </div>
-    </section>
-
-    <section>
-        <h2>करुणा का संदेश</h2>
-        <div class="card">
-            <p class="quote">
-                “घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”
-            </p>
-            <p style="text-align:center; color:var(--text-light);">
-                – गौतम बुद्ध
-            </p>
-            <div style="text-align:center; margin-top:1.5rem;">
-                
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>बुद्ध के अमर विचार</h2>
-        <div class="card">
-            <p class="quote">“सभी संकल्प अनित्य हैं।”</p>
-            <p style="text-align:center; margin:1.5rem 0;">
-                जीवन परिवर्तनशील है। इसे समझ लेने वाला दुख से मुक्त होने का मार्ग पा लेता है।
-            </p>
-            <div style="text-align:center;">
-                <a href="#" class="btn">और विचार पढ़ें</a>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>वीडियो गैलरी</h2>
-        <p style="text-align:center; color:#555; margin-bottom:2rem;">
-            हमारे संदेशों और विचारों को वीडियो के माध्यम से देखें
-        </p>
-
-        <div class="video-gallery">
-            <!-- सभी वीडियो यहां जोड़े गए हैं (repo से नाम लिए गए) -->
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448585109.mp4" type="video/mp4">
-                    ब्राउज़र वीडियो सपोर्ट नहीं करता।
-                </video>
-                <div class="video-info">
-                    <h4>करुणा का संदेश</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448476731.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>बुद्ध विचार - प्रेम</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448349817.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>सकारात्मक सोच</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549640292.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>शांति का मार्ग</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549508264.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>करुणा और सहयोग</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1767549393477.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>बुद्ध शिक्षाएँ</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-    <h2>हमारी गैलरी</h2>
-    <div class="gallery">
-        <!-- अब इमेज दिखेगी अगर अपलोड सही हुई -->
-        <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/morning-blessing.jpg" 
-             alt="सुबह की करुणा – नमो बुद्धाय" 
-             loading="lazy"
-             style="border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
-
-        <!-- अगर और इमेज हैं तो इसी तरह जोड़ो -->
-        <!-- <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/another-image.jpg" alt="..."> -->
-
-        <!-- अगर अभी कोई इमेज नहीं दिख रही तो fallback मैसेज -->
-        <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem; font-style:italic;">
-            गैलरी में सुबह की शांति वाली तस्वीरें जल्द ही आएँगी 🌿<br>
-            नमो बुद्धाय।
-        </p>
-    </div>
+<section>
+<div class="card">
+<h2>हमारे बारे में</h2>
+<p>सहचर एक ऐसा मंच है जहाँ हम बुद्ध की शिक्षाओं और सामाजिक सहयोग के संदेशों को समाज तक पहुँचाते हैं।</p>
+</div>
 </section>
 
-    <section>
-        <h2>सामाजिक सेवा</h2>
-        <div class="card">
-            <p style="font-size:1.1rem;">
-                हम शिक्षा, स्वास्थ्य जागरूकता, पर्यावरण संरक्षण, गरीबों की सहायता 
-                और अन्य जनकल्याणकारी कार्यों में सक्रिय योगदान देते हैं।
-            </p>
-            <div style="text-align:center; margin-top:2rem;">
-                <a href="#" class="btn">हमारे कार्य जानें</a>
-            </div>
-        </div>
-    </section>
+<section>
+<h2>फोटो गैलरी</h2>
+<div class="gallery">
+<img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/morning-blessing.jpg">
+</div>
+</section>
 
-    <section>
-        <h2>संपर्क करें</h2>
-        <div class="card" style="text-align:center;">
-            <p style="font-size:1.1rem; margin-bottom:1rem;">
-                Email: <strong>prakash4every@yahoo.com</strong>
-            </p>
-            <p style="margin:1.5rem 0;">
-                हमारी Facebook Page पर जुड़ें और नवीनतम अपडेट पाएँ
-            </p>
-            <a href="https://www.facebook.com/share/188ZTezbTo/" 
-               target="_blank" 
-               class="btn" style="font-size:1.1rem;">
-               Facebook पेज पर जाएँ
-            </a>
-        </div>
-    </section>
+<section>
+<h2>वीडियो गैलरी</h2>
+<div class="video-gallery">
 
-    <footer>
-        <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
-    </footer>
+<video controls>
+<source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448585109.mp4" type="video/mp4">
+</video>
+
+<video controls>
+<source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/1769448476731.mp4" type="video/mp4">
+</video>
+
+</div>
+</section>
+
+<footer>
+© 2026 Sahchar | करुणा से प्रेरित
+</footer>
 
 </body>
 </html>
