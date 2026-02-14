@@ -274,17 +274,26 @@
         </div>
     </section>
 
-    <section>
-        <h2>बुद्ध के अमर विचार</h2>
-        <div class="card">
-            <p class="quote">“सभी संकल्प अनित्य हैं।”</p>
-            <p style="text-align:center; margin:1.5rem 0;">
-                जीवन परिवर्तनशील है। इसे समझ लेने वाला दुख से मुक्त होने का मार्ग पा लेता है।
-            </p>
-            <div style="text-align:center;">
-                <a href="#" class="btn">और विचार पढ़ें</a>
-            </div>
-        </div>
+    <section style="padding:20px; text-align:center; background:#f4f4f4;">
+  <h2>Daily Buddha Thought</h2>
+  <p id="dailyThought" style="font-size:20px; font-weight:bold;"></p>
+</section>
+
+<script>
+const thoughts = [
+"घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।",
+"स्वयं पर विजय सबसे बड़ी विजय है।",
+"क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।",
+"शांति भीतर से आती है, बाहर मत खोजो।",
+"जो सोचते हैं वही बनते हैं।",
+"अतीत में मत उलझो, वर्तमान में जियो।",
+"दूसरों की सहायता करना ही सच्चा धर्म है."
+];
+
+const today = new Date().getDate();
+document.getElementById("dailyThought").innerText =
+thoughts[today % thoughts.length];
+</script>
     </section>
 
     <section>
