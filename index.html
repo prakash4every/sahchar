@@ -72,7 +72,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.5rem 2rem;
+            gap: 0 2rem;
         }
 
         nav a {
@@ -90,23 +90,6 @@
             transform: translateY(-2px);
         }
 
-        /* बुलेट पॉइंट्स */
-        nav a:not(:last-child)::after {
-            content: "•";
-            margin-left: 2rem;
-            color: var(--accent);
-            font-size: 1.4rem;
-            display: inline-block;
-            vertical-align: middle;
-            opacity: 0.8;
-            transition: all 0.3s;
-        }
-
-        nav a:hover::after {
-            color: white;
-            transform: scale(1.2);
-        }
-
         nav a::before {
             content: '';
             position: absolute;
@@ -121,6 +104,8 @@
         nav a:hover::before {
             width: 100%;
         }
+
+        /* बुलेट्स को gap से handle करें, ::after हटाया duplicate avoid करने के लिए */
 
         section {
             padding: 4rem 1rem;
@@ -299,19 +284,9 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 2.3rem; }
-            nav { gap: 0.5rem 1rem; }
+            nav { gap: 0 1rem; }
             nav a { font-size: 1rem; }
-            nav a:not(:last-child)::after {
-                margin-left: 1rem;
-                font-size: 1.2rem;
-            }
             section { padding: 3rem 1rem; }
-        }
-
-        @media (max-width: 480px) {
-            nav a:not(:last-child)::after {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -352,9 +327,6 @@
                 “घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”
             </p>
             <p style="text-align:center; color:var(--text-light);">– गौतम बुद्ध</p>
-            <div style="text-align:center; margin-top:1.5rem;">
-               
-            </div>
         </div>
     </section>
 
@@ -384,7 +356,9 @@
         <p style="text-align:center; color:#555; margin-bottom:2rem;">
             हमारे संदेशों और विचारों को वीडियो के माध्यम से देखें
         </p>
-        <div class="video-gallery"></div>
+        <div class="video-gallery" id="video-gallery">
+            <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem;">वीडियो लोड हो रहे हैं... 🎥</p>
+        </div>
     </section>
 
     <!-- इमेज गैलरी -->
@@ -418,15 +392,19 @@
             <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
                 <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-logo.png" 
                      alt="PhonePe" 
-                     style="height: 40px; margin-bottom: 1rem;">
+                     style="height: 40px; margin-bottom: 1rem;" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <p id="logo-fallback" style="display:none; color: #5f259f; font-weight: 600; margin-bottom: 1rem;">✓ PhonePe Accepted</p>
                 <p style="color: #5f259f; font-weight: 600; margin-bottom: 0.5rem;">✓ ACCEPTED HERE</p>
                 <p style="font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">Scan & Pay Using PhonePe App</p>
                 
                 <!-- QR Code -->
                 <div style="cursor: pointer;" onclick="openQRModal()">
-                    <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
+                    <img id="qr-img" src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
                          alt="PhonePe QR Code" 
-                         style="width: 200px; height: 200px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin-bottom: 1rem;">
+                         style="width: 200px; height: 200px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin-bottom: 1rem;"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <p id="qr-fallback" style="display:none; color:#999; font-size:0.9rem;">QR कोड लोड नहीं हो सका। UPI: rpk200815@ybl से पेमेंट करें।</p>
                 </div>
                 
                 <p style="font-weight: 600; color: var(--primary); margin: 0.5rem 0;">Sahchar</p>
@@ -487,8 +465,10 @@
 
     <!-- QR Modal -->
     <div id="qrModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:pointer;" onclick="closeQRModal()">
-        <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
-             style="max-width:90%; max-height:90%; border-radius:20px; box-shadow:0 0 30px rgba(255,255,255,0.3);">
+        <img id="modal-qr" src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
+             style="max-width:90%; max-height:90%; border-radius:20px; box-shadow:0 0 30px rgba(255,255,255,0.3);"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <p id="modal-fallback" style="display:none; color:white; text-align:center;">QR कोड उपलब्ध नहीं। UPI: rpk200815@ybl से संपर्क करें।</p>
     </div>
 
     <footer>
@@ -518,41 +498,55 @@
         const today = new Date().getDate();
         document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
 
-        // वीडियो गैलरी (Video फोल्डर से – बड़ा V)
-        const videoFiles = [
-            {file: "1769448585109.mp4", title: "करुणा का संदेश"},
-            {file: "1769448476731.mp4", title: "बुद्ध विचार - प्रेम"},
-            {file: "1769448349817.mp4", title: "सकारात्मक सोच"},
-            {file: "1767549640292.mp4", title: "शांति का मार्ग"},
-            {file: "1767549508264.mp4", title: "करुणा और सहयोग"},
-            {file: "1767549393477.mp4", title: "बुद्ध शिक्षाएँ"}
-        ];
+        // वीडियो गैलरी (Dynamic API से – root से MP4 लोड, नई auto आएँगी)
+        async function loadVideos() {
+            const gallery = document.getElementById('video-gallery');
+            try {
+                const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents?ref=main';
+                const response = await fetch(apiUrl, {
+                    headers: { 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (!response.ok) throw new Error('API error: ' + response.status);
+                const files = await response.json();
 
-        const videoGallery = document.querySelector('.video-gallery');
-        if (videoGallery) {
-            videoGallery.innerHTML = '';
-            videoFiles.forEach(vid => {
-                const card = document.createElement('div');
-                card.className = 'video-card';
-                card.innerHTML = `
-                    <video controls preload="none" poster="">
-                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/Video/${vid.file}" type="video/mp4">
-                        ब्राउज़र वीडियो सपोर्ट नहीं करता।
-                    </video>
-                    <div class="video-info">
-                        <h4>${vid.title}</h4>
-                        <small>फरवरी 2026</small>
-                    </div>
-                `;
-                videoGallery.appendChild(card);
-            });
+                const videoFiles = files.filter(file => 
+                    /\.(mp4|avi|mov|webm)$/i.test(file.name)
+                ).slice(0, 6); // टॉप 6 वीडियो
+
+                if (videoFiles.length === 0) {
+                    gallery.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#777;padding:2rem;">कोई वीडियो नहीं मिला। root में MP4 अपलोड करें।</p>';
+                    return;
+                }
+
+                gallery.innerHTML = '';
+                videoFiles.forEach(file => {
+                    const card = document.createElement('div');
+                    card.className = 'video-card';
+                    const title = file.name.replace(/\.[^/.]+$/, ""); // नाम से टाइटल
+                    card.innerHTML = `
+                        <video controls preload="none">
+                            <source src="${file.download_url}" type="video/mp4">
+                            ब्राउज़र वीडियो सपोर्ट नहीं करता।
+                        </video>
+                        <div class="video-info">
+                            <h4>${title}</h4>
+                            <small>फरवरी 2026</small>
+                        </div>
+                    `;
+                    gallery.appendChild(card);
+                });
+            } catch (error) {
+                console.error('वीडियो लोड एरर:', error);
+                gallery.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#777;padding:2rem;">वीडियो लोड करने में समस्या: ' + error.message + '</p>';
+            }
         }
+        loadVideos(); // वीडियो लोड करें
 
         // इमेज गैलरी (images/gallery फोल्डर से)
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             try {
-                const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images/gallery';
+                const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images/gallery?ref=main';
                 const response = await fetch(apiUrl, {
                     headers: { 'Accept': 'application/vnd.github.v3+json' }
                 });
@@ -570,7 +564,7 @@
                 );
 
                 if (imageFiles.length === 0) {
-                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी में कोई छवि नहीं है</p>';
+                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी में कोई छवि नहीं है। images/gallery में अपलोड करें।</p>';
                     return;
                 }
 
@@ -583,11 +577,11 @@
                     gallery.appendChild(img);
                 });
             } catch (error) {
-                console.error('Error:', error);
+                console.error('इमेज लोड एरर:', error);
                 gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी लोड करने में समस्या: ' + error.message + '</p>';
             }
         }
-        loadImages();
+        loadImages(); // इमेज लोड करें
     </script>
 </body>
 </html>
