@@ -348,18 +348,114 @@
     <section style="padding:20px; text-align:center; background:#f4f4f4;">
         <h2>Daily Buddha Thought</h2>
         <p id="dailyThought" style="font-size:20px; font-weight:bold;"></p>
-    </section>
+   <!-- वीडियो गैलरी section (HTML वही रखें) -->
+<section>
+    <h2>वीडियो गैलरी</h2>
+    <p style="text-align:center; color:#555; margin-bottom:2rem;">
+        हमारे संदेशों और विचारों को वीडियो के माध्यम से देखें
+    </p>
+    <div class="video-gallery" id="video-gallery">
+        <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem;">वीडियो लोड हो रहे हैं... 🎥</p>
+    </div>
+</section>
 
-    <!-- वीडियो गैलरी -->
-    <section>
-        <h2>वीडियो गैलरी</h2>
-        <p style="text-align:center; color:#555; margin-bottom:2rem;">
-            हमारे संदेशों और विचारों को वीडियो के माध्यम से देखें
-        </p>
-        <div class="video-gallery" id="video-gallery">
-            <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem;">वीडियो लोड हो रहे हैं... 🎥</p>
-        </div>
-    </section>
+<!-- ... बाकी HTML वही ... -->
+
+<script>
+// ... (QR modal functions, daily thought वही रखें) ...
+
+// वीडियो गैलरी – Video फोल्डर से dynamic लोड (API से)
+async function loadVideos() {
+    const gallery = document.getElementById('video-gallery');
+    try {
+        // Video फोल्डर (capital V) से फाइलें लें
+        const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/Video?ref=main';
+        const response = await fetch(apiUrl, {
+            headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+
+        if (response.status === 404) {
+            gallery.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#777;padding:2rem;">Video फोल्डर नहीं मिला। कृपया Video फोल्डर में .mp4 अपलोड करें।</p>';
+            return;
+        }
+
+        if (!response.ok) throw new Error('API error: ' + response.status);
+
+        const files = await response.json();
+        const videoFiles = files.filter(file => 
+            /\.(mp4|webm|mov)$/i.test(file.name)
+        );
+
+        if (videoFiles.length === 0) {
+            gallery.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#777;padding:2rem;">Video फोल्डर में कोई MP4 नहीं मिला।</p>';
+            return;
+        }
+
+        gallery.innerHTML = '';
+        videoFiles.forEach(file => {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            const title = file.name.replace(/\.[^/.]+$/, ""); // फाइल नाम से टाइटल
+            card.innerHTML = `
+                <video controls preload="none">
+                    <source src="${file.download_url}" type="video/mp4">
+                    ब्राउज़र वीडियो सपोर्ट नहीं करता।
+                </video>
+                <div class="video-info">
+                    <h4>${title || 'बुद्ध संदेश वीडियो'}</h4>
+                    <small>फरवरी 2026</small>
+                </div>
+            `;
+            gallery.appendChild(card);
+        });
+    } catch (error) {
+        console.error('वीडियो लोड एरर:', error);
+        gallery.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#777;padding:2rem;">वीडियो लोड करने में समस्या। कंसोल चेक करें (F12)।</p>';
+    }
+}
+loadVideos();  // कॉल करें
+
+// images/gallery लोड (आपका पुराना फंक्शन वही रखें, लेकिन बेहतर मैसेज)
+async function loadImages() {
+    const gallery = document.getElementById('image-gallery');
+    try {
+        const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images/gallery?ref=main';
+        const response = await fetch(apiUrl, {
+            headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+        
+        if (response.status === 404) {
+            gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">images/gallery फोल्डर नहीं मिला। कृपया बनाएँ और इमेज अपलोड करें।</p>';
+            return;
+        }
+        
+        if (!response.ok) throw new Error('API error: ' + response.status);
+        const files = await response.json();
+
+        const imageFiles = files.filter(file => 
+            /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
+        );
+
+        if (imageFiles.length === 0) {
+            gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">images/gallery में कोई इमेज नहीं है। बुद्ध विचार वाली इमेज अपलोड करें 🌿</p>';
+            return;
+        }
+
+        gallery.innerHTML = '';
+        imageFiles.forEach(file => {
+            const img = document.createElement('img');
+            img.src = file.download_url;
+            img.alt = file.name.replace(/\.[^/.]+$/, "");
+            img.loading = 'lazy';
+            gallery.appendChild(img);
+        });
+    } catch (error) {
+        console.error('इमेज लोड एरर:', error);
+        gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी लोड करने में समस्या: ' + error.message + '</p>';
+    }
+}
+loadImages();
+</script>
 
     <!-- इमेज गैलरी -->
     <section>
