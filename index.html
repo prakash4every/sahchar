@@ -12,6 +12,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+/* Donation Card */
+.donation-card {
+    background: linear-gradient(145deg, #ffffff, #f8f8ff);
+    border: 1px solid rgba(95, 37, 159, 0.1);
+}
+
+.donation-card .btn {
+    background: #5f259f !important;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+}
+
+.donation-card .btn:hover {
+    background: #4a1d7c !important;
+    box-shadow: 0 8px 20px rgba(95, 37, 159, 0.3);
+}
+
+/* Amount chips */
+.donation-card span {
+    background: white;
+    border: 1px solid #e0e0e0;
+    color: #444;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.donation-card span:hover {
+    background: var(--accent);
+    color: var(--primary);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* QR Modal */
+#qrModal {
+    transition: all 0.3s;
+}
         :root {
             --primary: #a52a2a;
             --primary-light: #c0392b;
