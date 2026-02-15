@@ -68,36 +68,58 @@
         }
 
         nav {
-            margin-top: 1.8rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 2rem;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 1.2rem;
             font-weight: 500;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
             position: relative;
+            padding: 0.5rem 0;
         }
 
-        nav a:hover,
-        nav a.active {
+        nav a:hover {
             color: var(--accent);
+            transform: translateY(-2px);
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -6px;
-            left: 0;
-            background: var(--accent);
-            transition: width 0.4s ease;
+        /* बुलेट पॉइंट्स (गोल्डन डॉट्स) */
+        nav a:not(:last-child)::after {
+            content: "•";
+            margin-left: 2rem;
+            color: var(--accent);
+            font-size: 1.4rem;
+            display: inline-block;
+            vertical-align: middle;
+            opacity: 0.8;
+            transition: all 0.3s;
         }
 
         nav a:hover::after {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        /* होवर अंडरलाइन इफेक्ट */
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::before {
             width: 100%;
         }
 
@@ -238,13 +260,24 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 2.3rem; }
-            nav a { margin: 0 0.8rem; font-size: 0.95rem; }
+            nav { gap: 0.5rem 1rem; }
+            nav a { font-size: 1rem; }
+            nav a:not(:last-child)::after {
+                margin-left: 1rem;
+                font-size: 1.2rem;
+            }
             section { padding: 3rem 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            nav a:not(:last-child)::after {
+                display: none; /* छोटी स्क्रीन में डॉट्स हटा दें */
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Facebook SDK (सबसे ऊपर, body के ठीक बाद) -->
+    <!-- Facebook SDK -->
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/hi_IN/sdk.js#xfbml=1&version=v24.0"></script>
 
