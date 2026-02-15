@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta name="description" content="सहचर - करुणा, बुद्ध विचार, सामाजिक सेवा और सकारात्मक संदेशों का मंच">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="सहचर - करुणा, बुद्ध विचार, सामाजिक सेवा और सकारात्मक संदेशों का मंच">
     <title>सहचर | Sahchar – करुणा और सकारात्मकता का साथी</title>
 
     <!-- Google Fonts -->
@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* आपका पूरा स्टाइल यथावत – कोई बदलाव नहीं */
         :root {
             --primary: #a52a2a;
             --primary-light: #c0392b;
@@ -24,23 +23,19 @@
             --shadow: 0 8px 30px rgba(0,0,0,0.08);
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            <body>
-    <!-- यहाँ से Facebook SDK शुरू -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/hi_IN/sdk.js#xfbml=1&version=v24.0"></script>
-    <!-- Facebook SDK खत्म -->
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- आपका पुराना हेडर यहाँ से शुरू होगा -->
-    <header>
-        ...
-    </header>
+        body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(to bottom, #fdfdfd, #f0f4f8);
             color: var(--text-dark);
             line-height: 1.7;
         }
+
         header {
             background: linear-gradient(135deg, var(--primary) 0%, #7f0000 100%);
             color: white;
@@ -49,6 +44,7 @@
             position: relative;
             overflow: hidden;
         }
+
         header::before {
             content: '';
             position: absolute;
@@ -56,69 +52,190 @@
             background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0%, transparent 60%);
             pointer-events: none;
         }
-        h1 { font-family: 'Noto Serif Devanagari', serif; font-size: 2.8rem; margin-bottom: 0.8rem; letter-spacing: 1px; }
-        header p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-        nav { margin-top: 1.8rem; }
+
+        h1 {
+            font-family: 'Noto Serif Devanagari', serif;
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin-top: 1.8rem;
+        }
+
         nav a {
-            color: white; text-decoration: none; margin: 0 1.2rem; font-weight: 500; font-size: 1.05rem;
-            transition: all 0.3s; position: relative;
+            color: white;
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            position: relative;
         }
-        nav a:hover, nav a.active { color: var(--accent); }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--accent);
+        }
+
         nav a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -6px; left: 0;
-            background: var(--accent); transition: width 0.4s ease;
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.4s ease;
         }
-        nav a:hover::after { width: 100%; }
-        section { padding: 4rem 1rem; max-width: 1100px; margin: 0 auto; }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 4rem 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
         h2 {
-            font-family: 'Noto Serif Devanagari', serif; color: var(--primary); text-align: center;
-            font-size: 2.2rem; margin-bottom: 2.5rem; position: relative; display: inline-block;
+            font-family: 'Noto Serif Devanagari', serif;
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
         }
+
         h2::after {
-            content: ''; width: 80px; height: 3px; background: var(--accent);
-            position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
             border-radius: 3px;
         }
+
         .card {
-            background: var(--card-bg); border-radius: 16px; padding: 2rem;
-            box-shadow: var(--shadow); transition: all 0.35s ease; margin: 1.5rem 0;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.35s ease;
+            margin: 1.5rem 0;
         }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
         .quote {
-            font-family: 'Noto Serif Devanagari', serif; font-size: 1.4rem; color: var(--primary);
-            text-align: center; margin: 1.5rem 0; font-style: italic;
+            font-family: 'Noto Serif Devanagari', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            text-align: center;
+            margin: 1.5rem 0;
+            font-style: italic;
         }
+
         .btn {
-            display: inline-block; background: var(--primary); color: white;
-            padding: 0.9rem 1.8rem; border-radius: 50px; text-decoration: none;
-            font-weight: 500; transition: all 0.3s; margin-top: 1rem;
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
         }
+
         .btn:hover {
-            background: var(--primary-light); transform: translateY(-3px);
+            background: var(--primary-light);
+            transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(165,42,42,0.25);
         }
+
         .video-gallery {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
+
         .video-card {
-            background: white; border-radius: 12px; overflow: hidden;
-            box-shadow: var(--shadow); transition: transform 0.3s;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
         }
-        .video-card:hover { transform: translateY(-8px); }
-        .video-card video { width: 100%; display: block; }
-        .video-info { padding: 1rem; text-align: center; }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .video-card video {
+            width: 100%;
+            display: block;
+            background: #000;
+        }
+
+        .video-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
         .gallery {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
+
         .gallery img {
-            width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
             transition: transform 0.4s ease;
         }
-        .gallery img:hover { transform: scale(1.06); }
-        footer {
-            background: var(--text-dark); color: white; text-align: center;
-            padding: 2.5rem 1rem; margin-top: 4rem;
+
+        .gallery img:hover {
+            transform: scale(1.06);
         }
+
+        .fb-page-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 4rem;
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.3rem; }
             nav a { margin: 0 0.8rem; font-size: 0.95rem; }
@@ -127,6 +244,9 @@
     </style>
 </head>
 <body>
+    <!-- Facebook SDK (सबसे ऊपर, body के ठीक बाद) -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/hi_IN/sdk.js#xfbml=1&version=v24.0"></script>
 
     <header>
         <h1>सहचर (Sahchar)</h1>
@@ -136,36 +256,11 @@
             <a href="#">बुद्ध विचार</a>
             <a href="#">सामाजिक सेवा</a>
             <a href="#">गैलरी</a>
-            <a href="#">संपर्क <!-- ===== नया Facebook फीड सेक्शन ===== -->
-<section>
-    <h2>हमारी Facebook दीवार</h2>
-    <div style="display: flex; justify-content: center;">
-        <div class="fb-page" 
-             data-href="https://www.facebook.com/prakash4every31" 
-             data-tabs="timeline" 
-             data-width="500" 
-             data-height="600" 
-             data-small-header="false" 
-             data-adapt-container-width="true" 
-             data-hide-cover="false" 
-             data-show-facepile="true">
-            <blockquote cite="https://www.facebook.com/prakash4every31" class="fb-xfbml-parse-ignore">
-                <a href="https://www.facebook.com/prakash4every31">Motivational Video</a>
-            </blockquote>
-        </div>
-    </div>
-</section>
-
-<!-- ===== पुराना संपर्क करें सेक्शन (यह जस का तस रहेगा) ===== -->
-<section>
-    <h2>संपर्क करें</h2>
-    <div class="card" style="text-align:center;">
-        ...
-    </div>
-</section></a>
+            <a href="#">संपर्क</a>
         </nav>
     </header>
 
+    <!-- हमारे बारे में -->
     <section>
         <h2>हमारे बारे में</h2>
         <div class="card" style="text-align:center; max-width:800px; margin:auto;">
@@ -177,34 +272,41 @@
         </div>
     </section>
 
+    <!-- करुणा संदेश -->
     <section>
         <h2>करुणा का संदेश</h2>
         <div class="card">
-            <p class="quote">“घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”</p>
+            <p class="quote">
+                “घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”
+            </p>
             <p style="text-align:center; color:var(--text-light);">– गौतम बुद्ध</p>
+            <div style="text-align:center; margin-top:1.5rem;">
+                <small>12 फरवरी 2026</small>
+            </div>
         </div>
     </section>
 
-    <!-- Daily Thought Section – अब ठीक से बंद -->
+    <!-- बुद्ध विचार -->
+    <section>
+        <h2>बुद्ध के अमर विचार</h2>
+        <div class="card">
+            <p class="quote">“सभी संकल्प अनित्य हैं।”</p>
+            <p style="text-align:center; margin:1.5rem 0;">
+                जीवन परिवर्तनशील है। इसे समझ लेने वाला दुख से मुक्त होने का मार्ग पा लेता है।
+            </p>
+            <div style="text-align:center;">
+                <a href="#" class="btn">और विचार पढ़ें</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Thought -->
     <section style="padding:20px; text-align:center; background:#f4f4f4;">
         <h2>Daily Buddha Thought</h2>
         <p id="dailyThought" style="font-size:20px; font-weight:bold;"></p>
     </section>
 
-    <script>
-        const thoughts = [
-            "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।",
-            "स्वयं पर विजय सबसे बड़ी विजय है।",
-            "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।",
-            "शांति भीतर से आती है, बाहर मत खोजो।",
-            "जो सोचते हैं वही बनते हैं।",
-            "अतीत में मत उलझो, वर्तमान में जियो।",
-            "दूसरों की सहायता करना ही सच्चा धर्म है।"
-        ];
-        const today = new Date().getDate();
-        document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
-    </script>
-
+    <!-- वीडियो गैलरी -->
     <section>
         <h2>वीडियो गैलरी</h2>
         <p style="text-align:center; color:#555; margin-bottom:2rem;">
@@ -213,6 +315,7 @@
         <div class="video-gallery"></div>
     </section>
 
+    <!-- इमेज गैलरी (GitHub API) -->
     <section>
         <h2>हमारी गैलरी</h2>
         <div class="gallery" id="image-gallery">
@@ -222,6 +325,7 @@
         </div>
     </section>
 
+    <!-- सामाजिक सेवा -->
     <section>
         <h2>सामाजिक सेवा</h2>
         <div class="card">
@@ -235,6 +339,27 @@
         </div>
     </section>
 
+    <!-- Facebook फीड (Page Plugin) -->
+    <section>
+        <h2>Facebook से नवीनतम पोस्ट</h2>
+        <div class="fb-page-container">
+            <div class="fb-page" 
+                 data-href="https://www.facebook.com/prakash4every31" 
+                 data-tabs="timeline" 
+                 data-width="500" 
+                 data-height="600" 
+                 data-small-header="false" 
+                 data-adapt-container-width="true" 
+                 data-hide-cover="false" 
+                 data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/prakash4every31" class="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/prakash4every31">Motivational Video</a>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- संपर्क करें -->
     <section>
         <h2>संपर्क करें</h2>
         <div class="card" style="text-align:center;">
@@ -244,21 +369,10 @@
             <p style="margin:1.5rem 0;">
                 हमारी Facebook Page पर जुड़ें और नवीनतम अपडेट पाएँ
             </p>
-            <a href="https://www.facebook.com/share/188ZTezbTo/" 
-               target="_blank" class="btn" style="font-size:1.1rem;">
+            <a href="https://www.facebook.com/share/188ZTezbTo/" target="_blank" class="btn">
                Facebook पेज पर जाएँ
             </a>
         </div>
-    </section>
-
-    <section>
-        <h2>Facebook से नवीनतम पोस्ट</h2>
-        <!-- सही Facebook page plugin – share लिंक की जगह page URL डालें (अगर username है तो) -->
-        <iframe 
-            src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/profile.php?id=YOUR_PAGE_ID_OR_USERNAME&tabs=posts&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-            width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-        </iframe>
-        <!-- NOTE: ऊपर YOUR_PAGE_ID_OR_USERNAME बदलें, जैसे prakash4every या page का सही URL -->
     </section>
 
     <footer>
@@ -267,7 +381,20 @@
 
     <!-- JavaScript -->
     <script>
-        // वीडियो गैलरी (पोस्टर हटाया क्योंकि thumbnails नहीं है – बाद में जोड़ सकते हैं)
+        // Daily Thought
+        const thoughts = [
+            "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।",
+            "स्वयं पर विजय सबसे बड़ी विजय है।",
+            "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।",
+            "शांति भीतर से आती है, बाहर मत खोजो।",
+            "जो सोचते हैं वही बनते हैं।",
+            "अतीत में मत उलझो, वर्तमान में जियो।",
+            "दूसरों की सहायता करना ही सच्चा धर्म है।"
+        ];
+        const today = new Date().getDate();
+        document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
+
+        // वीडियो गैलरी
         const videoFiles = [
             {file: "1769448585109.mp4", title: "करुणा का संदेश"},
             {file: "1769448476731.mp4", title: "बुद्ध विचार - प्रेम"},
@@ -278,23 +405,25 @@
         ];
 
         const videoGallery = document.querySelector('.video-gallery');
-        videoFiles.forEach(vid => {
-            const card = document.createElement('div');
-            card.className = 'video-card';
-            card.innerHTML = `
-                <video controls preload="none">
-                    <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${vid.file}" type="video/mp4">
-                    ब्राउज़र वीडियो सपोर्ट नहीं करता।
-                </video>
-                <div class="video-info">
-                    <h4>${vid.title}</h4>
-                    <small>फरवरी 2026</small>
-                </div>
-            `;
-            videoGallery.appendChild(card);
-        });
+        if (videoGallery) {
+            videoFiles.forEach(vid => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <video controls preload="none" poster="">
+                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${vid.file}" type="video/mp4">
+                        ब्राउज़र वीडियो सपोर्ट नहीं करता।
+                    </video>
+                    <div class="video-info">
+                        <h4>${vid.title}</h4>
+                        <small>फरवरी 2026</small>
+                    </div>
+                `;
+                videoGallery.appendChild(card);
+            });
+        }
 
-        // इमेज गैलरी (API से – काम कर रही है)
+        // इमेज गैलरी (GitHub API)
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             try {
@@ -310,7 +439,7 @@
                 );
 
                 if (imageFiles.length === 0) {
-                    gallery.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#777;padding:2rem;">कोई छवि नहीं मिली</p>';
+                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">कोई छवि नहीं मिली</p>';
                     return;
                 }
 
@@ -318,13 +447,13 @@
                 imageFiles.forEach(file => {
                     const img = document.createElement('img');
                     img.src = file.download_url;
-                    img.alt = file.name.replace(/\.[^/.]+$/, ""); // एक्सटेंशन हटाकर नाम
+                    img.alt = file.name.replace(/\.[^/.]+$/, "");
                     img.loading = 'lazy';
                     gallery.appendChild(img);
                 });
             } catch (error) {
                 console.error('Error:', error);
-                gallery.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#777;padding:2rem;">गैलरी लोड करने में समस्या: ' + error.message + '</p>';
+                gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी लोड करने में समस्या: ' + error.message + '</p>';
             }
         }
         loadImages();
