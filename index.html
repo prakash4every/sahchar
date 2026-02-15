@@ -12,43 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-/* Donation Card */
-.donation-card {
-    background: linear-gradient(145deg, #ffffff, #f8f8ff);
-    border: 1px solid rgba(95, 37, 159, 0.1);
-}
-
-.donation-card .btn {
-    background: #5f259f !important;
-    font-size: 1.2rem;
-    padding: 1rem 2rem;
-}
-
-.donation-card .btn:hover {
-    background: #4a1d7c !important;
-    box-shadow: 0 8px 20px rgba(95, 37, 159, 0.3);
-}
-
-/* Amount chips */
-.donation-card span {
-    background: white;
-    border: 1px solid #e0e0e0;
-    color: #444;
-    transition: all 0.3s;
-    cursor: pointer;
-}
-
-.donation-card span:hover {
-    background: var(--accent);
-    color: var(--primary);
-    border-color: var(--accent);
-    transform: translateY(-2px);
-}
-
-/* QR Modal */
-#qrModal {
-    transition: all 0.3s;
-}
         :root {
             --primary: #a52a2a;
             --primary-light: #c0392b;
@@ -127,7 +90,7 @@
             transform: translateY(-2px);
         }
 
-        /* बुलेट पॉइंट्स (गोल्डन डॉट्स) */
+        /* बुलेट पॉइंट्स */
         nav a:not(:last-child)::after {
             content: "•";
             margin-left: 2rem;
@@ -144,7 +107,6 @@
             transform: scale(1.2);
         }
 
-        /* होवर अंडरलाइन इफेक्ट */
         nav a::before {
             content: '';
             position: absolute;
@@ -287,6 +249,46 @@
             margin-top: 2rem;
         }
 
+        /* Donation Card */
+        .donation-card {
+            background: linear-gradient(145deg, #ffffff, #f8f8ff);
+            border: 1px solid rgba(95, 37, 159, 0.1);
+        }
+
+        .donation-card .btn {
+            background: #5f259f !important;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+        }
+
+        .donation-card .btn:hover {
+            background: #4a1d7c !important;
+            box-shadow: 0 8px 20px rgba(95, 37, 159, 0.3);
+        }
+
+        .donation-card span {
+            background: white;
+            border: 1px solid #e0e0e0;
+            color: #444;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .donation-card span:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        #qrModal {
+            transition: all 0.3s;
+        }
+
         footer {
             background: var(--text-dark);
             color: white;
@@ -308,7 +310,7 @@
 
         @media (max-width: 480px) {
             nav a:not(:last-child)::after {
-                display: none; /* छोटी स्क्रीन में डॉट्स हटा दें */
+                display: none;
             }
         }
     </style>
@@ -376,7 +378,7 @@
         <p id="dailyThought" style="font-size:20px; font-weight:bold;"></p>
     </section>
 
-    <!-- वीडियो गैलरी -->
+    <!-- वीडियो गैलरी (अब video फोल्डर से) -->
     <section>
         <h2>वीडियो गैलरी</h2>
         <p style="text-align:center; color:#555; margin-bottom:2rem;">
@@ -385,7 +387,7 @@
         <div class="video-gallery"></div>
     </section>
 
-    <!-- इमेज गैलरी (GitHub API) -->
+    <!-- इमेज गैलरी (अब images/gallery फोल्डर से) -->
     <section>
         <h2>हमारी गैलरी</h2>
         <div class="gallery" id="image-gallery">
@@ -408,60 +410,46 @@
             </div>
         </div>
     </section>
-<!-- ===== आर्थिक सहयोग सेक्शन (PhonePe) ===== -->
-<section>
-    <h2>आर्थिक सहयोग</h2>
-    <div class="card donation-card" style="text-align:center; max-width:500px; margin:auto;">
-        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
-            <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-logo.png" 
-                 alt="PhonePe" 
-                 style="height: 40px; margin-bottom: 1rem;">
-            <p style="color: #5f259f; font-weight: 600; margin-bottom: 0.5rem;">✓ ACCEPTED HERE</p>
-            <p style="font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">Scan & Pay Using PhonePe App</p>
-            
-            <!-- QR Code (क्लिक करने पर बड़ा होगा) -->
-            <div style="cursor: pointer;" onclick="openQRModal()">
-                <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
-                     alt="PhonePe QR Code" 
-                     style="width: 200px; height: 200px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin-bottom: 1rem;">
+
+    <!-- आर्थिक सहयोग सेक्शन (PhonePe) -->
+    <section>
+        <h2>आर्थिक सहयोग</h2>
+        <div class="card donation-card" style="text-align:center; max-width:500px; margin:auto;">
+            <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-logo.png" 
+                     alt="PhonePe" 
+                     style="height: 40px; margin-bottom: 1rem;">
+                <p style="color: #5f259f; font-weight: 600; margin-bottom: 0.5rem;">✓ ACCEPTED HERE</p>
+                <p style="font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">Scan & Pay Using PhonePe App</p>
+                
+                <!-- QR Code (क्लिक करने पर बड़ा होगा) -->
+                <div style="cursor: pointer;" onclick="openQRModal()">
+                    <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
+                         alt="PhonePe QR Code" 
+                         style="width: 200px; height: 200px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin-bottom: 1rem;">
+                </div>
+                
+                <p style="font-weight: 600; color: var(--primary); margin: 0.5rem 0;">Sahchar</p>
+                <p style="font-size: 0.85rem; color: #999;">UPI: rpk200815@ybl</p>
             </div>
             
-            <p style="font-weight: 600; color: var(--primary); margin: 0.5rem 0;">MOTIVATIONALVIDEO</p>
-            <p style="font-size: 0.85rem; color: #999;">UPI: rpk200815@ybl</p>
+            <p style="font-size: 1rem; color: #444; margin: 1rem 0;">
+                आपके छोटे से सहयोग से हम समाज में सकारात्मक बदलाव ला सकते हैं। 🙏
+            </p>
+            
+            <!-- दान राशि के लिए सुझाव -->
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0;">
+                <span>₹51</span>
+                <span>₹101</span>
+                <span>₹501</span>
+                <span>₹1001</span>
+            </div>
+            
+            <a href="#" class="btn" style="background: #5f259f;" onclick="openQRModal(); return false;">💰 सहयोग करें</a>
         </div>
-        
-        <p style="font-size: 1rem; color: #444; margin: 1rem 0;">
-            आपके छोटे से सहयोग से हम समाज में सकारात्मक बदलाव ला सकते हैं। 🙏
-        </p>
-        
-        <!-- दान राशि के लिए सुझाव -->
-        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0;">
-            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹51</span>
-            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹101</span>
-            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹501</span>
-            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹1001</span>
-        </div>
-        
-        <a href="#" class="btn" style="background: #5f259f;" onclick="openQRModal()">💰 सहयोग करें</a>
-    </div>
-</section>
+    </section>
 
-<!-- QR Code Modal (बड़ा दिखाने के लिए) -->
-<div id="qrModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:pointer;" onclick="closeQRModal()">
-    <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
-         style="max-width:90%; max-height:90%; border-radius:20px; box-shadow:0 0 30px rgba(255,255,255,0.3);">
-</div>
-
-<script>
-function openQRModal() {
-    document.getElementById('qrModal').style.display = 'flex';
-}
-function closeQRModal() {
-    document.getElementById('qrModal').style.display = 'none';
-}
-</script>
-
-    <!-- Facebook फीड (Page Plugin) -->
+    <!-- Facebook फीड -->
     <section>
         <h2>Facebook से नवीनतम पोस्ट</h2>
         <div class="fb-page-container">
@@ -497,12 +485,26 @@ function closeQRModal() {
         </div>
     </section>
 
+    <!-- QR Modal -->
+    <div id="qrModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:pointer;" onclick="closeQRModal()">
+        <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
+             style="max-width:90%; max-height:90%; border-radius:20px; box-shadow:0 0 30px rgba(255,255,255,0.3);">
+    </div>
+
     <footer>
         <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
     </footer>
 
     <!-- JavaScript -->
     <script>
+        // QR Modal Functions
+        function openQRModal() {
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+        function closeQRModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
         // Daily Thought
         const thoughts = [
             "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।",
@@ -516,7 +518,7 @@ function closeQRModal() {
         const today = new Date().getDate();
         document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
 
-        // वीडियो गैलरी
+        // वीडियो गैलरी (अब video फोल्डर से)
         const videoFiles = [
             {file: "1769448585109.mp4", title: "करुणा का संदेश"},
             {file: "1769448476731.mp4", title: "बुद्ध विचार - प्रेम"},
@@ -528,12 +530,13 @@ function closeQRModal() {
 
         const videoGallery = document.querySelector('.video-gallery');
         if (videoGallery) {
+            videoGallery.innerHTML = '';
             videoFiles.forEach(vid => {
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.innerHTML = `
                     <video controls preload="none" poster="">
-                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/${vid.file}" type="video/mp4">
+                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/video/${vid.file}" type="video/mp4">
                         ब्राउज़र वीडियो सपोर्ट नहीं करता।
                     </video>
                     <div class="video-info">
@@ -545,25 +548,29 @@ function closeQRModal() {
             });
         }
 
-        // इमेज गैलरी (GitHub API)
+        // इमेज गैलरी (अब images/gallery फोल्डर से)
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             try {
-                const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images';
+                const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images/gallery';
                 const response = await fetch(apiUrl, {
                     headers: { 'Accept': 'application/vnd.github.v3+json' }
                 });
+                
+                if (response.status === 404) {
+                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी फोल्डर नहीं मिला। कृपया images/gallery फोल्डर बनाएँ।</p>';
+                    return;
+                }
+                
                 if (!response.ok) throw new Error('API error: ' + response.status);
                 const files = await response.json();
 
                 const imageFiles = files.filter(file => 
-    /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name) && 
-    !file.name.includes('phonepe-qr.jpg') // QR कोड को हटाएँ
-);
+                    /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
                 );
 
                 if (imageFiles.length === 0) {
-                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">कोई छवि नहीं मिली</p>';
+                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी में कोई छवि नहीं है</p>';
                     return;
                 }
 
