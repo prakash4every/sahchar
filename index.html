@@ -519,32 +519,35 @@
         document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
 
         // वीडियो गैलरी (अब video फोल्डर से)
-        const videoFiles = [
-            {file: "1769448585109.mp4", title: "करुणा का संदेश"},
-            {file: "1769448476731.mp4", title: "बुद्ध विचार - प्रेम"},
-            {file: "1769448349817.mp4", title: "सकारात्मक सोच"},
-            {file: "1767549640292.mp4", title: "शांति का मार्ग"},
-            {file: "1767549508264.mp4", title: "करुणा और सहयोग"},
-            {file: "1767549393477.mp4", title: "बुद्ध शिक्षाएँ"}
-        ];
+        // वीडियो गैलरी (Video फोल्डर से – बड़ा V)
+const videoFiles = [
+    {file: "1769448585109.mp4", title: "करुणा का संदेश"},
+    {file: "1769448476731.mp4", title: "बुद्ध विचार - प्रेम"},
+    {file: "1769448349817.mp4", title: "सकारात्मक सोच"},
+    {file: "1767549640292.mp4", title: "शांति का मार्ग"},
+    {file: "1767549508264.mp4", title: "करुणा और सहयोग"},
+    {file: "1767549393477.mp4", title: "बुद्ध शिक्षाएँ"}
+];
 
-        const videoGallery = document.querySelector('.video-gallery');
-        if (videoGallery) {
-            videoGallery.innerHTML = '';
-            videoFiles.forEach(vid => {
-                const card = document.createElement('div');
-                card.className = 'video-card';
-                card.innerHTML = `
-                    <video controls preload="none" poster="">
-                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/video/${vid.file}" type="video/mp4">
-                        ब्राउज़र वीडियो सपोर्ट नहीं करता।
-                    </video>
-                    <div class="video-info">
-                        <h4>${vid.title}</h4>
-                        <small>फरवरी 2026</small>
-                    </div>
-                `;
-                videoGallery.appendChild(card);
+const videoGallery = document.querySelector('.video-gallery');
+if (videoGallery) {
+    videoGallery.innerHTML = '';
+    videoFiles.forEach(vid => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.innerHTML = `
+            <video controls preload="none" poster="">
+                <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/Video/${vid.file}" type="video/mp4">
+                ब्राउज़र वीडियो सपोर्ट नहीं करता।
+            </video>
+            <div class="video-info">
+                <h4>${vid.title}</h4>
+                <small>फरवरी 2026</small>
+            </div>
+        `;
+        videoGallery.appendChild(card);
+    });
+}
             });
         }
 
