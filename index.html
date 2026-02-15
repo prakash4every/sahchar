@@ -371,6 +371,58 @@
             </div>
         </div>
     </section>
+<!-- ===== आर्थिक सहयोग सेक्शन (PhonePe) ===== -->
+<section>
+    <h2>आर्थिक सहयोग</h2>
+    <div class="card donation-card" style="text-align:center; max-width:500px; margin:auto;">
+        <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+            <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-logo.png" 
+                 alt="PhonePe" 
+                 style="height: 40px; margin-bottom: 1rem;">
+            <p style="color: #5f259f; font-weight: 600; margin-bottom: 0.5rem;">✓ ACCEPTED HERE</p>
+            <p style="font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">Scan & Pay Using PhonePe App</p>
+            
+            <!-- QR Code (क्लिक करने पर बड़ा होगा) -->
+            <div style="cursor: pointer;" onclick="openQRModal()">
+                <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
+                     alt="PhonePe QR Code" 
+                     style="width: 200px; height: 200px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin-bottom: 1rem;">
+            </div>
+            
+            <p style="font-weight: 600; color: var(--primary); margin: 0.5rem 0;">RAM PRAKASH KUMAR</p>
+            <p style="font-size: 0.85rem; color: #999;">UPI: rpk200815@ybl</p>
+        </div>
+        
+        <p style="font-size: 1rem; color: #444; margin: 1rem 0;">
+            आपके छोटे से सहयोग से हम समाज में सकारात्मक बदलाव ला सकते हैं। 🙏
+        </p>
+        
+        <!-- दान राशि के लिए सुझाव -->
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0;">
+            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹51</span>
+            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹101</span>
+            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹501</span>
+            <span style="background: #f0f0f0; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem;">₹1001</span>
+        </div>
+        
+        <a href="#" class="btn" style="background: #5f259f;" onclick="openQRModal()">💰 सहयोग करें</a>
+    </div>
+</section>
+
+<!-- QR Code Modal (बड़ा दिखाने के लिए) -->
+<div id="qrModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:pointer;" onclick="closeQRModal()">
+    <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
+         style="max-width:90%; max-height:90%; border-radius:20px; box-shadow:0 0 30px rgba(255,255,255,0.3);">
+</div>
+
+<script>
+function openQRModal() {
+    document.getElementById('qrModal').style.display = 'flex';
+}
+function closeQRModal() {
+    document.getElementById('qrModal').style.display = 'none';
+}
+</script>
 
     <!-- Facebook फीड (Page Plugin) -->
     <section>
