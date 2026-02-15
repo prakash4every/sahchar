@@ -550,7 +550,65 @@
                     card.className = 'video-card';
                     
                     // फाइल नाम से टाइटल बनाएँ (बिना .mp4 के)
-                    let title = file.name.replace('.mp4', '').replace(/_/g, ' ');
+                    // ---------- वीडियो गैलरी (API से, फोल्डर: 'video' छोटा v) ----------
+async function loadVideos() {
+    // ... (try block और fetch वाला हिस्सा वही रहने दें) ...
+
+    videoGallery.innerHTML = '';
+    videoFiles.forEach(file => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        
+        // यहाँ से शुरू होता है title बनाने वाला हिस्सा
+        // पुरानी लाइनें हटाकर नीचे वाला पूरा ब्लॉक पेस्ट करें
+        
+        let title = file.name.replace('.mp4', '').trim();
+
+        // कुछ कॉमन पैटर्न से सुंदर नाम बनाना
+        if (title.match(/karuna|करुणा/i)) {
+            title = "करुणा का संदेश";
+        } else if (title.match(/prem|प्रेम|love/i)) {
+            title = "प्रेम और करुणा";
+        } else if (title.match(/shanti|शांति|peace/i)) {
+            title = "शांति का मार्ग";
+        } else if (title.match(/sachai|सच्चाई|saty|सत्य/i)) {
+            title = "सत्य की खोज";
+        } else if (title.match(/buddh|बुद्ध|buddha/i)) {
+            title = "बुद्ध की अमर शिक्षाएँ";
+        } else if (title.match(/positive|sakarात्मक|sachchar/i)) {
+            title = "सकारात्मक सोच का प्रकाश";
+        } else if (title.match(/dhyan|ध्यान|meditation/i)) {
+            title = "ध्यान और शांति";
+        } else if (title.match(/ahimsa|अहिंसा|nonviolence/i)) {
+            title = "अहिंसा का संदेश";
+        } else if (/^\d+$/.test(title) || title.length < 5) {
+            // अगर सिर्फ नंबर है या बहुत छोटा नाम
+            title = "बुद्ध संदेश " + title;
+        } else {
+            // डिफ़ॉल्ट: फाइल नाम को सुंदर बनाना
+            title = title
+                .replace(/_/g, ' ')
+                .replace(/-/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim()
+                .replace(/\b\w/g, l => l.toUpperCase());
+        }
+        
+        // नीचे card.innerHTML में title यूज हो रहा है (यहाँ कोई बदलाव नहीं)
+        card.innerHTML = `
+            <video controls preload="none" poster="">
+                <source src="${file.download_url}" type="video/mp4">
+                ब्राउज़र वीडियो सपोर्ट नहीं करता।
+            </video>
+            <div class="video-info">
+                <h4>${title}</h4>
+                <small>फरवरी 2026</small>
+            </div>
+        `;
+        videoGallery.appendChild(card);
+    });
+    // ... (catch block वही रहने दें) ...
+}
                     
                     card.innerHTML = `
                         <video controls preload="none" poster="">
