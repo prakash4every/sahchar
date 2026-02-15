@@ -353,7 +353,7 @@
             </p>
             <p style="text-align:center; color:var(--text-light);">– गौतम बुद्ध</p>
             <div style="text-align:center; margin-top:1.5rem;">
-               
+                <small>12 फरवरी 2026</small>
             </div>
         </div>
     </section>
@@ -378,7 +378,7 @@
         <p id="dailyThought" style="font-size:20px; font-weight:bold;"></p>
     </section>
 
-    <!-- वीडियो गैलरी (अब video फोल्डर से) -->
+    <!-- वीडियो गैलरी -->
     <section>
         <h2>वीडियो गैलरी</h2>
         <p style="text-align:center; color:#555; margin-bottom:2rem;">
@@ -387,7 +387,7 @@
         <div class="video-gallery"></div>
     </section>
 
-    <!-- इमेज गैलरी (अब images/gallery फोल्डर से) -->
+    <!-- इमेज गैलरी -->
     <section>
         <h2>हमारी गैलरी</h2>
         <div class="gallery" id="image-gallery">
@@ -422,7 +422,7 @@
                 <p style="color: #5f259f; font-weight: 600; margin-bottom: 0.5rem;">✓ ACCEPTED HERE</p>
                 <p style="font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">Scan & Pay Using PhonePe App</p>
                 
-                <!-- QR Code (क्लिक करने पर बड़ा होगा) -->
+                <!-- QR Code -->
                 <div style="cursor: pointer;" onclick="openQRModal()">
                     <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
                          alt="PhonePe QR Code" 
@@ -437,7 +437,7 @@
                 आपके छोटे से सहयोग से हम समाज में सकारात्मक बदलाव ला सकते हैं। 🙏
             </p>
             
-            <!-- दान राशि के लिए सुझाव -->
+            <!-- दान राशि के सुझाव -->
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0;">
                 <span>₹51</span>
                 <span>₹101</span>
@@ -518,40 +518,37 @@
         const today = new Date().getDate();
         document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
 
-        // वीडियो गैलरी (अब video फोल्डर से)
         // वीडियो गैलरी (Video फोल्डर से – बड़ा V)
-const videoFiles = [
-    {file: "1769448585109.mp4", title: "करुणा का संदेश"},
-    {file: "1769448476731.mp4", title: "बुद्ध विचार - प्रेम"},
-    {file: "1769448349817.mp4", title: "सकारात्मक सोच"},
-    {file: "1767549640292.mp4", title: "शांति का मार्ग"},
-    {file: "1767549508264.mp4", title: "करुणा और सहयोग"},
-    {file: "1767549393477.mp4", title: "बुद्ध शिक्षाएँ"}
-];
+        const videoFiles = [
+            {file: "1769448585109.mp4", title: "करुणा का संदेश"},
+            {file: "1769448476731.mp4", title: "बुद्ध विचार - प्रेम"},
+            {file: "1769448349817.mp4", title: "सकारात्मक सोच"},
+            {file: "1767549640292.mp4", title: "शांति का मार्ग"},
+            {file: "1767549508264.mp4", title: "करुणा और सहयोग"},
+            {file: "1767549393477.mp4", title: "बुद्ध शिक्षाएँ"}
+        ];
 
-const videoGallery = document.querySelector('.video-gallery');
-if (videoGallery) {
-    videoGallery.innerHTML = '';
-    videoFiles.forEach(vid => {
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.innerHTML = `
-            <video controls preload="none" poster="">
-                <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/Video/${vid.file}" type="video/mp4">
-                ब्राउज़र वीडियो सपोर्ट नहीं करता।
-            </video>
-            <div class="video-info">
-                <h4>${vid.title}</h4>
-                <small>फरवरी 2026</small>
-            </div>
-        `;
-        videoGallery.appendChild(card);
-    });
-}
+        const videoGallery = document.querySelector('.video-gallery');
+        if (videoGallery) {
+            videoGallery.innerHTML = '';
+            videoFiles.forEach(vid => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <video controls preload="none" poster="">
+                        <source src="https://raw.githubusercontent.com/prakash4every/sahchar/main/Video/${vid.file}" type="video/mp4">
+                        ब्राउज़र वीडियो सपोर्ट नहीं करता।
+                    </video>
+                    <div class="video-info">
+                        <h4>${vid.title}</h4>
+                        <small>फरवरी 2026</small>
+                    </div>
+                `;
+                videoGallery.appendChild(card);
             });
         }
 
-        // इमेज गैलरी (अब images/gallery फोल्डर से)
+        // इमेज गैलरी (images/gallery फोल्डर से)
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             try {
