@@ -557,7 +557,9 @@ function closeQRModal() {
                 const files = await response.json();
 
                 const imageFiles = files.filter(file => 
-                    /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
+    /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name) && 
+    !file.name.includes('phonepe-qr.jpg') // QR कोड को हटाएँ
+);
                 );
 
                 if (imageFiles.length === 0) {
