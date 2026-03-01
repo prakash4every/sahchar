@@ -232,6 +232,69 @@ document.getElementById('dailyThought').innerText = thoughts[new Date().getDate(
 
 // TODO: Add Video & Image auto-load scripts here if GitHub folder available
 </script>
+<script>
+// ---------- Daily Thought Already Included ----------
+// thoughts array and dailyThought display
+const thoughts = [
+"घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।",
+"स्वयं पर विजय सबसे बड़ी विजय है।",
+"क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।",
+"शांति भीतर से आती है, बाहर मत खोजो।",
+"जो सोचते हैं वही बनते हैं।",
+"अतीत में मत उलझो, भविष्य के लिए वर्तमान में जीयो।"
+];
+document.getElementById('dailyThought').innerText = thoughts[new Date().getDate() % thoughts.length];
 
+// ---------- QR Modal Functions ----------
+function openQRModal(){document.getElementById('qrModal').style.display='flex';}
+function closeQRModal(){document.getElementById('qrModal').style.display='none';}
+
+// ---------- Video Gallery Auto Load ----------
+const videoGallery = document.querySelector('.video-gallery');
+
+// GitHub या folder में वीडियो files के नाम
+const videos = [
+  {src:'https://raw.githubusercontent.com/prakash4every/sahchar/main/videos/buddha1.mp4', title:'Buddha Inspiration 1', message:'शांति मन में है, बाहर नहीं।'},
+  {src:'https://raw.githubusercontent.com/prakash4every/sahchar/main/videos/buddha2.mp4', title:'Buddha Inspiration 2', message:'क्रोध छोड़ो, प्रेम अपनाओ।'},
+  {src:'https://raw.githubusercontent.com/prakash4every/sahchar/main/videos/buddha3.mp4', title:'Buddha Inspiration 3', message:'आत्मज्ञान ही मुक्ति है।'}
+];
+
+videos.forEach(video=>{
+  const div = document.createElement('div');
+  div.className = 'video-card';
+  div.innerHTML = `
+    <video controls preload="metadata" poster="" muted>
+      <source src="${video.src}" type="video/mp4">
+      आपका ब्राउज़र वीडियो सपोर्ट नहीं करता।
+    </video>
+    <div class="video-info">
+      <h4>${video.title}</h4>
+      <p class="buddha-message">${video.message}</p>
+    </div>
+  `;
+  videoGallery.appendChild(div);
+});
+
+// ---------- Image Gallery Auto Load ----------
+const imageGallery = document.getElementById('image-gallery');
+
+// GitHub या folder में images के नाम
+const images = [
+  'https://raw.githubusercontent.com/prakash4every/sahchar/main/images/buddha1.jpg',
+  'https://raw.githubusercontent.com/prakash4every/sahchar/main/images/buddha2.jpg',
+  'https://raw.githubusercontent.com/prakash4every/sahchar/main/images/buddha3.jpg',
+  'https://raw.githubusercontent.com/prakash4every/sahchar/main/images/buddha4.jpg'
+];
+
+// Clear placeholder text
+imageGallery.innerHTML = '';
+
+images.forEach(img=>{
+  const imgEl = document.createElement('img');
+  imgEl.src = img;
+  imgEl.alt = 'Buddha Image';
+  imageGallery.appendChild(imgEl);
+});
+</script>
 </body>
 </html>
