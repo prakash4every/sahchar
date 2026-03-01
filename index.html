@@ -335,7 +335,7 @@
             }
         }
 
-        /* ===== सहचर AI चैटबॉट स्टाइल ===== */
+        /* ===== सहचर AI चैटबॉट स्टाइल (सुधारा हुआ) ===== */
         #sahcharChatBtn {
             position: fixed;
             bottom: 25px;
@@ -398,25 +398,48 @@
         }
         #sahcharInputBox {
             display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px;
             border-top: 2px solid #b45309;
+            background: white;
         }
         #sahcharInputBox input {
             flex: 1;
-            padding: 10px;
-            border: none;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 30px;
             outline: none;
             font-size: 14px;
             font-family: 'Poppins', sans-serif;
         }
         #sahcharInputBox button {
+            border: none;
+            border-radius: 30px;
+            padding: 12px 16px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            min-width: 50px;
+            font-weight: bold;
+        }
+        #sendBtn {
             background: #b45309;
             color: white;
-            border: none;
-            padding: 10px 14px;
-            cursor: pointer;
         }
-        #sahcharInputBox button:hover {
+        #sendBtn:hover {
             background: #92400e;
+            transform: scale(1.05);
+        }
+        #micBtn {
+            background: #10b981;
+            color: white;
+            font-size: 22px;
+            padding: 12px 18px;
+        }
+        #micBtn:hover {
+            background: #059669;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -607,8 +630,8 @@
         <div id="sahcharMessages"></div>
         <div id="sahcharInputBox">
             <input type="text" id="sahcharInput" placeholder="अपना प्रश्न पूछिए..." />
-            <button onclick="sendSahcharMsg()">➤</button>
-            <button onclick="startSahcharVoice()" style="background:#10b981; border:none; padding:10px 14px;">🎤</button>
+            <button id="sendBtn" onclick="sendSahcharMsg()">➤</button>
+            <button id="micBtn" onclick="startSahcharVoice()">🎤</button>
         </div>
     </div>
 
