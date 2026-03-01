@@ -334,6 +334,90 @@
                 display: none;
             }
         }
+
+        /* ===== सहचर AI चैटबॉट स्टाइल ===== */
+        #sahcharChatBtn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b45309, #92400e);
+            color: white;
+            font-size: 28px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(180, 83, 9, 0.3);
+            z-index: 9999;
+        }
+        #sahcharChatBox {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 340px;
+            height: 480px;
+            background: #fffaf0;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            z-index: 9999;
+            border: 2px solid #b45309;
+        }
+        #sahcharHeader {
+            background: linear-gradient(135deg, #b45309, #92400e);
+            color: white;
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        #sahcharMessages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            font-size: 14px;
+            background: #fffaf0;
+        }
+        .sahcharMsg {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+        .sahcharUserMsg {
+            background: #d1d5db;
+            margin-left: auto;
+        }
+        .sahcharBotMsg {
+            background: #fde68a;
+            margin-right: auto;
+        }
+        #sahcharInputBox {
+            display: flex;
+            border-top: 2px solid #b45309;
+        }
+        #sahcharInputBox input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+        }
+        #sahcharInputBox button {
+            background: #b45309;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            cursor: pointer;
+        }
+        #sahcharInputBox button:hover {
+            background: #92400e;
+        }
     </style>
 </head>
 <body>
@@ -504,11 +588,6 @@
             </a>
         </div>
     </section>
-<iframe src="https://sahchar-ai-khxthvteq5yf3ds6afpmyr.streamlit.app/?embed=true" 
-        width="100%" 
-        height="600" 
-        style="border:none;">
-</iframe>
 
     <!-- QR Modal -->
     <div id="qrModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:pointer;" onclick="closeQRModal()">
@@ -520,9 +599,21 @@
         <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- ===== सहचर AI चैटबॉट HTML ===== -->
+    <button id="sahcharChatBtn">🧘</button>
+
+    <div id="sahcharChatBox">
+        <div id="sahcharHeader">सहचर – बुद्ध‑चरित AI</div>
+        <div id="sahcharMessages"></div>
+        <div id="sahcharInputBox">
+            <input type="text" id="sahcharInput" placeholder="अपना प्रश्न पूछिए..." />
+            <button onclick="sendSahcharMsg()">➤</button>
+            <button onclick="startSahcharVoice()" style="background:#10b981; border:none; padding:10px 14px;">🎤</button>
+        </div>
+    </div>
+
     <script>
-        // QR Modal Functions
+        // ========== QR Modal Functions ==========
         function openQRModal() {
             document.getElementById('qrModal').style.display = 'flex';
         }
@@ -530,7 +621,7 @@
             document.getElementById('qrModal').style.display = 'none';
         }
 
-        // Daily Thought
+        // ========== Daily Thought ==========
         const thoughts = [
             "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।",
             "स्वयं पर विजय सबसे बड़ी विजय है।",
@@ -543,8 +634,7 @@
         const today = new Date().getDate();
         document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
 
-        // ================== वीडियो गैलरी - नया ऑटोमेशन ==================
-        // बुद्ध संदेशों का एक बड़ा संग्रह (आप चाहें तो और भी जोड़ सकते हैं)
+        // ========== वीडियो गैलरी ==========
         const buddhaMessages = [
             "करुणा ही सच्चा धर्म है।",
             "प्रेम से ही घृणा समाप्त होती है।",
@@ -563,10 +653,8 @@
             "जागरूकता ही मुक्ति का मार्ग है।"
         ];
 
-        // रैंडम संदेश लेने का फंक्शन
         function getRandomBuddhaMessage() {
-            const randomIndex = Math.floor(Math.random() * buddhaMessages.length);
-            return buddhaMessages[randomIndex];
+            return buddhaMessages[Math.floor(Math.random() * buddhaMessages.length)];
         }
 
         async function loadVideos() {
@@ -586,11 +674,7 @@
                 
                 if (!response.ok) throw new Error('API error: ' + response.status);
                 const files = await response.json();
-
-                // केवल .mp4 फाइलें चुनें
-                const videoFiles = files.filter(file => 
-                    file.name.toLowerCase().endsWith('.mp4')
-                );
+                const videoFiles = files.filter(file => file.name.toLowerCase().endsWith('.mp4'));
 
                 if (videoFiles.length === 0) {
                     videoGallery.innerHTML = '<p style="text-align:center; color:#777; padding:2rem;">कोई वीडियो नहीं मिला।</p>';
@@ -601,11 +685,7 @@
                 videoFiles.forEach(file => {
                     const card = document.createElement('div');
                     card.className = 'video-card';
-                    
-                    // हर वीडियो के लिए एक नया रैंडम संदेश लें
                     const message = getRandomBuddhaMessage();
-                    
-                    // वैकल्पिक: फाइल नाम से भी एक साधारण टाइटल बना सकते हैं
                     let fileNameTitle = file.name.replace('.mp4', '').replace(/[_-]/g, ' ');
                     
                     card.innerHTML = `
@@ -629,7 +709,7 @@
         }
         loadVideos();
 
-        // ---------- इमेज गैलरी (API से, फोल्डर: 'images/gallery') ----------
+        // ========== इमेज गैलरी ==========
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             try {
@@ -645,10 +725,7 @@
                 
                 if (!response.ok) throw new Error('API error: ' + response.status);
                 const files = await response.json();
-
-                const imageFiles = files.filter(file => 
-                    /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
-                );
+                const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name));
 
                 if (imageFiles.length === 0) {
                     gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी में कोई छवि नहीं है</p>';
@@ -669,7 +746,91 @@
             }
         }
         loadImages();
-    </script>
 
+        // ========== सहचर AI चैटबॉट जावास्क्रिप्ट ==========
+        const btn = document.getElementById("sahcharChatBtn");
+        const box = document.getElementById("sahcharChatBox");
+        const msgDiv = document.getElementById("sahcharMessages");
+
+        btn.onclick = () => {
+            box.style.display = box.style.display === "flex" ? "none" : "flex";
+            if (box.style.display === "flex" && !msgDiv.hasChildNodes()) {
+                addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। आप कैसे सहायता चाहते हैं?", "bot");
+                speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी।");
+            }
+        };
+
+        function addMsg(text, type) {
+            const msg = document.createElement("div");
+            msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
+            msg.innerText = text;
+            msgDiv.appendChild(msg);
+            msgDiv.scrollTop = msgDiv.scrollHeight;
+        }
+
+        function sendSahcharMsg() {
+            const input = document.getElementById("sahcharInput");
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            addMsg(msg, "user");
+            input.value = "";
+            addMsg("🤔 सोच रहा हूँ...", "bot");
+
+            fetch("https://sahchar-ai-backend.onrender.com/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: msg })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const lastMsg = msgDiv.lastChild;
+                if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
+                addMsg(data.reply, "bot");
+                speakSahchar(data.reply);
+            })
+            .catch(err => {
+                const lastMsg = msgDiv.lastChild;
+                if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
+                addMsg("सर्वर से संपर्क नहीं हो पाया। कृपया बाद में प्रयास करें।", "bot");
+                console.error(err);
+            });
+        }
+
+        document.getElementById("sahcharInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendSahcharMsg();
+        });
+
+        function startSahcharVoice() {
+            if (!('webkitSpeechRecognition' in window)) {
+                alert("Voice recognition के लिए Chrome या Edge इस्तेमाल करें।");
+                return;
+            }
+            const recog = new webkitSpeechRecognition();
+            recog.lang = "hi-IN";
+            recog.interimResults = false;
+            recog.continuous = false;
+
+            recog.onstart = () => addMsg("🎤 सुन रहा हूँ...", "bot");
+            recog.onresult = (e) => {
+                const voiceText = e.results[0][0].transcript;
+                document.getElementById("sahcharInput").value = voiceText;
+                recog.stop();
+                sendSahcharMsg();
+            };
+            recog.onerror = (e) => {
+                if (e.error === "not-allowed") addMsg("माइक्रोफोन अनुमति दें।", "bot");
+                else addMsg("आवाज़ सुनाई नहीं दी, फिर कोशिश करें।", "bot");
+            };
+            recog.start();
+        }
+
+        function speakSahchar(text) {
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "hi-IN";
+            speech.rate = 1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
 </body>
 </html>
