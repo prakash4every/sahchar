@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahcharAI – Feature Graphic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0d1f1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Poppins', 'Noto Sans Devanagari', system-ui, sans-serif;
+            padding: 20px;
+        }
+
+        /* Responsive wrapper – keeps 1024:500 ratio */
+        .graphic-wrapper {
+            max-width: 1024px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .feature-graphic {
+            aspect-ratio: 1024 / 500;
+            width: 100%;
+            background: linear-gradient(135deg, #0a2a22 0%, #1f3a2e 50%, #2c2418 100%);
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        /* Decorative glows */
+        .feature-graphic::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            right: -15%;
+            width: 68%;
+            height: 68%;
+            background: radial-gradient(circle, rgba(255, 225, 90, 0.17) 0%, transparent 68%);
+            border-radius: 50%;
+        }
+
+        .feature-graphic::after {
+            content: "";
+            position: absolute;
+            bottom: -28%;
+            left: -18%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(255, 200, 70, 0.13) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            padding: 5% 5%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: #fff9e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4);
+            border: 4px solid #FFDD70;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+        }
+
+        .app-name {
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 800;
+            color: #FFEEBB;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            line-height: 1.1;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            font-weight: 600;
+            color: #FFDD88;
+            margin-top: 4px;
+        }
+
+        .new-line {
+            font-size: clamp(0.9rem, 2.8vw, 1.2rem);
+            font-weight: 500;
+            color: #FFE9A8;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0 25px;
+        }
+
+        .feature-chip {
+            background: rgba(255,255,240,0.18);
+            backdrop-filter: blur(8px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #FFF9E0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255,215,0,0.6);
+            transition: all 0.2s ease;
+        }
+
+        .feature-chip:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,240,0.3);
+            border-color: #FFDD88;
+        }
+
+        .feature-chip span {
+            font-size: 1.2rem;
+        }
+
+        .middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            flex: 1;
+            margin-bottom: 10px;
+            min-height: 0; /* allow flex child to shrink */
+        }
+
+        .screenshot-area {
+            flex: 1.4;
+            background: rgba(0,0,0,0.45);
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,215,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            max-height: 210px;
+        }
+
+        .screenshot-area img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        .cta-container {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #FFDD44, #FFEE88);
+            color: #1C2F24;
+            font-weight: 800;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            padding: 12px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: 0 10px 24px rgba(255, 200, 60, 0.5);
+            white-space: nowrap;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-block;
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 18px 32px rgba(255, 200, 60, 0.7);
+        }
+
+        .attribution {
+            font-size: 0.7rem;
+            color: rgba(255,255,220,0.7);
+            text-align: right;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Small screens: stack middle area */
+        @media (max-width: 760px) {
+            .middle {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .screenshot-area {
+                width: 100%;
+                max-height: 180px;
+            }
+            .cta-container {
+                width: 100%;
+                justify-content: center;
+            }
+            .cta {
+                white-space: normal;
+                width: 100%;
+                text-align: center;
+                padding: 12px 20px;
+            }
+            .features {
+                gap: 8px;
+            }
+            .feature-chip {
+                padding: 6px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Very small: adjust logo size */
+        @media (max-width: 550px) {
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+            .top {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="graphic-wrapper">
+    <div class="feature-graphic">
+        <div class="content">
+            <div class="top">
+                <div class="logo">
+                    <!-- Replace with your actual logo; fallback SVG if missing -->
+                    <img src="sahchar_logo.png" alt="SahcharAI Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23FFDD88\'/%3E%3Ctext x=\'50\' y=\'67\' font-size=\'48\' text-anchor=\'middle\' fill=\'%23333\'%3ES%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div>
+                    <div class="app-name">SahcharAI</div>
+                    <div class="tagline">शांति, समझ और स्मार्ट समाधान</div>
+                    <div class="new-line">आपके जीवन का बुद्धिमान साथी</div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-chip"><span>💬</span> हिंदी AI चैट</div>
+                <div class="feature-chip"><span>🎨</span> सुंदर इमेज जनरेशन</div>
+                <div class="feature-chip"><span>🎤</span> वॉयस कमांड</div>
+                <div class="feature-chip"><span>🧠</span> स्मार्ट समझ</div>
+            </div>
+
+            <div class="middle">
+                <div class="screenshot-area">
+                    <!-- Replace with your actual screenshot; fallback SVG if missing -->
+                    <img src="app_screenshot.png" alt="SahcharAI App Interface" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\' viewBox=\'0 0 300 200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%23222\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23FFDD88\' font-size=\'18\'%3EApp Screenshot%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div class="cta-container">
+                    <a href="#" class="cta">अभी डाउनलोड करें</a>
+                </div>
+            </div>
+
+            <div class="attribution">जय भीम • नमो बुद्धाय 🙏</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
