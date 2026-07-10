@@ -335,7 +335,7 @@
             }
         }
 
-        /* ===== सहचर AI चैटबॉट स्टाइल (सुधारा हुआ) ===== */
+        /* ===== सहचर AI चैटबॉट स्टाइल ===== */
         #sahcharChatBtn {
             position: fixed;
             bottom: 25px;
@@ -480,9 +480,6 @@
                 “घृणा से घृणा कभी समाप्त नहीं होती,<br>प्रेम से ही घृणा समाप्त होती है।”
             </p>
             <p style="text-align:center; color:var(--text-light);">– गौतम बुद्ध</p>
-            <div style="text-align:center; margin-top:1.5rem;">
-                
-            </div>
         </div>
     </section>
 
@@ -539,44 +536,7 @@
         </div>
     </section>
 
-    <!-- आर्थिक सहयोग सेक्शन (PhonePe)
-   <section>
-        <h2>आर्थिक सहयोग</h2>
-        <div class="card donation-card" style="text-align:center; max-width:500px; margin:auto;">
-            <div style="background: #f8f8f8; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
-                <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-logo.png" 
-                     alt="PhonePe" 
-                     style="height: 40px; margin-bottom: 1rem;">
-                <p style="color: #5f259f; font-weight: 600; margin-bottom: 0.5rem;">✓ ACCEPTED HERE</p>
-                <p style="font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">Scan & Pay Using PhonePe App</p>
-                
-               
-                <div style="cursor: pointer;" onclick="openQRModal()">
-                    <img src="https://raw.githubusercontent.com/prakash4every/sahchar/main/images/phonepe-qr.jpg" 
-                         alt="PhonePe QR Code" 
-                         style="width: 200px; height: 200px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin-bottom: 1rem;">
-                </div>
-                
-                <p style="font-weight: 600; color: var(--primary); margin: 0.5rem 0;">Sahchar</p>
-                <p style="font-size: 0.85rem; color: #999;">UPI: rpk200815@ybl</p>
-            </div>
-            
-            <p style="font-size: 1rem; color: #444; margin: 1rem 0;">
-                आपके छोटे से सहयोग से हम समाज में सकारात्मक बदलाव ला सकते हैं। 🙏
-            </p>
-            
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0;">
-                <span>₹51</span>
-                <span>₹101</span>
-                <span>₹501</span>
-                <span>₹1001</span>
-            </div>
-            
-            <a href="#" class="btn" style="background: #5f259f;" onclick="openQRModal(); return false;">💰 सहयोग करें</a>
-        </div>
-    </section> -->
-
-    
+    <!-- Facebook से नवीनतम पोस्ट -->
     <section>
         <h2>Facebook से नवीनतम पोस्ट</h2>
         <div class="fb-page-container">
@@ -626,7 +586,7 @@
     <button id="sahcharChatBtn">🧘</button>
 
     <div id="sahcharChatBox">
-        <div id="sahcharHeader">सहचर – बुद्ध‑चरित AI</div>
+        <div id="sahcharHeader">सहचर – बुद्ध-चरित AI</div>
         <div id="sahcharMessages"></div>
         <div id="sahcharInputBox">
             <input type="text" id="sahcharInput" placeholder="अपना प्रश्न पूछिए..." />
@@ -770,101 +730,126 @@
         }
         loadImages();
 
-// ========== सहचर AI चैटबॉट जावास्क्रिप्ट (FIXED) ==========
-const btn = document.getElementById("sahcharChatBtn");
-const box = document.getElementById("sahcharChatBox");
-const msgDiv = document.getElementById("sahcharMessages");
+        // ========== सहचर AI चैटबॉट जावास्क्रिप्ट (FULLY FIXED) ==========
+        const btn = document.getElementById("sahcharChatBtn");
+        const box = document.getElementById("sahcharChatBox");
+        const msgDiv = document.getElementById("sahcharMessages");
 
-// ✅ FIXED: Firebase Backend URL
-const SAHCHAR_API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
+        // ✅ FIXED: Firebase Backend URL
+        const SAHCHAR_API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
 
-btn.onclick = () => {
-    box.style.display = box.style.display === "flex" ? "none" : "flex";
-    if (box.style.display === "flex" && !msgDiv.hasChildNodes()) {
-        addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। आप कैसे सहायता चाहते हैं? 🙏", "bot");
-        speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी।");
-    }
-};
+        // ✅ Emoji aur special characters filter
+        function cleanText(text) {
+            if (!text) return "";
+            
+            // Emoji remove
+            const emojiRegex = /[\u{1F600}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F300}-\u{1F5FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{FE00}-\u{FEFF}\u{2300}-\u{23FF}\u{2B50}\u{2934}\u{2935}\u{2190}-\u{21FF}]/gu;
+            let cleaned = text.replace(emojiRegex, '').trim();
+            
+            // Special characters filter (keep only Hindi, English, numbers, basic punctuation)
+            cleaned = cleaned.replace(/[^a-zA-Z0-9\u0900-\u097F\s.,!?;:'"()\-]/g, '');
+            
+            // Multiple spaces ko single space mein convert
+            cleaned = cleaned.replace(/\s+/g, ' ').trim();
+            
+            return cleaned || text;
+        }
 
-function addMsg(text, type) {
-    const msg = document.createElement("div");
-    msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
-    msg.innerText = text;
-    msgDiv.appendChild(msg);
-    msgDiv.scrollTop = msgDiv.scrollHeight;
-}
+        btn.onclick = () => {
+            box.style.display = box.style.display === "flex" ? "none" : "flex";
+            if (box.style.display === "flex" && !msgDiv.hasChildNodes()) {
+                addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। आप कैसे सहायता चाहते हैं?", "bot");
+                speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी।");
+            }
+        };
 
-function sendSahcharMsg() {
-    const input = document.getElementById("sahcharInput");
-    const msg = input.value.trim();
-    if (!msg) return;
+        function addMsg(text, type) {
+            const msg = document.createElement("div");
+            msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
+            msg.innerText = text;
+            msgDiv.appendChild(msg);
+            msgDiv.scrollTop = msgDiv.scrollHeight;
+        }
 
-    addMsg(msg, "user");
-    input.value = "";
-    addMsg("🤔 सोच रहा हूँ...", "bot");
+        function sendSahcharMsg() {
+            const input = document.getElementById("sahcharInput");
+            let msg = input.value.trim();
+            if (!msg) return;
 
-    // ✅ FIXED: Firebase URL
-    fetch(`${SAHCHAR_API_URL}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-            message: msg,
-            sessionId: "web_user_" + Date.now()
-        })
-    })
-    .then(res => {
-        if (!res.ok) throw new Error('Server error: ' + res.status);
-        return res.json();
-    })
-    .then(data => {
-        const lastMsg = msgDiv.lastChild;
-        if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
-        const reply = data.reply || data.message || "क्षमा करें, उत्तर नहीं मिला। 🙏";
-        addMsg(reply, "bot");
-        speakSahchar(reply);
-    })
-    .catch(err => {
-        const lastMsg = msgDiv.lastChild;
-        if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
-        addMsg("सर्वर से संपर्क नहीं हो पाया। कृपया बाद में प्रयास करें। 🙏", "bot");
-        console.error("❌ Chat error:", err);
-    });
-}
+            // ✅ User message clean karein
+            msg = cleanText(msg);
+            if (!msg) {
+                addMsg("कृपया सही संदेश लिखें।", "bot");
+                return;
+            }
 
-document.getElementById("sahcharInput").addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendSahcharMsg();
-});
+            addMsg(msg, "user");
+            input.value = "";
+            addMsg("सोच रहा हूँ...", "bot");
 
-function startSahcharVoice() {
-    if (!('webkitSpeechRecognition' in window)) {
-        addMsg("⚠️ Voice recognition के लिए Chrome या Edge इस्तेमाल करें।", "bot");
-        return;
-    }
-    const recog = new webkitSpeechRecognition();
-    recog.lang = "hi-IN";
-    recog.interimResults = false;
-    recog.continuous = false;
+            fetch(`${SAHCHAR_API_URL}/chat`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    message: msg,
+                    sessionId: "web_user_" + Date.now()
+                })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Server error: ' + res.status);
+                return res.json();
+            })
+            .then(data => {
+                const lastMsg = msgDiv.lastChild;
+                if (lastMsg && lastMsg.innerText === "सोच रहा हूँ...") lastMsg.remove();
+                let reply = data.reply || data.message || "क्षमा करें, उत्तर नहीं मिला।";
+                // ✅ Bot reply bhi clean karein
+                reply = cleanText(reply);
+                addMsg(reply, "bot");
+                speakSahchar(reply);
+            })
+            .catch(err => {
+                const lastMsg = msgDiv.lastChild;
+                if (lastMsg && lastMsg.innerText === "सोच रहा हूँ...") lastMsg.remove();
+                addMsg("सर्वर से संपर्क नहीं हो पाया। कृपया बाद में प्रयास करें।", "bot");
+                console.error("Chat error:", err);
+            });
+        }
 
-    recog.onstart = () => addMsg("🎤 सुन रहा हूँ...", "bot");
-    recog.onresult = (e) => {
-        const voiceText = e.results[0][0].transcript;
-        document.getElementById("sahcharInput").value = voiceText;
-        recog.stop();
-        sendSahcharMsg();
-    };
-    recog.onerror = (e) => {
-        if (e.error === "not-allowed") addMsg("⚠️ माइक्रोफोन अनुमति दें।", "bot");
-        else addMsg("⚠️ आवाज़ सुनाई नहीं दी, फिर कोशिश करें।", "bot");
-    };
-    recog.start();
-}
+        document.getElementById("sahcharInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendSahcharMsg();
+        });
 
-function speakSahchar(text) {
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "hi-IN";
-    speech.rate = 1;
-    window.speechSynthesis.speak(speech);
-}
+        function startSahcharVoice() {
+            if (!('webkitSpeechRecognition' in window)) {
+                addMsg("Voice recognition के लिए Chrome या Edge इस्तेमाल करें।", "bot");
+                return;
+            }
+            const recog = new webkitSpeechRecognition();
+            recog.lang = "hi-IN";
+            recog.interimResults = false;
+            recog.continuous = false;
+
+            recog.onstart = () => addMsg("सुन रहा हूँ...", "bot");
+            recog.onresult = (e) => {
+                const voiceText = e.results[0][0].transcript;
+                document.getElementById("sahcharInput").value = voiceText;
+                recog.stop();
+                sendSahcharMsg();
+            };
+            recog.onerror = (e) => {
+                if (e.error === "not-allowed") addMsg("माइक्रोफोन अनुमति दें।", "bot");
+                else addMsg("आवाज़ सुनाई नहीं दी, फिर कोशिश करें।", "bot");
+            };
+            recog.start();
+        }
+
+        function speakSahchar(text) {
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "hi-IN";
+            speech.rate = 1;
+            window.speechSynthesis.speak(speech);
+        }
     </script>
 </body>
 </html>
