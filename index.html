@@ -770,90 +770,101 @@
         }
         loadImages();
 
-        // ========== सहचर AI चैटबॉट जावास्क्रिप्ट ==========
-        const btn = document.getElementById("sahcharChatBtn");
-        const box = document.getElementById("sahcharChatBox");
-        const msgDiv = document.getElementById("sahcharMessages");
+// ========== सहचर AI चैटबॉट जावास्क्रिप्ट (FIXED) ==========
+const btn = document.getElementById("sahcharChatBtn");
+const box = document.getElementById("sahcharChatBox");
+const msgDiv = document.getElementById("sahcharMessages");
 
-        btn.onclick = () => {
-            box.style.display = box.style.display === "flex" ? "none" : "flex";
-            if (box.style.display === "flex" && !msgDiv.hasChildNodes()) {
-                addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। आप कैसे सहायता चाहते हैं?", "bot");
-                speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी।");
-            }
-        };
+// ✅ FIXED: Firebase Backend URL
+const SAHCHAR_API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
 
-        function addMsg(text, type) {
-            const msg = document.createElement("div");
-            msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
-            msg.innerText = text;
-            msgDiv.appendChild(msg);
-            msgDiv.scrollTop = msgDiv.scrollHeight;
-        }
+btn.onclick = () => {
+    box.style.display = box.style.display === "flex" ? "none" : "flex";
+    if (box.style.display === "flex" && !msgDiv.hasChildNodes()) {
+        addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। आप कैसे सहायता चाहते हैं? 🙏", "bot");
+        speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी।");
+    }
+};
 
-        function sendSahcharMsg() {
-            const input = document.getElementById("sahcharInput");
-            const msg = input.value.trim();
-            if (!msg) return;
+function addMsg(text, type) {
+    const msg = document.createElement("div");
+    msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
+    msg.innerText = text;
+    msgDiv.appendChild(msg);
+    msgDiv.scrollTop = msgDiv.scrollHeight;
+}
 
-            addMsg(msg, "user");
-            input.value = "";
-            addMsg("🤔 सोच रहा हूँ...", "bot");
+function sendSahcharMsg() {
+    const input = document.getElementById("sahcharInput");
+    const msg = input.value.trim();
+    if (!msg) return;
 
-            fetch("https://sahchar-ai-backend.onrender.com/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: msg })
-            })
-            .then(res => res.json())
-            .then(data => {
-                const lastMsg = msgDiv.lastChild;
-                if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
-                addMsg(data.reply, "bot");
-                speakSahchar(data.reply);
-            })
-            .catch(err => {
-                const lastMsg = msgDiv.lastChild;
-                if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
-                addMsg("सर्वर से संपर्क नहीं हो पाया। कृपया बाद में प्रयास करें।", "bot");
-                console.error(err);
-            });
-        }
+    addMsg(msg, "user");
+    input.value = "";
+    addMsg("🤔 सोच रहा हूँ...", "bot");
 
-        document.getElementById("sahcharInput").addEventListener("keypress", (e) => {
-            if (e.key === "Enter") sendSahcharMsg();
-        });
+    // ✅ FIXED: Firebase URL
+    fetch(`${SAHCHAR_API_URL}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+            message: msg,
+            sessionId: "web_user_" + Date.now()
+        })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('Server error: ' + res.status);
+        return res.json();
+    })
+    .then(data => {
+        const lastMsg = msgDiv.lastChild;
+        if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
+        const reply = data.reply || data.message || "क्षमा करें, उत्तर नहीं मिला। 🙏";
+        addMsg(reply, "bot");
+        speakSahchar(reply);
+    })
+    .catch(err => {
+        const lastMsg = msgDiv.lastChild;
+        if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
+        addMsg("सर्वर से संपर्क नहीं हो पाया। कृपया बाद में प्रयास करें। 🙏", "bot");
+        console.error("❌ Chat error:", err);
+    });
+}
 
-        function startSahcharVoice() {
-            if (!('webkitSpeechRecognition' in window)) {
-                alert("Voice recognition के लिए Chrome या Edge इस्तेमाल करें।");
-                return;
-            }
-            const recog = new webkitSpeechRecognition();
-            recog.lang = "hi-IN";
-            recog.interimResults = false;
-            recog.continuous = false;
+document.getElementById("sahcharInput").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendSahcharMsg();
+});
 
-            recog.onstart = () => addMsg("🎤 सुन रहा हूँ...", "bot");
-            recog.onresult = (e) => {
-                const voiceText = e.results[0][0].transcript;
-                document.getElementById("sahcharInput").value = voiceText;
-                recog.stop();
-                sendSahcharMsg();
-            };
-            recog.onerror = (e) => {
-                if (e.error === "not-allowed") addMsg("माइक्रोफोन अनुमति दें।", "bot");
-                else addMsg("आवाज़ सुनाई नहीं दी, फिर कोशिश करें।", "bot");
-            };
-            recog.start();
-        }
+function startSahcharVoice() {
+    if (!('webkitSpeechRecognition' in window)) {
+        addMsg("⚠️ Voice recognition के लिए Chrome या Edge इस्तेमाल करें।", "bot");
+        return;
+    }
+    const recog = new webkitSpeechRecognition();
+    recog.lang = "hi-IN";
+    recog.interimResults = false;
+    recog.continuous = false;
 
-        function speakSahchar(text) {
-            const speech = new SpeechSynthesisUtterance(text);
-            speech.lang = "hi-IN";
-            speech.rate = 1;
-            window.speechSynthesis.speak(speech);
-        }
+    recog.onstart = () => addMsg("🎤 सुन रहा हूँ...", "bot");
+    recog.onresult = (e) => {
+        const voiceText = e.results[0][0].transcript;
+        document.getElementById("sahcharInput").value = voiceText;
+        recog.stop();
+        sendSahcharMsg();
+    };
+    recog.onerror = (e) => {
+        if (e.error === "not-allowed") addMsg("⚠️ माइक्रोफोन अनुमति दें।", "bot");
+        else addMsg("⚠️ आवाज़ सुनाई नहीं दी, फिर कोशिश करें।", "bot");
+    };
+    recog.start();
+}
+
+function speakSahchar(text) {
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "hi-IN";
+    speech.rate = 1;
+    window.speechSynthesis.speak(speech);
+}
     </script>
 </body>
 </html>
