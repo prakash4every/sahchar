@@ -579,6 +579,57 @@
             background: #059669;
             transform: scale(1.05);
         }
+
+        /* ===== DAILY THOUGHT STYLES ===== */
+        .thought-container {
+            padding: 20px;
+            text-align: center;
+            background: #f4f4f4;
+        }
+        .thought-container h2 {
+            font-family: 'Noto Serif Devanagari', serif;
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .thought-container h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        #dailyThought {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 10px 0;
+            font-family: 'Noto Serif Devanagari', serif;
+        }
+        #thoughtAuthor {
+            font-size: 16px;
+            color: #888;
+            margin: 5px 0;
+        }
+        #thoughtDate {
+            font-size: 14px;
+            color: #aaa;
+            margin: 5px 0;
+        }
+        .thought-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
@@ -658,6 +709,17 @@
     </section>
 
     <!-- ============================================================ -->
+    <!-- ===== DAILY BUDDHA THOUGHT (AUTO-UPDATE WITH CHATBOT) ===== -->
+    <!-- ============================================================ -->
+    <section class="thought-container">
+        <h2>🪷 Daily Buddha Thought</h2>
+        <div class="thought-divider"></div>
+        <p id="dailyThought">Loading...</p>
+        <p id="thoughtAuthor">– गौतम बुद्ध</p>
+        <p id="thoughtDate"></p>
+    </section>
+
+    <!-- ============================================================ -->
     <!-- ===== OTHER SECTIONS ===== -->
     <!-- ============================================================ -->
 
@@ -696,12 +758,6 @@
                 <a href="#" class="btn">और विचार पढ़ें</a>
             </div>
         </div>
-    </section>
-
-    <!-- Daily Thought -->
-    <section style="padding:20px; text-align:center; background:#f4f4f4;">
-        <h2>Daily Buddha Thought</h2>
-        <p id="dailyThought" style="font-size:20px; font-weight:bold;"></p>
     </section>
 
     <!-- वीडियो गैलरी -->
@@ -791,21 +847,50 @@
     </div>
 
     <script>
-        // ========== Daily Thought ==========
-        const thoughts = [
-            "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।",
-            "स्वयं पर विजय सबसे बड़ी विजय है।",
-            "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।",
-            "शांति भीतर से आती है, बाहर मत खोजो।",
-            "जो सोचते हैं वही बनते हैं।",
-            "अतीत में मत उलझो, वर्तमान में जियो।",
-            "दूसरों की सहायता करना ही सच्चा धर्म है।"
+        // ============================================================ //
+        // ===== DAILY THOUGHT WITH AUTO-UPDATE (FRONTEND ONLY) ===== //
+        // ============================================================ //
+        const buddhaThoughts = [
+            { thought: "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।", author: "गौतम बुद्ध" },
+            { thought: "स्वयं पर विजय सबसे बड़ी विजय है।", author: "गौतम बुद्ध" },
+            { thought: "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।", author: "गौतम बुद्ध" },
+            { thought: "शांति भीतर से आती है, बाहर मत खोजो।", author: "गौतम बुद्ध" },
+            { thought: "जो सोचते हैं वही बनते हैं।", author: "गौतम बुद्ध" },
+            { thought: "अतीत में मत उलझो, वर्तमान में जियो।", author: "गौतम बुद्ध" },
+            { thought: "दूसरों की सहायता करना ही सच्चा धर्म है।", author: "गौतम बुद्ध" },
+            { thought: "क्षमा सबसे बड़ा बल है।", author: "गौतम बुद्ध" },
+            { thought: "सत्य ही अंततः जीतता है।", author: "गौतम बुद्ध" },
+            { thought: "मैत्री से सुख मिलता है।", author: "गौतम बुद्ध" },
+            { thought: "संघ का साथ कभी मत छोड़ो।", author: "गौतम बुद्ध" },
+            { thought: "जागरूकता ही मुक्ति का मार्ग है।", author: "गौतम बुद्ध" },
+            { thought: "अहिंसा परम धर्म है।", author: "गौतम बुद्ध" },
+            { thought: "जो जैसा सोचता है, वैसा बन जाता है।", author: "गौतम बुद्ध" },
+            { thought: "वर्तमान में जीना सीखो।", author: "गौतम बुद्ध" },
+            { thought: "दान से मन पवित्र होता है।", author: "गौतम बुद्ध" }
         ];
-        const today = new Date().getDate();
-        document.getElementById("dailyThought").innerText = thoughts[today % thoughts.length];
 
-        // ========== वीडियो गैलरी ==========
-        const buddhaMessages = [
+        function getDailyThought() {
+            const today = new Date();
+            const startOfYear = new Date(today.getFullYear(), 0, 0);
+            const diff = today - startOfYear;
+            const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const index = dayOfYear % buddhaThoughts.length;
+            
+            const thoughtData = buddhaThoughts[index];
+            document.getElementById('dailyThought').innerText = `“${thoughtData.thought}”`;
+            document.getElementById('thoughtAuthor').innerText = `– ${thoughtData.author}`;
+            document.getElementById('thoughtDate').innerText = today.toLocaleDateString('hi-IN', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            return thoughtData.thought;
+        }
+
+        // ===== वीडियो गैलरी =====
+        const videoMessages = [
             "करुणा ही सच्चा धर्म है।",
             "प्रेम से ही घृणा समाप्त होती है।",
             "सभी संकल्प अनित्य हैं।",
@@ -823,8 +908,8 @@
             "जागरूकता ही मुक्ति का मार्ग है।"
         ];
 
-        function getRandomBuddhaMessage() {
-            return buddhaMessages[Math.floor(Math.random() * buddhaMessages.length)];
+        function getRandomVideoMessage() {
+            return videoMessages[Math.floor(Math.random() * videoMessages.length)];
         }
 
         async function loadVideos() {
@@ -855,7 +940,7 @@
                 videoFiles.forEach(file => {
                     const card = document.createElement('div');
                     card.className = 'video-card';
-                    const message = getRandomBuddhaMessage();
+                    const message = getRandomVideoMessage();
                     let fileNameTitle = file.name.replace('.mp4', '').replace(/[_-]/g, ' ');
                     
                     card.innerHTML = `
@@ -877,9 +962,8 @@
                 videoGallery.innerHTML = '<p style="text-align:center; color:#777; padding:2rem;">वीडियो लोड करने में समस्या: ' + error.message + '</p>';
             }
         }
-        loadVideos();
 
-        // ========== इमेज गैलरी ==========
+        // ===== इमेज गैलरी =====
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             try {
@@ -915,9 +999,8 @@
                 gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी लोड करने में समस्या: ' + error.message + '</p>';
             }
         }
-        loadImages();
 
-        // ========== सहचर AI चैटबॉट जावास्क्रिप्ट ==========
+        // ===== सहचर AI चैटबॉट =====
         const btn = document.getElementById("sahcharChatBtn");
         const box = document.getElementById("sahcharChatBox");
         const msgDiv = document.getElementById("sahcharMessages");
@@ -936,8 +1019,15 @@
         btn.onclick = () => {
             box.style.display = box.style.display === "flex" ? "none" : "flex";
             if (box.style.display === "flex" && !msgDiv.hasChildNodes()) {
-                addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। आप कैसे सहायता चाहते हैं? 🙏", "bot");
-                speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। आप कैसे सहायता चाहते हैं?");
+                // Daily thought chatbot mein bhi post karein
+                const thought = document.getElementById('dailyThought').innerText;
+                addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। 🙏", "bot");
+                if (thought && thought !== "Loading...") {
+                    setTimeout(() => {
+                        addMsg(`🪷 आज का बुद्ध विचार: ${thought}`, "bot");
+                    }, 2000);
+                }
+                speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी।");
             }
         };
 
@@ -1030,6 +1120,20 @@
             speech.rate = 1;
             window.speechSynthesis.speak(speech);
         }
+
+        // ============================================================ //
+        // ===== INITIALIZE EVERYTHING ON PAGE LOAD ===== //
+        // ============================================================ //
+        document.addEventListener('DOMContentLoaded', function() {
+            // Daily thought set karein
+            getDailyThought();
+            
+            // Videos load karein
+            loadVideos();
+            
+            // Images load karein
+            loadImages();
+        });
     </script>
 </body>
 </html>
