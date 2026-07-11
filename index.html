@@ -1057,14 +1057,18 @@
                 return;
             }
 
-            fetch(`${SAHCHAR_API_URL}/chat`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    message: cleanMsg,
-                    sessionId: "web_user_" + Date.now()
-                })
-            })
+           fetch(`${SAHCHAR_API_URL}/chat`, {
+    method: "POST",
+    headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    mode: 'cors',  // ✅ CORS enable
+    body: JSON.stringify({ 
+        message: cleanMsg,
+        sessionId: "web_user_" + Date.now()
+    })
+})
             .then(res => {
                 if (!res.ok) throw new Error('Server error: ' + res.status);
                 return res.json();
