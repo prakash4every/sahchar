@@ -221,7 +221,7 @@
         .file-info span { display: inline-flex; align-items: center; gap: 5px; }
 
         /* ============================================================ */
-        /* ===== DAILY THOUGHT WITH QUESTION ===== */
+        /* ===== DAILY WISDOM WITH INPUT ===== */
         /* ============================================================ */
         .thought-container {
             padding: 30px 20px;
@@ -281,6 +281,60 @@
             font-style: italic;
         }
 
+        /* Wisdom Input Area */
+        .wisdom-input-area {
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: white;
+            padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 2px solid #e2e8f0;
+            transition: border-color 0.3s;
+        }
+        .wisdom-input-area:focus-within {
+            border-color: var(--primary);
+        }
+        .wisdom-input-area input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            padding: 0.7rem 0;
+            font-family: 'Poppins', sans-serif;
+            background: transparent;
+        }
+        .wisdom-input-area input::placeholder {
+            color: #aaa;
+        }
+        .wisdom-input-area .wisdom-send-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .wisdom-input-area .wisdom-send-btn:hover {
+            background: var(--primary-light);
+            transform: scale(1.05);
+        }
+        .wisdom-input-area .wisdom-send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Thought Display */
         .thought-display {
             background: white;
@@ -289,6 +343,15 @@
             max-width: 700px;
             margin: 0 auto;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .thought-display.loading {
+            opacity: 0.6;
+            pointer-events: none;
         }
         #dailyThought {
             font-size: 1.8rem;
@@ -312,27 +375,81 @@
             width: 60px;
             height: 3px;
             background: var(--accent);
-            margin: 1rem auto;
+            margin: 0.8rem auto;
             border-radius: 3px;
         }
 
-        /* Refresh Button */
-        .refresh-thought-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
+        /* Buttons Row */
+        .wisdom-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .wisdom-btn {
             padding: 0.6rem 1.8rem;
             border-radius: 50px;
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 1rem;
             font-family: 'Poppins', sans-serif;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        .refresh-thought-btn:hover {
+        .wisdom-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .wisdom-btn-primary:hover {
             background: var(--primary-light);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(165,42,42,0.25);
+        }
+        .wisdom-btn-secondary {
+            background: #e2e8f0;
+            color: var(--text-dark);
+        }
+        .wisdom-btn-secondary:hover {
+            background: #cbd5e1;
+            transform: translateY(-2px);
+        }
+        .wisdom-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Loading Spinner inside thought */
+        .thought-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0.5rem auto;
+        }
+        .thought-spinner.active {
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error message */
+        .wisdom-error {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .wisdom-error.show {
+            display: block;
         }
 
         @media (max-width: 600px) {
@@ -340,6 +457,9 @@
             .question-box { padding: 1rem; }
             .thought-display { padding: 1.2rem; }
             #dailyThought { font-size: 1.3rem; }
+            .wisdom-input-area { padding: 0.3rem 0.3rem 0.3rem 0.8rem; }
+            .wisdom-input-area input { font-size: 0.85rem; }
+            .wisdom-input-area .wisdom-send-btn { width: 38px; height: 38px; font-size: 1rem; }
         }
 
         /* ============================================================ */
@@ -670,7 +790,7 @@
     </section>
 
     <!-- ============================================================ -->
-    <!-- ===== DAILY BUDDHA THOUGHT WITH QUESTION ===== -->
+    <!-- ===== INTERACTIVE DAILY WISDOM ===== -->
     <!-- ============================================================ -->
     <section class="thought-container">
         <h2>🪷 Daily Buddha Wisdom</h2>
@@ -678,18 +798,35 @@
         <!-- Question Box -->
         <div class="question-box">
             <div class="q-label">🌟 आज का प्रश्न</div>
-            <div class="q-text" id="dailyQuestion">Loading...</div>
-            <div class="q-hint">💡 बुद्ध के विचारों में उत्तर खोजें</div>
+            <div class="q-text" id="dailyQuestion">सच्चा ज्ञान क्या है?</div>
+            <div class="q-hint">💡 नीचे अपना प्रश्न लिखें या "नया विचार" पर क्लिक करें</div>
         </div>
 
+        <!-- Input Area -->
+        <div class="wisdom-input-area" id="wisdomInputArea">
+            <input type="text" id="wisdomUserInput" placeholder="अपना प्रश्न लिखें... (जैसे: सच्चा सुख क्या है?)" />
+            <button class="wisdom-send-btn" id="wisdomSendBtn" onclick="askWisdomQuestion()" title="पूछें">➤</button>
+        </div>
+        <div class="wisdom-error" id="wisdomError">⚠️ कृपया कुछ लिखें।</div>
+
         <!-- Thought Display -->
-        <div class="thought-display">
-            <div class="thought-divider"></div>
-            <p id="dailyThought">Loading...</p>
-            <p id="thoughtAuthor">– गौतम बुद्ध</p>
-            <p id="thoughtDate"></p>
-            <div class="thought-divider"></div>
-            <button class="refresh-thought-btn" onclick="getDailyWisdom()">🔄 नया विचार</button>
+        <div class="thought-display" id="thoughtDisplay">
+            <div class="thought-spinner" id="thoughtSpinner"></div>
+            <div id="thoughtContent">
+                <p id="dailyThought">“जागरूकता ही मुक्ति का मार्ग है।”</p>
+                <p id="thoughtAuthor">– गौतम बुद्ध</p>
+                <p id="thoughtDate">शनिवार, 11 जुलाई 2026</p>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="wisdom-buttons">
+            <button class="wisdom-btn wisdom-btn-primary" onclick="getNewWisdom()" id="newWisdomBtn">
+                🔄 नया विचार
+            </button>
+            <button class="wisdom-btn wisdom-btn-secondary" onclick="resetToDailyWisdom()">
+                📅 आज का विचार
+            </button>
         </div>
     </section>
 
@@ -702,7 +839,7 @@
         <div class="card" style="text-align:center; max-width:800px; margin:auto;">
             <p style="font-size:1.15rem;">
                 सहचर एक ऐसा मंच है जहाँ हम भगवान बुद्ध की शिक्षाओं, सकारात्मक संदेशों, 
-                करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं。<br><br>
+                करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं।<br><br>
                 हमारा लक्ष्य है – हर व्यक्ति के मन में शांति और समाज में सहानुभूति का प्रसार करना।
             </p>
         </div>
@@ -800,7 +937,7 @@
     </footer>
 
     <!-- ============================================================ -->
-    <!-- ===== CHATBOT (FULL FEATURES) ===== -->
+    <!-- ===== CHATBOT ===== -->
     <!-- ============================================================ -->
     <button id="sahcharChatBtn">🧘</button>
 
@@ -834,44 +971,28 @@
             <p style="font-size:0.85rem;color:#666;margin-bottom:12px;">कोई feature select करें और prompt लिखें:</p>
             <div class="feature-grid-modal">
                 <div class="feature-item-modal" onclick="selectFeature('🔍','Web Search','खोज')">
-                    <span class="icon">🔍</span>
-                    <span class="label">Web Search</span>
-                    <div class="desc">वेब पर खोजें</div>
+                    <span class="icon">🔍</span><span class="label">Web Search</span><div class="desc">वेब पर खोजें</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('🎨','Image Gen','तस्वीर बनाओ')">
-                    <span class="icon">🎨</span>
-                    <span class="label">Image Gen</span>
-                    <div class="desc">AI तस्वीर बनाएं</div>
+                    <span class="icon">🎨</span><span class="label">Image Gen</span><div class="desc">AI तस्वीर बनाएं</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('🎬','Video Gen','वीडियो बनाओ')">
-                    <span class">🎬</span>
-                    <span class="label">Video Gen</span>
-                    <div class="desc">AI वीडियो बनाएं</div>
+                    <span class="icon">🎬</span><span class="label">Video Gen</span><div class="desc">AI वीडियो बनाएं</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('📄','Document','document analyze')">
-                    <span class="icon">📄</span>
-                    <span class="label">Document</span>
-                    <div class="desc">दस्तावेज़ विश्लेषण</div>
+                    <span class="icon">📄</span><span class="label">Document</span><div class="desc">दस्तावेज़ विश्लेषण</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('💾','Memory','पिछली बात')">
-                    <span class="icon">💾</span>
-                    <span class="label">Memory</span>
-                    <div class="desc">पिछली बातें याद</div>
+                    <span class="icon">💾</span><span class="label">Memory</span><div class="desc">पिछली बातें याद</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('🧠','Self-Learn','सीखो')">
-                    <span class="icon">🧠</span>
-                    <span class="label">Self-Learn</span>
-                    <div class="desc">खुद सीखना</div>
+                    <span class="icon">🧠</span><span class="label">Self-Learn</span><div class="desc">खुद सीखना</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('🔄','Auto-Upgrade','upgrade')">
-                    <span class="icon">🔄</span>
-                    <span class="label">Auto-Upgrade</span>
-                    <div class="desc">खुद अपग्रेड</div>
+                    <span class="icon">🔄</span><span class="label">Auto-Upgrade</span><div class="desc">खुद अपग्रेड</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('🌐','Multilingual','hello')">
-                    <span class="icon">🌐</span>
-                    <span class="label">Multilingual</span>
-                    <div class="desc">हिंदी/English</div>
+                    <span class="icon">🌐</span><span class="label">Multilingual</span><div class="desc">हिंदी/English</div>
                 </div>
             </div>
             <div class="feature-prompt-area" id="featurePromptArea">
@@ -887,102 +1008,200 @@
 
     <script>
         // ============================================================ //
-        // ===== DAILY WISDOM WITH QUESTIONS ===== //
+        // ===== INTERACTIVE DAILY WISDOM ===== //
         // ============================================================ //
 
-        const buddhaWisdom = [
-            { 
-                question: "सच्चा सुख क्या है?",
-                thought: "संयम ही सच्चा सुख है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "मन को कैसे शांत करें?",
-                thought: "शांति भीतर से आती है, बाहर मत खोजो।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "क्रोध से कैसे बचें?",
-                thought: "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "जीवन का सबसे बड़ा रहस्य क्या है?",
-                thought: "जो सोचते हैं वही बनते हैं।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "सत्य क्या है?",
-                thought: "सत्य ही अंततः जीतता है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "दान का महत्व क्या है?",
-                thought: "दान से मन पवित्र होता है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "सच्चा बल क्या है?",
-                thought: "क्षमा सबसे बड़ा बल है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "सबसे बड़ा धर्म क्या है?",
-                thought: "अहिंसा परम धर्म है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "सच्ची मित्रता क्या है?",
-                thought: "मैत्री से सुख मिलता है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "जीवन में सबसे महत्वपूर्ण क्या है?",
-                thought: "वर्तमान में जीना सीखो।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "सच्चा ज्ञान क्या है?",
-                thought: "जागरूकता ही मुक्ति का मार्ग है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "दूसरों की सेवा क्यों करें?",
-                thought: "दूसरों की भलाई में ही अपनी भलाई है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "मनुष्य का सबसे बड़ा शत्रु कौन है?",
-                thought: "मन ही मनुष्य का कारण है, मन ही बंधन और मोक्ष का कारण है।",
-                author: "गौतम बुद्ध"
-            },
-            { 
-                question: "सच्चा योद्धा कौन है?",
-                thought: "जो क्रोध को नियंत्रित कर लेता है, वही सच्चा योद्धा है।",
-                author: "गौतम बुद्ध"
-            }
+        const wisdomBase = [
+            { question: "सच्चा ज्ञान क्या है?", thought: "जागरूकता ही मुक्ति का मार्ग है।", author: "गौतम बुद्ध" },
+            { question: "सच्चा सुख क्या है?", thought: "संयम ही सच्चा सुख है।", author: "गौतम बुद्ध" },
+            { question: "मन को कैसे शांत करें?", thought: "शांति भीतर से आती है, बाहर मत खोजो।", author: "गौतम बुद्ध" },
+            { question: "क्रोध से कैसे बचें?", thought: "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।", author: "गौतम बुद्ध" },
+            { question: "जीवन का सबसे बड़ा रहस्य क्या है?", thought: "जो सोचते हैं वही बनते हैं।", author: "गौतम बुद्ध" },
+            { question: "सत्य क्या है?", thought: "सत्य ही अंततः जीतता है।", author: "गौतम बुद्ध" },
+            { question: "दान का महत्व क्या है?", thought: "दान से मन पवित्र होता है।", author: "गौतम बुद्ध" },
+            { question: "सच्चा बल क्या है?", thought: "क्षमा सबसे बड़ा बल है।", author: "गौतम बुद्ध" },
+            { question: "सबसे बड़ा धर्म क्या है?", thought: "अहिंसा परम धर्म है।", author: "गौतम बुद्ध" },
+            { question: "सच्ची मित्रता क्या है?", thought: "मैत्री से सुख मिलता है।", author: "गौतम बुद्ध" },
+            { question: "जीवन में सबसे महत्वपूर्ण क्या है?", thought: "वर्तमान में जीना सीखो।", author: "गौतम बुद्ध" },
+            { question: "दूसरों की सेवा क्यों करें?", thought: "दूसरों की भलाई में ही अपनी भलाई है।", author: "गौतम बुद्ध" },
+            { question: "मनुष्य का सबसे बड़ा शत्रु कौन है?", thought: "मन ही मनुष्य का कारण है, मन ही बंधन और मोक्ष का कारण है।", author: "गौतम बुद्ध" },
+            { question: "सच्चा योद्धा कौन है?", thought: "जो क्रोध को नियंत्रित कर लेता है, वही सच्चा योद्धा है।", author: "गौतम बुद्ध" }
         ];
 
+        const API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
+        let currentWisdom = { question: "", thought: "", author: "", date: "" };
+        let isDailyThought = true;
+
+        // ===== Display Wisdom =====
+        function displayWisdom(question, thought, author, date) {
+            document.getElementById('dailyQuestion').innerText = question;
+            document.getElementById('dailyThought').innerText = `“${thought}”`;
+            document.getElementById('thoughtAuthor').innerText = `– ${author}`;
+            document.getElementById('thoughtDate').innerText = date;
+            currentWisdom = { question, thought, author, date };
+        }
+
+        // ===== Get Daily Wisdom =====
         function getDailyWisdom() {
             const today = new Date();
             const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            const index = dayOfYear % buddhaWisdom.length;
-            const wisdom = buddhaWisdom[index];
+            const index = dayOfYear % wisdomBase.length;
+            const wisdom = wisdomBase[index];
+            const date = today.toLocaleDateString('hi-IN', {
+                weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+            });
+            displayWisdom(wisdom.question, wisdom.thought, wisdom.author, date);
+            isDailyThought = true;
+        }
 
-            document.getElementById('dailyQuestion').innerText = wisdom.question;
-            document.getElementById('dailyThought').innerText = `“${wisdom.thought}”`;
-            document.getElementById('thoughtAuthor').innerText = `– ${wisdom.author}`;
-            document.getElementById('thoughtDate').innerText = today.toLocaleDateString('hi-IN', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
+        // ===== Reset to Daily Wisdom =====
+        function resetToDailyWisdom() {
+            document.getElementById('thoughtDisplay').classList.remove('loading');
+            document.getElementById('wisdomError').classList.remove('show');
+            getDailyWisdom();
+        }
+
+        // ===== Get New Wisdom (Random) =====
+        function getNewWisdom() {
+            const btn = document.getElementById('newWisdomBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ खोज रहा हूँ...';
+            document.getElementById('thoughtDisplay').classList.add('loading');
+            document.getElementById('thoughtSpinner').classList.add('active');
+            document.getElementById('wisdomError').classList.remove('show');
+
+            // Try to get from backend via web search
+            fetch(`${API_URL}/chat`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify({
+                    message: "बुद्ध का कोई अनमोल विचार बताओ जो जीवन में शांति और ज्ञान दे।",
+                    sessionId: "wisdom_" + Date.now()
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const reply = data.reply || data.message;
+                if (reply && reply.length > 10) {
+                    // Extract thought from reply
+                    let thought = reply;
+                    let author = "गौतम बुद्ध";
+                    // Try to extract if contains " - " or "–"
+                    if (reply.includes('–') || reply.includes('-')) {
+                        const parts = reply.split(/[–\-]/);
+                        if (parts.length >= 2) {
+                            thought = parts[0].trim();
+                            author = parts[1].trim() || "गौतम बुद्ध";
+                        }
+                    }
+                    const today = new Date();
+                    const date = today.toLocaleDateString('hi-IN', {
+                        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+                    });
+                    displayWisdom("✨ आज का विशेष विचार", thought, author, date);
+                    isDailyThought = false;
+                } else {
+                    // Fallback to random from local base
+                    const random = wisdomBase[Math.floor(Math.random() * wisdomBase.length)];
+                    const today = new Date();
+                    const date = today.toLocaleDateString('hi-IN', {
+                        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+                    });
+                    displayWisdom(random.question, random.thought, random.author, date);
+                    isDailyThought = false;
+                }
+                document.getElementById('thoughtDisplay').classList.remove('loading');
+                document.getElementById('thoughtSpinner').classList.remove('active');
+                btn.disabled = false;
+                btn.textContent = '🔄 नया विचार';
+            })
+            .catch(err => {
+                console.error("Wisdom fetch error:", err);
+                // Fallback to local
+                const random = wisdomBase[Math.floor(Math.random() * wisdomBase.length)];
+                const today = new Date();
+                const date = today.toLocaleDateString('hi-IN', {
+                    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+                });
+                displayWisdom(random.question, random.thought, random.author, date);
+                isDailyThought = false;
+                document.getElementById('thoughtDisplay').classList.remove('loading');
+                document.getElementById('thoughtSpinner').classList.remove('active');
+                btn.disabled = false;
+                btn.textContent = '🔄 नया विचार';
             });
         }
 
-        // Auto-rotate every 24 hours
-        getDailyWisdom();
-        setInterval(getDailyWisdom, 24 * 60 * 60 * 1000);
+        // ===== Ask Wisdom Question =====
+        function askWisdomQuestion() {
+            const input = document.getElementById('wisdomUserInput');
+            const question = input.value.trim();
+            if (!question) {
+                document.getElementById('wisdomError').textContent = '⚠️ कृपया कुछ लिखें।';
+                document.getElementById('wisdomError').classList.add('show');
+                return;
+            }
+            document.getElementById('wisdomError').classList.remove('show');
+            const sendBtn = document.getElementById('wisdomSendBtn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = '⏳';
+            document.getElementById('thoughtDisplay').classList.add('loading');
+            document.getElementById('thoughtSpinner').classList.add('active');
+
+            fetch(`${API_URL}/chat`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify({
+                    message: `बुद्ध की शिक्षाओं के अनुसार "${question}" का उत्तर दे। संक्षिप्त और प्रेरणादायक हो।`,
+                    sessionId: "wisdom_" + Date.now()
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const reply = data.reply || data.message || "क्षमा करें, उत्तर नहीं मिला।";
+                const today = new Date();
+                const date = today.toLocaleDateString('hi-IN', {
+                    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+                });
+                // Try to extract author
+                let thought = reply;
+                let author = "गौतम बुद्ध";
+                if (reply.includes('–') || reply.includes('-')) {
+                    const parts = reply.split(/[–\-]/);
+                    if (parts.length >= 2) {
+                        thought = parts[0].trim();
+                        author = parts[1].trim() || "गौतम बुद्ध";
+                    }
+                }
+                displayWisdom(`❓ ${question}`, thought, author, date);
+                isDailyThought = false;
+                input.value = '';
+                document.getElementById('thoughtDisplay').classList.remove('loading');
+                document.getElementById('thoughtSpinner').classList.remove('active');
+                sendBtn.disabled = false;
+                sendBtn.textContent = '➤';
+            })
+            .catch(err => {
+                console.error("Wisdom question error:", err);
+                // Fallback
+                const random = wisdomBase[Math.floor(Math.random() * wisdomBase.length)];
+                const today = new Date();
+                const date = today.toLocaleDateString('hi-IN', {
+                    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+                });
+                displayWisdom(`❓ ${question}`, random.thought, random.author, date);
+                isDailyThought = false;
+                document.getElementById('thoughtDisplay').classList.remove('loading');
+                document.getElementById('thoughtSpinner').classList.remove('active');
+                sendBtn.disabled = false;
+                sendBtn.textContent = '➤';
+            });
+        }
+
+        // ===== Enter Key =====
+        document.getElementById('wisdomUserInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') askWisdomQuestion();
+        });
 
         // ============================================================ //
         // ===== VIDEO GALLERY ===== //
@@ -992,10 +1211,10 @@
             "सभी संकल्प अनित्य हैं।", "शांति भीतर से आती है।",
             "अपने मन पर विजय पाओ।", "दान से मन पवित्र होता है।",
             "क्षमा सबसे बड़ा बल है।", "सत्य ही अंततः जीतता है।",
-            "मैत्री से सुख मिलता है।", "जो जैसा सोचता है, वैसा बन जाता है。",
-            "वर्तमान में जीना सीखो。", "अहिंसा परम धर्म है।",
-            "दूसरों की भलाई में ही अपनी भलाई है。", "संघ का साथ कभी मत छोड़ो。",
-            "जागरूकता ही मुक्ति का मार्ग है।"
+            "मैत्री से सुख मिलता है।", "जो जैसा सोचता है, वैसा बन जाता है।",
+            "वर्तमान में जीना सीखो।", "अहिंसा परम धर्म है।",
+            "दूसरों की भलाई में ही अपनी भलाई है।", "संघ का साथ कभी मत छोड़ो।",
+            "जागरूकता ही मुक्ति का मार्ग है。"
         ];
 
         function getRandomVideoMessage() {
@@ -1087,7 +1306,6 @@
         const messagesDiv = document.getElementById("sahcharMessages");
         const inputField = document.getElementById("sahcharInput");
         const typingIndicator = document.getElementById("typingIndicator");
-        const API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
         let selectedFeature = null;
 
         chatBtn.onclick = () => {
