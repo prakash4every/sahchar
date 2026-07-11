@@ -23,18 +23,8 @@
             --shadow: 0 8px 30px rgba(0,0,0,0.08);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to bottom, #fdfdfd, #f0f4f8);
-            color: var(--text-dark);
-            line-height: 1.7;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom, #fdfdfd, #f0f4f8); color: var(--text-dark); line-height: 1.7; }
 
         header {
             background: linear-gradient(135deg, var(--primary) 0%, #7f0000 100%);
@@ -44,7 +34,6 @@
             position: relative;
             overflow: hidden;
         }
-
         header::before {
             content: '';
             position: absolute;
@@ -52,20 +41,8 @@
             background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0%, transparent 60%);
             pointer-events: none;
         }
-
-        h1 {
-            font-family: 'Noto Serif Devanagari', serif;
-            font-size: 2.8rem;
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+        h1 { font-family: 'Noto Serif Devanagari', serif; font-size: 2.8rem; margin-bottom: 0.8rem; letter-spacing: 1px; }
+        header p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
         nav {
             margin-top: 2rem;
@@ -74,7 +51,6 @@
             justify-content: center;
             gap: 0.5rem 2rem;
         }
-
         nav a {
             color: white;
             text-decoration: none;
@@ -84,12 +60,7 @@
             position: relative;
             padding: 0.5rem 0;
         }
-
-        nav a:hover {
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-
+        nav a:hover { color: var(--accent); transform: translateY(-2px); }
         nav a:not(:last-child)::after {
             content: "•";
             margin-left: 2rem;
@@ -100,12 +71,7 @@
             opacity: 0.8;
             transition: all 0.3s;
         }
-
-        nav a:hover::after {
-            color: white;
-            transform: scale(1.2);
-        }
-
+        nav a:hover::after { color: white; transform: scale(1.2); }
         nav a::before {
             content: '';
             position: absolute;
@@ -116,12 +82,9 @@
             background: var(--accent);
             transition: width 0.3s ease;
         }
+        nav a:hover::before { width: 100%; }
 
-        nav a:hover::before {
-            width: 100%;
-        }
-
-        /* ===== TOP DOWNLOAD BANNER (CLEAN & PROFESSIONAL) ===== */
+        /* ===== TOP DOWNLOAD BANNER ===== */
         .top-download-banner {
             background: linear-gradient(135deg, #4CAF50, #2E7D32);
             color: white;
@@ -137,7 +100,6 @@
             z-index: 9998;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
         .top-download-banner a {
             color: #FFD700;
             font-weight: 600;
@@ -147,33 +109,14 @@
             gap: 6px;
             transition: all 0.3s;
         }
-
-        .top-download-banner a:hover {
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .top-download-banner .banner-divider {
-            color: rgba(255,255,255,0.3);
-        }
-
+        .top-download-banner a:hover { color: white; transform: scale(1.05); }
+        .top-download-banner .banner-divider { color: rgba(255,255,255,0.3); }
         @media (max-width: 600px) {
-            .top-download-banner {
-                font-size: 0.8rem;
-                padding: 0.5rem 0.8rem;
-                gap: 0.4rem 0.8rem;
-            }
-            .top-download-banner .banner-divider {
-                display: none;
-            }
+            .top-download-banner { font-size: 0.8rem; padding: 0.5rem 0.8rem; gap: 0.4rem 0.8rem; }
+            .top-download-banner .banner-divider { display: none; }
         }
 
-        section {
-            padding: 4rem 1rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
+        section { padding: 4rem 1rem; max-width: 1100px; margin: 0 auto; }
         h2 {
             font-family: 'Noto Serif Devanagari', serif;
             color: var(--primary);
@@ -183,7 +126,6 @@
             position: relative;
             display: inline-block;
         }
-
         h2::after {
             content: '';
             width: 80px;
@@ -196,50 +138,39 @@
             border-radius: 3px;
         }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: all 0.35s ease;
-            margin: 1.5rem 0;
-        }
+        .card { background: var(--card-bg); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow); transition: all 0.35s ease; margin: 1.5rem 0; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+        .quote { font-family: 'Noto Serif Devanagari', serif; font-size: 1.4rem; color: var(--primary); text-align: center; margin: 1.5rem 0; font-style: italic; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 0.9rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s; margin-top: 1rem; border: none; cursor: pointer; }
+        .btn:hover { background: var(--primary-light); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(165,42,42,0.25); }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-        }
+        .video-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .video-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s; display: flex; flex-direction: column; }
+        .video-card:hover { transform: translateY(-8px); }
+        .video-card video { width: 100%; display: block; background: #000; }
+        .video-info { padding: 1rem; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .video-info h4 { color: var(--primary); font-family: 'Noto Serif Devanagari', serif; font-size: 1.2rem; margin-bottom: 0.5rem; line-height: 1.6; }
+        .video-info .buddha-message { font-style: italic; color: var(--text-light); font-size: 0.95rem; border-top: 1px dashed var(--accent); padding-top: 0.8rem; margin-top: 0.5rem; }
 
-        .quote {
-            font-family: 'Noto Serif Devanagari', serif;
-            font-size: 1.4rem;
-            color: var(--primary);
-            text-align: center;
-            margin: 1.5rem 0;
-            font-style: italic;
-        }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); transition: transform 0.4s ease; }
+        .gallery img:hover { transform: scale(1.06); }
 
-        .btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 0.9rem 1.8rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            margin-top: 1rem;
-            border: none;
-            cursor: pointer;
-        }
+        .fb-page-container { display: flex; justify-content: center; margin-top: 2rem; }
+        footer { background: var(--text-dark); color: white; text-align: center; padding: 2.5rem 1rem; margin-top: 4rem; }
 
-        .btn:hover {
-            background: var(--primary-light);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(165,42,42,0.25);
+        @media (max-width: 768px) {
+            h1 { font-size: 2.3rem; }
+            nav { gap: 0.5rem 1rem; }
+            nav a { font-size: 1rem; }
+            nav a:not(:last-child)::after { margin-left: 1rem; font-size: 1.2rem; }
+            section { padding: 3rem 1rem; }
         }
+        @media (max-width: 480px) { nav a:not(:last-child)::after { display: none; } }
 
-        /* ===== APP DOWNLOAD SECTION STYLES ===== */
+        /* ============================================================ */
+        /* ===== APP DOWNLOAD SECTION ===== */
+        /* ============================================================ */
         .download-card {
             background: linear-gradient(145deg, #ffffff, #f5f0e8);
             border: 2px solid var(--accent);
@@ -251,7 +182,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .download-card::before {
             content: '';
             position: absolute;
@@ -263,45 +193,11 @@
             border-radius: 50%;
             pointer-events: none;
         }
-
-        .download-icon {
-            font-size: 4rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .download-title {
-            font-family: 'Noto Serif Devanagari', serif;
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .download-subtitle {
-            color: var(--text-light);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .download-features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 1.5rem 0;
-        }
-
-        .feature-tag {
-            background: rgba(165, 42, 42, 0.08);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            color: var(--primary);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
+        .download-icon { font-size: 4rem; margin-bottom: 0.5rem; display: block; }
+        .download-title { font-family: 'Noto Serif Devanagari', serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .download-subtitle { color: var(--text-light); font-size: 1rem; margin-bottom: 1.5rem; }
+        .download-features { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 1.5rem 0; }
+        .feature-tag { background: rgba(165, 42, 42, 0.08); padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; color: var(--primary); display: inline-flex; align-items: center; gap: 6px; }
         .btn-download {
             display: inline-block;
             background: linear-gradient(135deg, #4CAF50, #45a049);
@@ -317,163 +213,28 @@
             cursor: pointer;
             margin-top: 0.5rem;
         }
+        .btn-download:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 35px rgba(76, 175, 80, 0.45); }
+        .qr-container { margin: 1.5rem auto; padding: 1rem; background: white; border-radius: 16px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .qr-container img { width: 200px; height: 200px; display: block; border-radius: 8px; }
+        .qr-container p { font-size: 0.8rem; color: #888; margin-top: 0.5rem; }
+        .file-info { margin-top: 1rem; font-size: 0.8rem; color: #888; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .file-info span { display: inline-flex; align-items: center; gap: 5px; }
 
-        .btn-download:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.45);
-        }
+        /* ============================================================ */
+        /* ===== DAILY THOUGHT ===== */
+        /* ============================================================ */
+        .thought-container { padding: 20px; text-align: center; background: #f4f4f4; }
+        .thought-container h2 { font-family: 'Noto Serif Devanagari', serif; color: var(--primary); text-align: center; font-size: 2.2rem; margin-bottom: 1.5rem; position: relative; display: inline-block; }
+        .thought-container h2::after { content: ''; width: 80px; height: 3px; background: var(--accent); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); border-radius: 3px; }
+        #dailyThought { font-size: 24px; font-weight: 600; color: var(--primary); margin: 10px 0; font-family: 'Noto Serif Devanagari', serif; }
+        #thoughtAuthor { font-size: 16px; color: #888; margin: 5px 0; }
+        #thoughtDate { font-size: 14px; color: #aaa; margin: 5px 0; }
+        .thought-divider { width: 60px; height: 2px; background: var(--accent); margin: 10px auto; border-radius: 2px; }
 
-        .qr-container {
-            margin: 1.5rem auto;
-            padding: 1rem;
-            background: white;
-            border-radius: 16px;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
+        /* ============================================================ */
+        /* ===== CHATBOT STYLES (UPGRADED WITH FEATURES) ===== */
+        /* ============================================================ */
 
-        .qr-container img {
-            width: 200px;
-            height: 200px;
-            display: block;
-            border-radius: 8px;
-        }
-
-        .qr-container p {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 0.5rem;
-        }
-
-        .file-info {
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            color: #888;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .file-info span {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .video-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .video-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .video-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .video-card video {
-            width: 100%;
-            display: block;
-            background: #000;
-        }
-
-        .video-info {
-            padding: 1rem;
-            text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .video-info h4 {
-            color: var(--primary);
-            font-family: 'Noto Serif Devanagari', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-        }
-
-        .video-info .buddha-message {
-            font-style: italic;
-            color: var(--text-light);
-            font-size: 0.95rem;
-            border-top: 1px dashed var(--accent);
-            padding-top: 0.8rem;
-            margin-top: 0.5rem;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            transition: transform 0.4s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.06);
-        }
-
-        .fb-page-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        footer {
-            background: var(--text-dark);
-            color: white;
-            text-align: center;
-            padding: 2.5rem 1rem;
-            margin-top: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.3rem; }
-            nav { gap: 0.5rem 1rem; }
-            nav a { font-size: 1rem; }
-            nav a:not(:last-child)::after {
-                margin-left: 1rem;
-                font-size: 1.2rem;
-            }
-            section { padding: 3rem 1rem; }
-            .qr-container img {
-                width: 150px;
-                height: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav a:not(:last-child)::after {
-                display: none;
-            }
-            .qr-container img {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
-        /* ===== सहचर AI चैटबॉट स्टाइल ===== */
         #sahcharChatBtn {
             position: fixed;
             bottom: 25px;
@@ -486,156 +247,257 @@
             font-size: 28px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(180, 83, 9, 0.3);
+            box-shadow: 0 8px 25px rgba(180, 83, 9, 0.35);
             z-index: 9999;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        #sahcharChatBtn:hover { transform: scale(1.08); box-shadow: 0 12px 35px rgba(180, 83, 9, 0.45); }
+
         #sahcharChatBox {
             position: fixed;
             bottom: 100px;
             right: 25px;
-            width: 340px;
-            height: 480px;
-            background: #fffaf0;
+            width: 400px;
+            max-width: 92vw;
+            height: 560px;
+            max-height: 82vh;
+            background: #ffffff;
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
             display: none;
             flex-direction: column;
             overflow: hidden;
             font-family: 'Poppins', sans-serif;
             z-index: 9999;
             border: 2px solid #b45309;
+            animation: slideUp 0.3s ease-out;
         }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         #sahcharHeader {
             background: linear-gradient(135deg, #b45309, #92400e);
             color: white;
-            padding: 14px;
-            text-align: center;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
+        #sahcharHeader .header-title { display: flex; align-items: center; gap: 8px; }
+        #sahcharHeader .header-title span { font-size: 1.3rem; }
+        .status-badge { font-size: 0.55rem; opacity: 0.7; font-weight: 400; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 20px; }
+        #closeChatBtn { background: rgba(255,255,255,0.15); border: none; color: white; font-size: 1.1rem; cursor: pointer; padding: 2px 10px; border-radius: 50%; transition: background 0.3s; }
+        #closeChatBtn:hover { background: rgba(255,255,255,0.3); }
+
         #sahcharMessages {
             flex: 1;
-            padding: 12px;
+            padding: 12px 14px;
             overflow-y: auto;
             font-size: 14px;
-            background: #fffaf0;
+            background: #fcf8f2;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
+        #sahcharMessages::-webkit-scrollbar { width: 4px; }
+        #sahcharMessages::-webkit-scrollbar-thumb { background: #b45309; border-radius: 10px; }
+
         .sahcharMsg {
-            margin-bottom: 10px;
-            padding: 8px 12px;
-            border-radius: 12px;
-            max-width: 85%;
+            max-width: 88%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            line-height: 1.6;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease;
         }
-        .sahcharUserMsg {
-            background: #d1d5db;
-            margin-left: auto;
-        }
-        .sahcharBotMsg {
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .sahcharUserMsg { background: #d1d5db; color: #1e293b; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .sahcharBotMsg { background: #fde68a; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 4px; }
+
+        .sahcharMsg img { max-width: 100%; border-radius: 12px; margin-top: 6px; cursor: pointer; border: 2px solid #e2e8f0; }
+        .sahcharMsg img:hover { border-color: #b45309; }
+
+        .feature-tag { display: inline-block; background: rgba(37, 99, 235, 0.1); color: #2563eb; font-size: 0.55rem; padding: 1px 8px; border-radius: 12px; margin-left: 6px; font-weight: 500; }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
             background: #fde68a;
-            margin-right: auto;
+            padding: 10px 16px;
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            gap: 4px;
         }
+        .typing-indicator span { width: 8px; height: 8px; background: #92400e; border-radius: 50%; display: inline-block; animation: typingBounce 1.4s infinite; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-8px); }
+        }
+
         #sahcharInputBox {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px;
+            gap: 4px;
+            padding: 8px 10px;
             border-top: 2px solid #b45309;
             background: white;
+            flex-shrink: 0;
         }
         #sahcharInputBox input {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #ccc;
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 30px;
+            outline: none;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+        #sahcharInputBox input:focus { border-color: #b45309; }
+        #sahcharInputBox button {
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        #sendBtn { background: #b45309; color: white; }
+        #sendBtn:hover { background: #92400e; transform: scale(1.05); }
+        #micBtn { background: #10b981; color: white; font-size: 17px; }
+        #micBtn:hover { background: #059669; transform: scale(1.05); }
+        #micBtn.listening { background: #ef4444; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+        #plusBtn {
+            background: #b45309;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #plusBtn:hover { background: #92400e; transform: scale(1.05) rotate(90deg); }
+
+        /* ===== FEATURE MODAL ===== */
+        .feature-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInModal 0.3s ease;
+        }
+        @keyframes fadeInModal { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .feature-modal-content {
+            background: white;
+            border-radius: 28px;
+            padding: 24px;
+            max-width: 500px;
+            width: 92%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .feature-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .feature-modal-header h3 { font-size: 1.2rem; color: #b45309; }
+        .feature-modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #888; transition: color 0.3s; }
+        .feature-modal-close:hover { color: #b45309; }
+
+        .feature-grid-modal {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 12px 0 16px;
+        }
+        .feature-item-modal {
+            background: #f8f4f0;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 12px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .feature-item-modal:hover {
+            background: #b45309;
+            color: white;
+            transform: scale(1.05);
+            border-color: #b45309;
+        }
+        .feature-item-modal .icon { font-size: 2rem; display: block; margin-bottom: 2px; }
+        .feature-item-modal .label { font-size: 0.6rem; font-weight: 500; }
+        .feature-item-modal .desc { font-size: 0.55rem; color: #888; margin-top: 2px; }
+        .feature-item-modal:hover .desc { color: rgba(255,255,255,0.7); }
+
+        .feature-prompt-area {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px dashed #e2e8f0;
+        }
+        .feature-prompt-area.active { display: block; }
+        .feature-prompt-area label { display: block; font-weight: 600; font-size: 0.85rem; color: #b45309; margin-bottom: 6px; }
+        .feature-prompt-area .prompt-input-row { display: flex; gap: 8px; }
+        .feature-prompt-area input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
             border-radius: 30px;
             outline: none;
             font-size: 14px;
             font-family: 'Poppins', sans-serif;
         }
-        #sahcharInputBox button {
-            border: none;
-            border-radius: 30px;
-            padding: 12px 16px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: 0.2s;
-            min-width: 50px;
-            font-weight: bold;
-        }
-        #sendBtn {
+        .feature-prompt-area input:focus { border-color: #b45309; }
+        .feature-prompt-area button {
             background: #b45309;
             color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        #sendBtn:hover {
-            background: #92400e;
-            transform: scale(1.05);
-        }
-        #micBtn {
-            background: #10b981;
-            color: white;
-            font-size: 22px;
-            padding: 12px 18px;
-        }
-        #micBtn:hover {
-            background: #059669;
-            transform: scale(1.05);
-        }
+        .feature-prompt-area button:hover { background: #92400e; transform: scale(1.05); }
+        .feature-prompt-area .selected-feature-name { font-size: 0.8rem; color: #666; margin-top: 4px; }
 
-        /* ===== DAILY THOUGHT STYLES ===== */
-        .thought-container {
-            padding: 20px;
-            text-align: center;
-            background: #f4f4f4;
-        }
-        .thought-container h2 {
-            font-family: 'Noto Serif Devanagari', serif;
-            color: var(--primary);
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-        .thought-container h2::after {
-            content: '';
-            width: 80px;
-            height: 3px;
-            background: var(--accent);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 3px;
-        }
-        #dailyThought {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--primary);
-            margin: 10px 0;
-            font-family: 'Noto Serif Devanagari', serif;
-        }
-        #thoughtAuthor {
-            font-size: 16px;
-            color: #888;
-            margin: 5px 0;
-        }
-        #thoughtDate {
-            font-size: 14px;
-            color: #aaa;
-            margin: 5px 0;
-        }
-        .thought-divider {
-            width: 60px;
-            height: 2px;
-            background: var(--accent);
-            margin: 10px auto;
-            border-radius: 2px;
+        @media (max-width: 480px) {
+            .feature-grid-modal { grid-template-columns: repeat(3, 1fr); }
+            .feature-modal-content { padding: 16px; }
         }
     </style>
 </head>
 <body>
 
     <!-- ============================================================ -->
-    <!-- ===== TOP DOWNLOAD BANNER (CLEAN & PROFESSIONAL) ===== -->
+    <!-- ===== TOP DOWNLOAD BANNER ===== -->
     <!-- ============================================================ -->
     <div class="top-download-banner" id="downloadBanner">
         <span>📱 <strong>SahcharAI App</strong></span>
@@ -661,7 +523,7 @@
     </header>
 
     <!-- ============================================================ -->
-    <!-- ===== SAHCHARAI APP DOWNLOAD SECTION (DEDICATED) ===== -->
+    <!-- ===== SAHCHARAI APP DOWNLOAD SECTION ===== -->
     <!-- ============================================================ -->
     <section id="app-download">
         <h2>📱 SahcharAI App Download</h2>
@@ -671,7 +533,6 @@
             <p class="download-subtitle">
                 बुद्ध की शिक्षाओं और AI की शक्ति को अपने फ़ोन पर अनुभव करें।
             </p>
-
             <div class="download-features">
                 <span class="feature-tag">💬 AI Chat</span>
                 <span class="feature-tag">🎤 Voice Input</span>
@@ -679,29 +540,18 @@
                 <span class="feature-tag">🎬 Video Gen</span>
                 <span class="feature-tag">🧘 Buddha Teachings</span>
             </div>
-
-            <!-- Download Button -->
-            <a href="https://github.com/prakash4every/sahchar/raw/main/SahcharAI.apk" 
-               class="btn-download" 
-               download>
-               ⬇️ APK डाउनलोड करें (16 MB)
+            <a href="https://github.com/prakash4every/sahchar/raw/main/SahcharAI.apk" class="btn-download" download>
+                ⬇️ APK डाउनलोड करें (16 MB)
             </a>
-
-            <!-- QR Code (Big & Professional) -->
             <div class="qr-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://github.com/prakash4every/sahchar/raw/main/SahcharAI.apk" 
-                     alt="Download QR Code" 
-                     loading="lazy">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://github.com/prakash4every/sahchar/raw/main/SahcharAI.apk" alt="Download QR Code" loading="lazy">
                 <p>📸 Scan to Download</p>
             </div>
-
-            <!-- File Info -->
             <div class="file-info">
                 <span>📦 Version 1.0.0</span>
                 <span>📅 Updated: 10 Jul 2026</span>
                 <span>🤖 Android 7.0+</span>
             </div>
-
             <p style="margin-top:1rem; font-size:0.75rem; color:#999;">
                 ⚠️ Settings → Security → "Install from Unknown Sources" Enable करें
             </p>
@@ -709,7 +559,7 @@
     </section>
 
     <!-- ============================================================ -->
-    <!-- ===== DAILY BUDDHA THOUGHT (AUTO-UPDATE WITH CHATBOT) ===== -->
+    <!-- ===== DAILY BUDDHA THOUGHT ===== -->
     <!-- ============================================================ -->
     <section class="thought-container">
         <h2>🪷 Daily Buddha Thought</h2>
@@ -723,7 +573,6 @@
     <!-- ===== OTHER SECTIONS ===== -->
     <!-- ============================================================ -->
 
-    <!-- हमारे बारे में -->
     <section>
         <h2>हमारे बारे में</h2>
         <div class="card" style="text-align:center; max-width:800px; margin:auto;">
@@ -735,7 +584,6 @@
         </div>
     </section>
 
-    <!-- करुणा संदेश -->
     <section>
         <h2>करुणा का संदेश</h2>
         <div class="card">
@@ -746,7 +594,6 @@
         </div>
     </section>
 
-    <!-- बुद्ध विचार -->
     <section>
         <h2>बुद्ध के अमर विचार</h2>
         <div class="card">
@@ -760,7 +607,6 @@
         </div>
     </section>
 
-    <!-- वीडियो गैलरी -->
     <section>
         <h2>वीडियो गैलरी</h2>
         <p style="text-align:center; color:#555; margin-bottom:2rem;">
@@ -769,7 +615,6 @@
         <div class="video-gallery"></div>
     </section>
 
-    <!-- इमेज गैलरी -->
     <section>
         <h2>हमारी गैलरी</h2>
         <div class="gallery" id="image-gallery">
@@ -779,7 +624,6 @@
         </div>
     </section>
 
-    <!-- सामाजिक सेवा -->
     <section>
         <h2>सामाजिक सेवा</h2>
         <div class="card">
@@ -793,7 +637,6 @@
         </div>
     </section>
 
-    <!-- Facebook से नवीनतम पोस्ट -->
     <section>
         <h2>Facebook से नवीनतम पोस्ट</h2>
         <div class="fb-page-container">
@@ -813,7 +656,6 @@
         </div>
     </section>
 
-    <!-- संपर्क करें -->
     <section>
         <h2>संपर्क करें</h2>
         <div class="card" style="text-align:center;">
@@ -833,22 +675,95 @@
         <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
     </footer>
 
-    <!-- ===== सहचर AI चैटबॉट HTML ===== -->
+    <!-- ============================================================ -->
+    <!-- ===== CHATBOT (FULL FEATURES) ===== -->
+    <!-- ============================================================ -->
     <button id="sahcharChatBtn">🧘</button>
 
     <div id="sahcharChatBox">
-        <div id="sahcharHeader">सहचर – बुद्ध-चरित AI</div>
+        <div id="sahcharHeader">
+            <div class="header-title">
+                <span>🧘</span> सहचर AI
+                <span class="status-badge">● Online</span>
+            </div>
+            <button id="closeChatBtn" onclick="closeChat()">✕</button>
+        </div>
         <div id="sahcharMessages"></div>
+        <div class="typing-indicator" id="typingIndicator">
+            <span></span><span></span><span></span>
+        </div>
         <div id="sahcharInputBox">
             <input type="text" id="sahcharInput" placeholder="अपना प्रश्न पूछिए..." />
+            <button id="plusBtn" onclick="openFeatureModal()" title="Features">+</button>
+            <button id="micBtn" onclick="startSahcharVoice()" title="Voice Input">🎤</button>
             <button id="sendBtn" onclick="sendSahcharMsg()">➤</button>
-            <button id="micBtn" onclick="startSahcharVoice()">🎤</button>
+        </div>
+    </div>
+
+    <!-- ===== FEATURE MODAL ===== -->
+    <div class="feature-modal" id="featureModal" onclick="closeFeatureModalOutside(event)">
+        <div class="feature-modal-content" onclick="event.stopPropagation()">
+            <div class="feature-modal-header">
+                <h3>✨ सहचर AI Features</h3>
+                <button class="feature-modal-close" onclick="closeFeatureModal()">✕</button>
+            </div>
+            <p style="font-size:0.85rem;color:#666;margin-bottom:12px;">कोई feature select करें और prompt लिखें:</p>
+            <div class="feature-grid-modal">
+                <div class="feature-item-modal" onclick="selectFeature('🔍','Web Search','खोज')">
+                    <span class="icon">🔍</span>
+                    <span class="label">Web Search</span>
+                    <div class="desc">वेब पर खोजें</div>
+                </div>
+                <div class="feature-item-modal" onclick="selectFeature('🎨','Image Gen','तस्वीर बनाओ')">
+                    <span class="icon">🎨</span>
+                    <span class="label">Image Gen</span>
+                    <div class="desc">AI तस्वीर बनाएं</div>
+                </div>
+                <div class="feature-item-modal" onclick="selectFeature('🎬','Video Gen','वीडियो बनाओ')">
+                    <span class="icon">🎬</span>
+                    <span class="label">Video Gen</span>
+                    <div class="desc">AI वीडियो बनाएं</div>
+                </div>
+                <div class="feature-item-modal" onclick="selectFeature('📄','Document','document analyze')">
+                    <span class="icon">📄</span>
+                    <span class="label">Document</span>
+                    <div class="desc">दस्तावेज़ विश्लेषण</div>
+                </div>
+                <div class="feature-item-modal" onclick="selectFeature('💾','Memory','पिछली बात')">
+                    <span class="icon">💾</span>
+                    <span class="label">Memory</span>
+                    <div class="desc">पिछली बातें याद</div>
+                </div>
+                <div class="feature-item-modal" onclick="selectFeature('🧠','Self-Learn','सीखो')">
+                    <span class="icon">🧠</span>
+                    <span class="label">Self-Learn</span>
+                    <div class="desc">खुद सीखना</div>
+                </div>
+                <div class="feature-item-modal" onclick="selectFeature('🔄','Auto-Upgrade','upgrade')">
+                    <span class="icon">🔄</span>
+                    <span class="label">Auto-Upgrade</span>
+                    <div class="desc">खुद अपग्रेड</div>
+                </div>
+                <div class="feature-item-modal" onclick="selectFeature('🌐','Multilingual','hello')">
+                    <span class="icon">🌐</span>
+                    <span class="label">Multilingual</span>
+                    <div class="desc">हिंदी/English</div>
+                </div>
+            </div>
+            <div class="feature-prompt-area" id="featurePromptArea">
+                <label id="featurePromptLabel">🔍 Web Search: अपना प्रश्न लिखें</label>
+                <div class="prompt-input-row">
+                    <input type="text" id="featurePromptInput" placeholder="जैसे: आज का मौसम" />
+                    <button onclick="sendFeaturePrompt()">➤</button>
+                </div>
+                <div class="selected-feature-name" id="selectedFeatureName">Web Search</div>
+            </div>
         </div>
     </div>
 
     <script>
         // ============================================================ //
-        // ===== DAILY THOUGHT WITH AUTO-UPDATE (FRONTEND ONLY) ===== //
+        // ===== DAILY THOUGHT ===== //
         // ============================================================ //
         const buddhaThoughts = [
             { thought: "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।", author: "गौतम बुद्ध" },
@@ -875,7 +790,6 @@
             const diff = today - startOfYear;
             const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
             const index = dayOfYear % buddhaThoughts.length;
-            
             const thoughtData = buddhaThoughts[index];
             document.getElementById('dailyThought').innerText = `“${thoughtData.thought}”`;
             document.getElementById('thoughtAuthor').innerText = `– ${thoughtData.author}`;
@@ -885,26 +799,20 @@
                 month: 'long',
                 year: 'numeric'
             });
-            
             return thoughtData.thought;
         }
 
-        // ===== वीडियो गैलरी =====
+        // ============================================================ //
+        // ===== VIDEO GALLERY ===== //
+        // ============================================================ //
         const videoMessages = [
-            "करुणा ही सच्चा धर्म है।",
-            "प्रेम से ही घृणा समाप्त होती है।",
-            "सभी संकल्प अनित्य हैं।",
-            "शांति भीतर से आती है।",
-            "अपने मन पर विजय पाओ।",
-            "दान से मन पवित्र होता है।",
-            "क्षमा सबसे बड़ा बल है।",
-            "सत्य ही अंततः जीतता है।",
-            "मैत्री से सुख मिलता है।",
-            "जो जैसा सोचता है, वैसा बन जाता है।",
-            "वर्तमान में जीना सीखो।",
-            "अहिंसा परम धर्म है।",
-            "दूसरों की भलाई में ही अपनी भलाई है।",
-            "संघ का साथ कभी मत छोड़ो।",
+            "करुणा ही सच्चा धर्म है।", "प्रेम से ही घृणा समाप्त होती है।",
+            "सभी संकल्प अनित्य हैं।", "शांति भीतर से आती है।",
+            "अपने मन पर विजय पाओ।", "दान से मन पवित्र होता है।",
+            "क्षमा सबसे बड़ा बल है।", "सत्य ही अंततः जीतता है।",
+            "मैत्री से सुख मिलता है।", "जो जैसा सोचता है, वैसा बन जाता है।",
+            "वर्तमान में जीना सीखो।", "अहिंसा परम धर्म है।",
+            "दूसरों की भलाई में ही अपनी भलाई है।", "संघ का साथ कभी मत छोड़ो।",
             "जागरूकता ही मुक्ति का मार्ग है।"
         ];
 
@@ -915,34 +823,26 @@
         async function loadVideos() {
             const videoGallery = document.querySelector('.video-gallery');
             if (!videoGallery) return;
-            
             try {
                 const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/video';
-                const response = await fetch(apiUrl, {
-                    headers: { 'Accept': 'application/vnd.github.v3+json' }
-                });
-                
+                const response = await fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
                 if (response.status === 404) {
                     videoGallery.innerHTML = '<p style="text-align:center; color:#777; padding:2rem;">वीडियो फोल्डर नहीं मिला।</p>';
                     return;
                 }
-                
                 if (!response.ok) throw new Error('API error: ' + response.status);
                 const files = await response.json();
                 const videoFiles = files.filter(file => file.name.toLowerCase().endsWith('.mp4'));
-
                 if (videoFiles.length === 0) {
                     videoGallery.innerHTML = '<p style="text-align:center; color:#777; padding:2rem;">कोई वीडियो नहीं मिला।</p>';
                     return;
                 }
-
                 videoGallery.innerHTML = '';
                 videoFiles.forEach(file => {
                     const card = document.createElement('div');
                     card.className = 'video-card';
                     const message = getRandomVideoMessage();
                     let fileNameTitle = file.name.replace('.mp4', '').replace(/[_-]/g, ' ');
-                    
                     card.innerHTML = `
                         <video controls preload="none" poster="">
                             <source src="${file.download_url}" type="video/mp4">
@@ -963,29 +863,25 @@
             }
         }
 
-        // ===== इमेज गैलरी =====
+        // ============================================================ //
+        // ===== IMAGE GALLERY ===== //
+        // ============================================================ //
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             try {
                 const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images/gallery';
-                const response = await fetch(apiUrl, {
-                    headers: { 'Accept': 'application/vnd.github.v3+json' }
-                });
-                
+                const response = await fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
                 if (response.status === 404) {
-                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी फोल्डर नहीं मिला। कृपया images/gallery फोल्डर बनाएँ।</p>';
+                    gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी फोल्डर नहीं मिला।</p>';
                     return;
                 }
-                
                 if (!response.ok) throw new Error('API error: ' + response.status);
                 const files = await response.json();
                 const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name));
-
                 if (imageFiles.length === 0) {
                     gallery.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#777; padding:2rem;">गैलरी में कोई छवि नहीं है</p>';
                     return;
                 }
-
                 gallery.innerHTML = '';
                 imageFiles.forEach(file => {
                     const img = document.createElement('img');
@@ -1000,142 +896,316 @@
             }
         }
 
-        // ===== सहचर AI चैटबॉट =====
-        const btn = document.getElementById("sahcharChatBtn");
-        const box = document.getElementById("sahcharChatBox");
-        const msgDiv = document.getElementById("sahcharMessages");
+        // ============================================================ //
+        // ===== CHATBOT SCRIPT (FULL FEATURES) ===== //
+        // ============================================================ //
 
-        const SAHCHAR_API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
+        const chatBtn = document.getElementById("sahcharChatBtn");
+        const chatBox = document.getElementById("sahcharChatBox");
+        const messagesDiv = document.getElementById("sahcharMessages");
+        const inputField = document.getElementById("sahcharInput");
+        const typingIndicator = document.getElementById("typingIndicator");
+        const API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
+        let selectedFeature = null;
 
-        function removeEmojiForTTS(text) {
-            if (!text) return "";
-            const emojiRegex = /[\u{1F600}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F300}-\u{1F5FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{FE00}-\u{FEFF}\u{2300}-\u{23FF}\u{2B50}\u{2934}\u{2935}\u{2190}-\u{21FF}]/gu;
-            let cleaned = text.replace(emojiRegex, '').trim();
-            cleaned = cleaned.replace(/[^a-zA-Z0-9\u0900-\u097F\s.,!?;:'"()\-]/g, '');
-            cleaned = cleaned.replace(/\s+/g, ' ').trim();
-            return cleaned || text;
-        }
-
-        btn.onclick = () => {
-            box.style.display = box.style.display === "flex" ? "none" : "flex";
-            if (box.style.display === "flex" && !msgDiv.hasChildNodes()) {
-                // Daily thought chatbot mein bhi post karein
-                const thought = document.getElementById('dailyThought').innerText;
-                addMsg("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी। 🙏", "bot");
-                if (thought && thought !== "Loading...") {
-                    setTimeout(() => {
-                        addMsg(`🪷 आज का बुद्ध विचार: ${thought}`, "bot");
-                    }, 2000);
-                }
-                speakSahchar("नमस्ते! मैं सहचर हूँ – बुद्ध की शिक्षाओं का साथी।");
+        // ===== Toggle Chat =====
+        chatBtn.onclick = () => {
+            const isOpen = chatBox.style.display === "flex";
+            chatBox.style.display = isOpen ? "none" : "flex";
+            if (!isOpen && messagesDiv.children.length === 0) {
+                addMsg("नमस्ते! मैं सहचर AI हूँ – बुद्ध की शिक्षाओं का साथी। 🙏\n\nमेरी ये special capabilities हैं:\n🔍 Web Search\n🎨 Image Generation\n🎬 Video Generation\n📄 Document Analysis\n💾 Chat Memory\n🧠 Self-Learning\n🔄 Auto-Upgrade\n🌐 Multilingual\n\n✅ + icon पर click करें और features चुनें!", "bot");
             }
+            if (!isOpen) inputField.focus();
         };
 
-        function addMsg(text, type) {
+        function closeChat() { chatBox.style.display = "none"; }
+
+        // ===== Add Message =====
+        function addMsg(text, type, feature = null, imageUrl = null) {
             const msg = document.createElement("div");
             msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
-            msg.innerText = text;
-            msgDiv.appendChild(msg);
-            msgDiv.scrollTop = msgDiv.scrollHeight;
+            if (imageUrl) {
+                const textSpan = document.createElement("span");
+                textSpan.innerHTML = text;
+                msg.appendChild(textSpan);
+                const img = document.createElement("img");
+                img.src = imageUrl;
+                img.alt = "Generated Image";
+                img.loading = "lazy";
+                img.onclick = () => window.open(imageUrl, '_blank');
+                msg.appendChild(img);
+            } else if (feature && type === "bot") {
+                const span = document.createElement("span");
+                span.innerHTML = text;
+                msg.appendChild(span);
+                const tag = document.createElement("span");
+                tag.className = "feature-tag";
+                tag.textContent = feature;
+                msg.appendChild(tag);
+            } else {
+                msg.innerText = text;
+            }
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
+        function addVideoMsg(text, videoUrl, feature = null) {
+            const msg = document.createElement("div");
+            msg.className = "sahcharMsg sahcharBotMsg";
+            const textSpan = document.createElement("span");
+            textSpan.innerHTML = text;
+            msg.appendChild(textSpan);
+            const video = document.createElement("video");
+            video.src = videoUrl;
+            video.controls = true;
+            video.style.maxWidth = "100%";
+            video.style.borderRadius = "12px";
+            video.style.marginTop = "6px";
+            video.style.maxHeight = "200px";
+            video.preload = "metadata";
+            msg.appendChild(video);
+            if (feature) {
+                const tag = document.createElement("span");
+                tag.className = "feature-tag";
+                tag.textContent = feature;
+                msg.appendChild(tag);
+            }
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showTyping(show) {
+            typingIndicator.style.display = show ? "flex" : "none";
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // ===== Speak =====
+        function speakSahchar(text) {
+            if (!text) return;
+            const clean = text.replace(/[\u{1F600}-\u{1F6FF}]/gu, '').trim();
+            const speech = new SpeechSynthesisUtterance(clean);
+            speech.lang = "hi-IN";
+            speech.rate = 1;
+            window.speechSynthesis.speak(speech);
+        }
+
+        // ===== Detect Feature =====
+        function detectFeature(message) {
+            const lower = message.toLowerCase();
+            if (lower.includes("तस्वीर") || lower.includes("इमेज") || lower.includes("image") || lower.includes("picture")) return "🎨 Image";
+            if (lower.includes("वीडियो") || lower.includes("video")) return "🎬 Video";
+            if (lower.includes("खोज") || lower.includes("search") || lower.includes("news") || lower.includes("समाचार") || lower.includes("मौसम")) return "🔍 Search";
+            if (lower.includes("document") || lower.includes("दस्तावेज़") || lower.includes("फाइल")) return "📄 Document";
+            if (lower.includes("पिछली बात") || lower.includes("history") || lower.includes("याद")) return "💾 Memory";
+            if (lower.includes("समय") || lower.includes("time") || lower.includes("तारीख") || lower.includes("date")) return "⏰ Time";
+            return "💬 Chat";
+        }
+
+        // ============================================================ //
+        // ===== GENERATE IMAGE ===== //
+        // ============================================================ //
+        function generateImage(prompt) {
+            showTyping(true);
+            addMsg("🎨 इमेज जनरेट हो रही है...", "bot", "🎨 Image");
+            fetch(`${API_URL}/generate`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: prompt, sessionId: "web_user_" + Date.now() })
+            })
+            .then(res => res.json())
+            .then(data => {
+                showTyping(false);
+                const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
+                    msgs[msgs.length-1].remove();
+                }
+                const imageUrl = data.imageUrl || data.url;
+                if (imageUrl) {
+                    addMsg("✅ ये रही आपकी तस्वीर:", "bot", "🎨 Image", imageUrl);
+                    speakSahchar("ये रही आपकी तस्वीर");
+                } else {
+                    addMsg("❌ इमेज जनरेट नहीं हो पाई।", "bot", "🎨 Image");
+                }
+            })
+            .catch(err => {
+                showTyping(false);
+                const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
+                    msgs[msgs.length-1].remove();
+                }
+                addMsg("❌ इमेज जनरेट करने में त्रुटि हुई।", "bot", "🎨 Image");
+                console.error("Image gen error:", err);
+            });
+        }
+
+        // ============================================================ //
+        // ===== GENERATE VIDEO ===== //
+        // ============================================================ //
+        function generateVideo(prompt) {
+            showTyping(true);
+            addMsg("🎬 वीडियो जनरेट हो रहा है...", "bot", "🎬 Video");
+            fetch(`${API_URL}/generate`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: prompt, model: "video", sessionId: "web_user_" + Date.now() })
+            })
+            .then(res => res.json())
+            .then(data => {
+                showTyping(false);
+                const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है')) {
+                    msgs[msgs.length-1].remove();
+                }
+                const videoUrl = data.videoUrl;
+                if (videoUrl) {
+                    addVideoMsg("✅ ये रहा आपका वीडियो:", videoUrl, "🎬 Video");
+                    speakSahchar("ये रहा आपका वीडियो");
+                } else {
+                    addMsg("❌ वीडियो जनरेट नहीं हो पाया।", "bot", "🎬 Video");
+                }
+            })
+            .catch(err => {
+                showTyping(false);
+                const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है')) {
+                    msgs[msgs.length-1].remove();
+                }
+                addMsg("❌ वीडियो जनरेट करने में त्रुटि हुई।", "bot", "🎬 Video");
+                console.error("Video gen error:", err);
+            });
+        }
+
+        // ============================================================ //
+        // ===== SEND MESSAGE ===== //
+        // ============================================================ //
         function sendSahcharMsg() {
-            const input = document.getElementById("sahcharInput");
-            let msg = input.value.trim();
+            const msg = inputField.value.trim();
             if (!msg) return;
-
+            const feature = detectFeature(msg);
             addMsg(msg, "user");
-            input.value = "";
-            addMsg("🤔 सोच रहा हूँ...", "bot");
+            inputField.value = "";
+            showTyping(true);
+            let cleanMsg = msg.replace(/[\u{1F600}-\u{1F6FF}]/gu, '').trim();
+            if (!cleanMsg) { showTyping(false); addMsg("⚠️ कृपया टेक्स्ट लिखें।", "bot"); return; }
 
-            let cleanMsg = msg.replace(/[\u{1F600}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F300}-\u{1F5FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{FE00}-\u{FEFF}\u{2300}-\u{23FF}\u{2B50}\u{2934}\u{2935}\u{2190}-\u{21FF}]/gu, '').trim();
-            
-            if (!cleanMsg) {
-                const lastMsg = msgDiv.lastChild;
-                if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
-                addMsg("⚠️ कृपया टेक्स्ट के साथ इमोजी भेजें। 🙏", "bot");
+            // Image Generation
+            if (feature === "🎨 Image") {
+                let prompt = cleanMsg.replace(/तस्वीर\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/इमेज\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/image|picture|draw/gi, '').trim();
+                if (!prompt) prompt = cleanMsg;
+                generateImage(prompt);
                 return;
             }
 
-           fetch(`${SAHCHAR_API_URL}/chat`, {
-    method: "POST",
-    headers: { 
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-    },
-    mode: 'cors',  // ✅ CORS enable
-    body: JSON.stringify({ 
-        message: cleanMsg,
-        sessionId: "web_user_" + Date.now()
-    })
-})
-            .then(res => {
-                if (!res.ok) throw new Error('Server error: ' + res.status);
-                return res.json();
+            // Video Generation
+            if (feature === "🎬 Video") {
+                let prompt = cleanMsg.replace(/वीडियो\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/video/gi, '').trim();
+                if (!prompt) prompt = cleanMsg;
+                generateVideo(prompt);
+                return;
+            }
+
+            // Normal Chat
+            fetch(`${API_URL}/chat`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify({ message: cleanMsg, sessionId: "web_user_" + Date.now() })
             })
+            .then(res => res.json())
             .then(data => {
-                const lastMsg = msgDiv.lastChild;
-                if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
-                let reply = data.reply || data.message || "क्षमा करें, उत्तर नहीं मिला। 🙏";
-                addMsg(reply, "bot");
-                let ttsText = removeEmojiForTTS(reply);
-                speakSahchar(ttsText);
+                showTyping(false);
+                const reply = data.reply || data.message || "क्षमा करें, उत्तर नहीं मिला। 🙏";
+                addMsg(reply, "bot", feature);
+                speakSahchar(reply);
             })
             .catch(err => {
-                const lastMsg = msgDiv.lastChild;
-                if (lastMsg && lastMsg.innerText === "🤔 सोच रहा हूँ...") lastMsg.remove();
-                addMsg("सर्वर से संपर्क नहीं हो पाया। कृपया बाद में प्रयास करें। 🙏", "bot");
-                console.error("❌ Chat error:", err);
+                showTyping(false);
+                addMsg("सर्वर से संपर्क नहीं हो पाया। 🙏", "bot");
+                console.error("Chat error:", err);
             });
+        }
+
+        // ============================================================ //
+        // ===== VOICE INPUT ===== //
+        // ============================================================ //
+        function startSahcharVoice() {
+            if (!('webkitSpeechRecognition' in window)) {
+                addMsg("⚠️ Voice recognition के लिए Chrome या Edge इस्तेमाल करें।", "bot");
+                return;
+            }
+            const micBtn = document.getElementById("micBtn");
+            micBtn.classList.add("listening");
+            const recog = new webkitSpeechRecognition();
+            recog.lang = "hi-IN";
+            recog.interimResults = false;
+            recog.continuous = false;
+            recog.onstart = () => addMsg("🎤 सुन रहा हूँ...", "bot");
+            recog.onresult = (e) => {
+                const voiceText = e.results[0][0].transcript;
+                inputField.value = voiceText;
+                micBtn.classList.remove("listening");
+                recog.stop();
+                sendSahcharMsg();
+            };
+            recog.onerror = () => micBtn.classList.remove("listening");
+            recog.start();
         }
 
         document.getElementById("sahcharInput").addEventListener("keypress", (e) => {
             if (e.key === "Enter") sendSahcharMsg();
         });
 
-        function startSahcharVoice() {
-            if (!('webkitSpeechRecognition' in window)) {
-                addMsg("⚠️ Voice recognition के लिए Chrome या Edge इस्तेमाल करें।", "bot");
-                return;
+        // ============================================================ //
+        // ===== FEATURE MODAL ===== //
+        // ============================================================ //
+        function openFeatureModal() {
+            document.getElementById("featureModal").style.display = "flex";
+            document.getElementById("featurePromptArea").classList.remove("active");
+            selectedFeature = null;
+        }
+
+        function closeFeatureModal() {
+            document.getElementById("featureModal").style.display = "none";
+        }
+
+        function closeFeatureModalOutside(e) {
+            if (e.target === e.currentTarget) closeFeatureModal();
+        }
+
+        function selectFeature(icon, label, prompt) {
+            selectedFeature = { icon, label, prompt };
+            document.getElementById("featurePromptLabel").innerHTML = `${icon} ${label}: अपना प्रश्न लिखें`;
+            document.getElementById("featurePromptInput").placeholder = `जैसे: ${prompt}`;
+            document.getElementById("selectedFeatureName").textContent = label;
+            document.getElementById("featurePromptArea").classList.add("active");
+            document.getElementById("featurePromptInput").focus();
+        }
+
+        function sendFeaturePrompt() {
+            const input = document.getElementById("featurePromptInput");
+            const prompt = input.value.trim();
+            if (!prompt || !selectedFeature) return;
+            closeFeatureModal();
+            if (selectedFeature.label === "Image Gen") {
+                inputField.value = `तस्वीर बनाओ ${prompt}`;
+            } else if (selectedFeature.label === "Video Gen") {
+                inputField.value = `वीडियो बनाओ ${prompt}`;
+            } else {
+                inputField.value = prompt;
             }
-            const recog = new webkitSpeechRecognition();
-            recog.lang = "hi-IN";
-            recog.interimResults = false;
-            recog.continuous = false;
-
-            recog.onstart = () => addMsg("🎤 सुन रहा हूँ...", "bot");
-            recog.onresult = (e) => {
-                const voiceText = e.results[0][0].transcript;
-                document.getElementById("sahcharInput").value = voiceText;
-                recog.stop();
-                sendSahcharMsg();
-            };
-            recog.onerror = (e) => {
-                if (e.error === "not-allowed") addMsg("⚠️ माइक्रोफोन अनुमति दें।", "bot");
-                else addMsg("⚠️ आवाज़ सुनाई नहीं दी, फिर कोशिश करें।", "bot");
-            };
-            recog.start();
+            sendSahcharMsg();
+            input.value = "";
         }
 
-        function speakSahchar(text) {
-            if (!text) return;
-            const speech = new SpeechSynthesisUtterance(text);
-            speech.lang = "hi-IN";
-            speech.rate = 1;
-            window.speechSynthesis.speak(speech);
-        }
+        document.getElementById("featurePromptInput").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") sendFeaturePrompt();
+        });
 
         // ============================================================ //
-        // ===== INITIALIZE EVERYTHING ON PAGE LOAD ===== //
+        // ===== INITIALIZE ===== //
         // ============================================================ //
         document.addEventListener('DOMContentLoaded', function() {
-            // Daily thought set karein
             getDailyThought();
-            
-            // Videos load karein
             loadVideos();
-            
-            // Images load karein
             loadImages();
         });
     </script>
