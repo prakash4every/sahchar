@@ -221,18 +221,129 @@
         .file-info span { display: inline-flex; align-items: center; gap: 5px; }
 
         /* ============================================================ */
-        /* ===== DAILY THOUGHT ===== */
+        /* ===== DAILY THOUGHT WITH QUESTION ===== */
         /* ============================================================ */
-        .thought-container { padding: 20px; text-align: center; background: #f4f4f4; }
-        .thought-container h2 { font-family: 'Noto Serif Devanagari', serif; color: var(--primary); text-align: center; font-size: 2.2rem; margin-bottom: 1.5rem; position: relative; display: inline-block; }
-        .thought-container h2::after { content: ''; width: 80px; height: 3px; background: var(--accent); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); border-radius: 3px; }
-        #dailyThought { font-size: 24px; font-weight: 600; color: var(--primary); margin: 10px 0; font-family: 'Noto Serif Devanagari', serif; }
-        #thoughtAuthor { font-size: 16px; color: #888; margin: 5px 0; }
-        #thoughtDate { font-size: 14px; color: #aaa; margin: 5px 0; }
-        .thought-divider { width: 60px; height: 2px; background: var(--accent); margin: 10px auto; border-radius: 2px; }
+        .thought-container {
+            padding: 30px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #f4f4f4, #faf0e6);
+            border-radius: 20px;
+            margin: 0 1rem 2rem;
+        }
+        .thought-container h2 {
+            font-family: 'Noto Serif Devanagari', serif;
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .thought-container h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        /* Question Box */
+        .question-box {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--primary);
+        }
+        .question-box .q-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        .question-box .q-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0.5rem 0;
+            font-family: 'Noto Serif Devanagari', serif;
+        }
+        .question-box .q-hint {
+            font-size: 0.85rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Thought Display */
+        .thought-display {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        #dailyThought {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0.5rem 0;
+            font-family: 'Noto Serif Devanagari', serif;
+            line-height: 1.6;
+        }
+        #thoughtAuthor {
+            font-size: 1rem;
+            color: #888;
+            margin: 0.5rem 0;
+        }
+        #thoughtDate {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin: 0.5rem 0;
+        }
+        .thought-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1rem auto;
+            border-radius: 3px;
+        }
+
+        /* Refresh Button */
+        .refresh-thought-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .refresh-thought-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165,42,42,0.25);
+        }
+
+        @media (max-width: 600px) {
+            .question-box .q-text { font-size: 1.1rem; }
+            .question-box { padding: 1rem; }
+            .thought-display { padding: 1.2rem; }
+            #dailyThought { font-size: 1.3rem; }
+        }
 
         /* ============================================================ */
-        /* ===== CHATBOT STYLES (UPGRADED WITH FEATURES) ===== */
+        /* ===== CHATBOT STYLES ===== */
         /* ============================================================ */
 
         #sahcharChatBtn {
@@ -559,14 +670,27 @@
     </section>
 
     <!-- ============================================================ -->
-    <!-- ===== DAILY BUDDHA THOUGHT ===== -->
+    <!-- ===== DAILY BUDDHA THOUGHT WITH QUESTION ===== -->
     <!-- ============================================================ -->
     <section class="thought-container">
-        <h2>🪷 Daily Buddha Thought</h2>
-        <div class="thought-divider"></div>
-        <p id="dailyThought">Loading...</p>
-        <p id="thoughtAuthor">– गौतम बुद्ध</p>
-        <p id="thoughtDate"></p>
+        <h2>🪷 Daily Buddha Wisdom</h2>
+
+        <!-- Question Box -->
+        <div class="question-box">
+            <div class="q-label">🌟 आज का प्रश्न</div>
+            <div class="q-text" id="dailyQuestion">Loading...</div>
+            <div class="q-hint">💡 बुद्ध के विचारों में उत्तर खोजें</div>
+        </div>
+
+        <!-- Thought Display -->
+        <div class="thought-display">
+            <div class="thought-divider"></div>
+            <p id="dailyThought">Loading...</p>
+            <p id="thoughtAuthor">– गौतम बुद्ध</p>
+            <p id="thoughtDate"></p>
+            <div class="thought-divider"></div>
+            <button class="refresh-thought-btn" onclick="getDailyWisdom()">🔄 नया विचार</button>
+        </div>
     </section>
 
     <!-- ============================================================ -->
@@ -578,7 +702,7 @@
         <div class="card" style="text-align:center; max-width:800px; margin:auto;">
             <p style="font-size:1.15rem;">
                 सहचर एक ऐसा मंच है जहाँ हम भगवान बुद्ध की शिक्षाओं, सकारात्मक संदेशों, 
-                करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं।<br><br>
+                करुणा, जागरूकता और सामाजिक सहयोग के विचारों को एक साथ लाते हैं。<br><br>
                 हमारा लक्ष्य है – हर व्यक्ति के मन में शांति और समाज में सहानुभूति का प्रसार करना।
             </p>
         </div>
@@ -720,7 +844,7 @@
                     <div class="desc">AI तस्वीर बनाएं</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('🎬','Video Gen','वीडियो बनाओ')">
-                    <span class="icon">🎬</span>
+                    <span class">🎬</span>
                     <span class="label">Video Gen</span>
                     <div class="desc">AI वीडियो बनाएं</div>
                 </div>
@@ -763,44 +887,102 @@
 
     <script>
         // ============================================================ //
-        // ===== DAILY THOUGHT ===== //
+        // ===== DAILY WISDOM WITH QUESTIONS ===== //
         // ============================================================ //
-        const buddhaThoughts = [
-            { thought: "घृणा से घृणा समाप्त नहीं होती, प्रेम से होती है।", author: "गौतम बुद्ध" },
-            { thought: "स्वयं पर विजय सबसे बड़ी विजय है।", author: "गौतम बुद्ध" },
-            { thought: "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।", author: "गौतम बुद्ध" },
-            { thought: "शांति भीतर से आती है, बाहर मत खोजो।", author: "गौतम बुद्ध" },
-            { thought: "जो सोचते हैं वही बनते हैं।", author: "गौतम बुद्ध" },
-            { thought: "अतीत में मत उलझो, वर्तमान में जियो।", author: "गौतम बुद्ध" },
-            { thought: "दूसरों की सहायता करना ही सच्चा धर्म है।", author: "गौतम बुद्ध" },
-            { thought: "क्षमा सबसे बड़ा बल है।", author: "गौतम बुद्ध" },
-            { thought: "सत्य ही अंततः जीतता है।", author: "गौतम बुद्ध" },
-            { thought: "मैत्री से सुख मिलता है।", author: "गौतम बुद्ध" },
-            { thought: "संघ का साथ कभी मत छोड़ो।", author: "गौतम बुद्ध" },
-            { thought: "जागरूकता ही मुक्ति का मार्ग है।", author: "गौतम बुद्ध" },
-            { thought: "अहिंसा परम धर्म है।", author: "गौतम बुद्ध" },
-            { thought: "जो जैसा सोचता है, वैसा बन जाता है।", author: "गौतम बुद्ध" },
-            { thought: "वर्तमान में जीना सीखो।", author: "गौतम बुद्ध" },
-            { thought: "दान से मन पवित्र होता है।", author: "गौतम बुद्ध" }
+
+        const buddhaWisdom = [
+            { 
+                question: "सच्चा सुख क्या है?",
+                thought: "संयम ही सच्चा सुख है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "मन को कैसे शांत करें?",
+                thought: "शांति भीतर से आती है, बाहर मत खोजो।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "क्रोध से कैसे बचें?",
+                thought: "क्रोध को पकड़े रखना जलते अंगारे को पकड़ने जैसा है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "जीवन का सबसे बड़ा रहस्य क्या है?",
+                thought: "जो सोचते हैं वही बनते हैं।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "सत्य क्या है?",
+                thought: "सत्य ही अंततः जीतता है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "दान का महत्व क्या है?",
+                thought: "दान से मन पवित्र होता है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "सच्चा बल क्या है?",
+                thought: "क्षमा सबसे बड़ा बल है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "सबसे बड़ा धर्म क्या है?",
+                thought: "अहिंसा परम धर्म है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "सच्ची मित्रता क्या है?",
+                thought: "मैत्री से सुख मिलता है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "जीवन में सबसे महत्वपूर्ण क्या है?",
+                thought: "वर्तमान में जीना सीखो।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "सच्चा ज्ञान क्या है?",
+                thought: "जागरूकता ही मुक्ति का मार्ग है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "दूसरों की सेवा क्यों करें?",
+                thought: "दूसरों की भलाई में ही अपनी भलाई है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "मनुष्य का सबसे बड़ा शत्रु कौन है?",
+                thought: "मन ही मनुष्य का कारण है, मन ही बंधन और मोक्ष का कारण है।",
+                author: "गौतम बुद्ध"
+            },
+            { 
+                question: "सच्चा योद्धा कौन है?",
+                thought: "जो क्रोध को नियंत्रित कर लेता है, वही सच्चा योद्धा है।",
+                author: "गौतम बुद्ध"
+            }
         ];
 
-        function getDailyThought() {
+        function getDailyWisdom() {
             const today = new Date();
-            const startOfYear = new Date(today.getFullYear(), 0, 0);
-            const diff = today - startOfYear;
-            const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const index = dayOfYear % buddhaThoughts.length;
-            const thoughtData = buddhaThoughts[index];
-            document.getElementById('dailyThought').innerText = `“${thoughtData.thought}”`;
-            document.getElementById('thoughtAuthor').innerText = `– ${thoughtData.author}`;
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const index = dayOfYear % buddhaWisdom.length;
+            const wisdom = buddhaWisdom[index];
+
+            document.getElementById('dailyQuestion').innerText = wisdom.question;
+            document.getElementById('dailyThought').innerText = `“${wisdom.thought}”`;
+            document.getElementById('thoughtAuthor').innerText = `– ${wisdom.author}`;
             document.getElementById('thoughtDate').innerText = today.toLocaleDateString('hi-IN', {
                 weekday: 'long',
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'
             });
-            return thoughtData.thought;
         }
+
+        // Auto-rotate every 24 hours
+        getDailyWisdom();
+        setInterval(getDailyWisdom, 24 * 60 * 60 * 1000);
 
         // ============================================================ //
         // ===== VIDEO GALLERY ===== //
@@ -810,9 +992,9 @@
             "सभी संकल्प अनित्य हैं।", "शांति भीतर से आती है।",
             "अपने मन पर विजय पाओ।", "दान से मन पवित्र होता है।",
             "क्षमा सबसे बड़ा बल है।", "सत्य ही अंततः जीतता है।",
-            "मैत्री से सुख मिलता है।", "जो जैसा सोचता है, वैसा बन जाता है।",
-            "वर्तमान में जीना सीखो।", "अहिंसा परम धर्म है।",
-            "दूसरों की भलाई में ही अपनी भलाई है।", "संघ का साथ कभी मत छोड़ो।",
+            "मैत्री से सुख मिलता है।", "जो जैसा सोचता है, वैसा बन जाता है。",
+            "वर्तमान में जीना सीखो。", "अहिंसा परम धर्म है।",
+            "दूसरों की भलाई में ही अपनी भलाई है。", "संघ का साथ कभी मत छोड़ो。",
             "जागरूकता ही मुक्ति का मार्ग है।"
         ];
 
@@ -897,7 +1079,7 @@
         }
 
         // ============================================================ //
-        // ===== CHATBOT SCRIPT (FULL FEATURES) ===== //
+        // ===== CHATBOT SCRIPT ===== //
         // ============================================================ //
 
         const chatBtn = document.getElementById("sahcharChatBtn");
@@ -908,7 +1090,6 @@
         const API_URL = "https://api-5n6fh3d24a-uc.a.run.app";
         let selectedFeature = null;
 
-        // ===== Toggle Chat =====
         chatBtn.onclick = () => {
             const isOpen = chatBox.style.display === "flex";
             chatBox.style.display = isOpen ? "none" : "flex";
@@ -920,7 +1101,6 @@
 
         function closeChat() { chatBox.style.display = "none"; }
 
-        // ===== Add Message =====
         function addMsg(text, type, feature = null, imageUrl = null) {
             const msg = document.createElement("div");
             msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
@@ -979,7 +1159,6 @@
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
-        // ===== Speak =====
         function speakSahchar(text) {
             if (!text) return;
             const clean = text.replace(/[\u{1F600}-\u{1F6FF}]/gu, '').trim();
@@ -989,7 +1168,6 @@
             window.speechSynthesis.speak(speech);
         }
 
-        // ===== Detect Feature =====
         function detectFeature(message) {
             const lower = message.toLowerCase();
             if (lower.includes("तस्वीर") || lower.includes("इमेज") || lower.includes("image") || lower.includes("picture")) return "🎨 Image";
@@ -1001,9 +1179,6 @@
             return "💬 Chat";
         }
 
-        // ============================================================ //
-        // ===== GENERATE IMAGE ===== //
-        // ============================================================ //
         function generateImage(prompt) {
             showTyping(true);
             addMsg("🎨 इमेज जनरेट हो रही है...", "bot", "🎨 Image");
@@ -1038,9 +1213,6 @@
             });
         }
 
-        // ============================================================ //
-        // ===== GENERATE VIDEO ===== //
-        // ============================================================ //
         function generateVideo(prompt) {
             showTyping(true);
             addMsg("🎬 वीडियो जनरेट हो रहा है...", "bot", "🎬 Video");
@@ -1075,9 +1247,6 @@
             });
         }
 
-        // ============================================================ //
-        // ===== SEND MESSAGE ===== //
-        // ============================================================ //
         function sendSahcharMsg() {
             const msg = inputField.value.trim();
             if (!msg) return;
@@ -1088,7 +1257,6 @@
             let cleanMsg = msg.replace(/[\u{1F600}-\u{1F6FF}]/gu, '').trim();
             if (!cleanMsg) { showTyping(false); addMsg("⚠️ कृपया टेक्स्ट लिखें।", "bot"); return; }
 
-            // Image Generation
             if (feature === "🎨 Image") {
                 let prompt = cleanMsg.replace(/तस्वीर\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/इमेज\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/image|picture|draw/gi, '').trim();
                 if (!prompt) prompt = cleanMsg;
@@ -1096,7 +1264,6 @@
                 return;
             }
 
-            // Video Generation
             if (feature === "🎬 Video") {
                 let prompt = cleanMsg.replace(/वीडियो\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/video/gi, '').trim();
                 if (!prompt) prompt = cleanMsg;
@@ -1104,7 +1271,6 @@
                 return;
             }
 
-            // Normal Chat
             fetch(`${API_URL}/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -1124,9 +1290,6 @@
             });
         }
 
-        // ============================================================ //
-        // ===== VOICE INPUT ===== //
-        // ============================================================ //
         function startSahcharVoice() {
             if (!('webkitSpeechRecognition' in window)) {
                 addMsg("⚠️ Voice recognition के लिए Chrome या Edge इस्तेमाल करें।", "bot");
@@ -1154,9 +1317,7 @@
             if (e.key === "Enter") sendSahcharMsg();
         });
 
-        // ============================================================ //
-        // ===== FEATURE MODAL ===== //
-        // ============================================================ //
+        // ===== FEATURE MODAL =====
         function openFeatureModal() {
             document.getElementById("featureModal").style.display = "flex";
             document.getElementById("featurePromptArea").classList.remove("active");
@@ -1204,7 +1365,7 @@
         // ===== INITIALIZE ===== //
         // ============================================================ //
         document.addEventListener('DOMContentLoaded', function() {
-            getDailyThought();
+            getDailyWisdom();
             loadVideos();
             loadImages();
         });
