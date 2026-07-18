@@ -219,43 +219,85 @@
         .qr-container p { font-size: 0.8rem; color: #888; margin-top: 0.5rem; }
         .file-info { margin-top: 1rem; font-size: 0.8rem; color: #888; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .file-info span { display: inline-flex; align-items: center; gap: 5px; }
-<!-- ===== PLAY STORE TESTING STATUS ===== -->
-<section id="testing-status" style="background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 20px; padding: 2rem; margin: 2rem auto; max-width: 800px; color: white;">
-    <h2 style="font-family: 'Noto Serif Devanagari', serif; color: #fcd34d; text-align: center; font-size: 1.8rem; margin-bottom: 1rem;">
-        🧪 Play Store Testing Progress
-    </h2>
-    
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 600px; margin: 0 auto;">
-        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px;">
-            <div style="font-size: 2.5rem;">👥</div>
-            <div style="font-size: 1.8rem; font-weight: 700; color: #fcd34d;">9/12</div>
-            <div style="font-size: 0.8rem; color: #94a3b8;">Testers Opted-in</div>
-        </div>
-        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px;">
-            <div style="font-size: 2.5rem;">⏳</div>
-            <div style="font-size: 1.8rem; font-weight: 700; color: #fcd34d;">14</div>
-            <div style="font-size: 0.8rem; color: #94a3b8;">Days Required</div>
-        </div>
-    </div>
-    
-    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8;">
-            <span>Progress</span>
-            <span>75%</span>
-        </div>
-        <div style="background: #334155; height: 8px; border-radius: 10px; margin-top: 4px;">
-            <div style="background: #fcd34d; width: 75%; height: 8px; border-radius: 10px;"></div>
-        </div>
-    </div>
-    
-    <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: #94a3b8;">
-        ⚠️ <span style="color: #fcd34d;">Testing Link</span> se install karein: 
-        <a href="https://play.google.com/apps/testing/your.app.package" target="_blank" style="color: #60a5fa; text-decoration: underline;">
-            https://play.google.com/apps/test/RQExvtiX0U4/ahAO29uNRLAY0e-lKWsaRE0Ci1Agars2dLV67cvGFyopc0-iBbxHRrrIvjUQbFWomHOeLcLNqcP7o_FJ45PuOpPdlt
-        https://play.google.com/apps/internaltest/4701205749432279010
-        </a>
-    </p>
-</section>
+
+        /* ============================================================ */
+        /* ===== PLAY STORE TESTING STATUS - CSS ===== */
+        /* ============================================================ */
+        .testing-status-section {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            color: white;
+        }
+        .testing-status-section h2 {
+            font-family: 'Noto Serif Devanagari', serif;
+            color: #fcd34d;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .testing-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testing-stat-item {
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+        .testing-stat-item .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fcd34d;
+        }
+        .testing-stat-item .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+        .testing-progress {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .testing-progress .progress-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+        .testing-progress .progress-bar {
+            background: #334155;
+            height: 8px;
+            border-radius: 10px;
+            margin-top: 4px;
+        }
+        .testing-progress .progress-bar .progress-fill {
+            background: #fcd34d;
+            height: 8px;
+            border-radius: 10px;
+            width: 75%;
+        }
+        .testing-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        .testing-link a {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+
         /* ============================================================ */
         /* ===== DAILY WISDOM WITH INPUT ===== */
         /* ============================================================ */
@@ -826,6 +868,42 @@
     </section>
 
     <!-- ============================================================ -->
+    <!-- ===== PLAY STORE TESTING STATUS - यहाँ सही जगह है! ===== -->
+    <!-- ============================================================ -->
+    <section class="testing-status-section">
+        <h2>🧪 Play Store Testing Progress</h2>
+        
+        <div class="testing-stats">
+            <div class="testing-stat-item">
+                <div class="stat-number">9/12</div>
+                <div class="stat-label">👥 Testers Opted-in</div>
+            </div>
+            <div class="testing-stat-item">
+                <div class="stat-number">14</div>
+                <div class="stat-label">⏳ Days Required</div>
+            </div>
+        </div>
+        
+        <div class="testing-progress">
+            <div class="progress-row">
+                <span>Progress</span>
+                <span>75%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%;"></div>
+            </div>
+        </div>
+        
+        <div class="testing-link">
+            ⚠️ <span style="color: #fcd34d;">Testing Link</span> से install करें:
+            <br>
+            <a href="https://play.google.com/apps/internaltest/4701205749432279010" target="_blank">
+                https://play.google.com/apps/internaltest/4701205749432279010
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
     <!-- ===== INTERACTIVE DAILY WISDOM ===== -->
     <!-- ============================================================ -->
     <section class="thought-container">
@@ -1250,7 +1328,7 @@
             "मैत्री से सुख मिलता है।", "जो जैसा सोचता है, वैसा बन जाता है।",
             "वर्तमान में जीना सीखो।", "अहिंसा परम धर्म है।",
             "दूसरों की भलाई में ही अपनी भलाई है।", "संघ का साथ कभी मत छोड़ो।",
-            "जागरूकता ही मुक्ति का मार्ग है。"
+            "जागरूकता ही मुक्ति का मार्ग है।"
         ];
 
         function getRandomVideoMessage() {
