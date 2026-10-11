@@ -263,83 +263,7 @@
         .release-summary[hidden], .install-hint[hidden] { display: none; }
         .qr-container[hidden], .file-info[hidden], .release-notes-link[hidden] { display: none; }
 
-        /* ============================================================ */
-        /* ===== PLAY STORE TESTING STATUS - CSS ===== */
-        /* ============================================================ */
-        .testing-status-section {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 800px;
-            color: white;
-        }
-        .testing-status-section h2 {
-            font-family: 'Noto Serif Devanagari', serif;
-            color: #fcd34d;
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        .testing-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .testing-stat-item {
-            text-align: center;
-            background: rgba(255,255,255,0.05);
-            padding: 1rem;
-            border-radius: 12px;
-        }
-        .testing-stat-item .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fcd34d;
-        }
-        .testing-stat-item .stat-label {
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-        .testing-progress {
-            background: rgba(255,255,255,0.05);
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 1rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .testing-progress .progress-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-        .testing-progress .progress-bar {
-            background: #334155;
-            height: 8px;
-            border-radius: 10px;
-            margin-top: 4px;
-        }
-        .testing-progress .progress-bar .progress-fill {
-            background: #fcd34d;
-            height: 8px;
-            border-radius: 10px;
-            width: 75%;
-        }
-        .testing-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-        .testing-link a {
-            color: #60a5fa;
-            text-decoration: underline;
-        }
+
 
         /* ============================================================ */
         /* ===== DAILY WISDOM WITH INPUT ===== */
@@ -975,7 +899,7 @@
             box-shadow: 0 14px 38px rgba(33,53,47,.07);
         }
         .download-card { border-color: rgba(217,170,85,.52); }
-        .testing-status-section { border: 1px solid rgba(217,170,85,.25); }
+
         .thought-container {
             padding: 2.5rem 1.5rem; background: linear-gradient(145deg,#f0eee5,#f9f5eb);
             border: 1px solid rgba(217,170,85,.22);
@@ -1025,7 +949,7 @@
         /* ============================================================ */
         /* ===== STUNNING ENHANCEMENTS & GLASSMORPHISM ===== */
         /* ============================================================ */
-        .card, .thought-container, .download-card, .testing-status-section {
+        .card, .thought-container, .download-card {
             backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -1168,41 +1092,7 @@
         </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- ===== PLAY STORE TESTING STATUS - यहाँ सही जगह है! ===== -->
-    <!-- ============================================================ -->
-    <section class="testing-status-section">
-        <h2>🧪 Play Store Testing Progress</h2>
-        
-        <div class="testing-stats">
-            <div class="testing-stat-item">
-                <div class="stat-number">9/12</div>
-                <div class="stat-label">👥 Testers Opted-in</div>
-            </div>
-            <div class="testing-stat-item">
-                <div class="stat-number">14</div>
-                <div class="stat-label">⏳ Days Required</div>
-            </div>
-        </div>
-        
-        <div class="testing-progress">
-            <div class="progress-row">
-                <span>Progress</span>
-                <span>75%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 75%;"></div>
-            </div>
-        </div>
-        
-        <div class="testing-link">
-            ⚠️ <span style="color: #fcd34d;">Testing Link</span> से install करें:
-            <br>
-            <a href="https://play.google.com/apps/internaltest/4701205749432279010" target="_blank">
-                https://play.google.com/apps/internaltest/4701205749432279010
-            </a>
-        </div>
-    </section>
+
 
     <!-- ============================================================ -->
     <!-- ===== INTERACTIVE DAILY WISDOM ===== -->
