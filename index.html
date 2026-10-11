@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="सहचर - करुणा, बुद्ध विचार, सामाजिक सेवा और सकारात्मक संदेशों का मंच">
+    <meta name="theme-color" content="#244f45">
+    <meta property="og:title" content="सहचर | Sahchar — करुणा का साथी">
+    <meta property="og:description" content="बुद्ध की शिक्षाओं, सकारात्मक सोच और सामाजिक सहयोग के साथ एक शांत, बेहतर दिन की ओर।">
     <title>सहचर | Sahchar – करुणा और सकारात्मकता का साथी</title>
 
     <!-- Google Fonts -->
@@ -13,14 +16,14 @@
 
     <style>
         :root {
-            --primary: #a52a2a;
-            --primary-light: #c0392b;
-            --accent: #f4c430;
-            --text-dark: #2c3e50;
-            --text-light: #34495e;
-            --bg: #fdfdfd;
-            --card-bg: #ffffff;
-            --shadow: 0 8px 30px rgba(0,0,0,0.08);
+            --primary: #28594d;
+            --primary-light: #397564;
+            --accent: #d9aa55;
+            --text-dark: #21352f;
+            --text-light: #52655e;
+            --bg: #f7f5ef;
+            --card-bg: #fffefa;
+            --shadow: 0 12px 36px rgba(33,53,47,0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -801,9 +804,168 @@
             .feature-grid-modal { grid-template-columns: repeat(3, 1fr); }
             .feature-modal-content { padding: 16px; }
         }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+        body { background: #f7f5ef; color: #21352f; }
+        a:focus-visible, button:focus-visible, input:focus-visible {
+            outline: 3px solid #d9aa55;
+            outline-offset: 3px;
+        }
+        .skip-link {
+            position: fixed; top: 0.75rem; left: 0.75rem; z-index: 10001;
+            padding: 0.7rem 1rem; border-radius: 999px; background: white;
+            color: #28594d; transform: translateY(-160%);
+        }
+        .skip-link:focus { transform: translateY(0); }
+        .top-download-banner { background: #244f45; box-shadow: none; }
+        .top-download-banner a { color: #f6d58f; }
+        .site-hero {
+            min-height: 600px;
+            padding: 1.5rem max(1.25rem, calc((100vw - 1160px) / 2)) 5rem;
+            background: radial-gradient(ellipse at 78% 35%, rgba(224,186,112,.18), transparent 34%),
+                linear-gradient(130deg, #244f45, #193b34 62%, #17342e);
+            text-align: left;
+        }
+        .site-hero::before {
+            background: radial-gradient(circle at 20% 90%, rgba(255,255,255,.08), transparent 36%);
+        }
+        .hero-nav {
+            position: relative; z-index: 1; display: flex; align-items: center;
+            justify-content: space-between; gap: 1.5rem; max-width: 1160px; margin: 0 auto;
+        }
+        .brand {
+            display: inline-flex; align-items: center; gap: .7rem; color: white;
+            text-decoration: none; font-family: 'Noto Serif Devanagari', serif;
+            font-size: 1.25rem; font-weight: 700; line-height: 1.15;
+        }
+        .brand-mark {
+            display: grid; width: 42px; height: 42px; place-items: center;
+            border: 1px solid rgba(246,213,143,.6); border-radius: 50%;
+            color: #f6d58f; font-size: 1.35rem;
+        }
+        .brand small {
+            display: block; margin-top: .2rem; color: rgba(255,255,255,.62);
+            font: 500 .57rem/1 'Poppins', sans-serif; letter-spacing: .22em;
+        }
+        .site-hero nav { justify-content: flex-end; gap: .35rem 1.4rem; margin: 0; }
+        .site-hero nav a { padding: .5rem 0; color: rgba(255,255,255,.84); font-size: .88rem; }
+        .site-hero nav a:not(:last-child)::after { display: none; }
+        .site-hero nav a:hover { color: #f6d58f; }
+        .hero-content {
+            position: relative; z-index: 1; display: grid;
+            grid-template-columns: minmax(0,1.1fr) minmax(260px,.9fr);
+            align-items: center; gap: 3rem; max-width: 1160px;
+            min-height: 455px; margin: 0 auto; padding-top: 2.5rem;
+        }
+        .hero-copy { max-width: 640px; }
+        .hero-eyebrow {
+            margin-bottom: 1rem; color: #f6d58f; font-size: .78rem;
+            font-weight: 600; letter-spacing: .13em;
+        }
+        .site-hero h1 {
+            margin-bottom: 1rem; font-size: clamp(2.8rem,6vw,5.1rem);
+            letter-spacing: -.035em; line-height: 1.2;
+        }
+        .site-hero h1 span {
+            display: block; color: #f6d58f; font-size: .56em; letter-spacing: 0;
+        }
+        .site-hero .hero-description {
+            max-width: 530px; color: rgba(255,255,255,.78);
+            font-size: 1.05rem; line-height: 1.9;
+        }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.8rem; }
+        .hero-actions .btn {
+            margin: 0; padding: .82rem 1.4rem; background: #f2cf89;
+            color: #243b34; font-weight: 600;
+        }
+        .hero-actions .btn:hover { background: #ffdfa0; }
+        .hero-actions .btn-outline {
+            border: 1px solid rgba(255,255,255,.38); background: transparent; color: white;
+        }
+        .hero-actions .btn-outline:hover { background: rgba(255,255,255,.1); }
+        .hero-note { margin-top: 1.25rem; color: rgba(255,255,255,.62); font-size: .8rem; }
+        .hero-art {
+            position: relative; display: grid; width: min(100%,390px); aspect-ratio: 1;
+            place-items: center; justify-self: center;
+            border: 1px solid rgba(246,213,143,.24); border-radius: 50%;
+            background: radial-gradient(circle, rgba(245,224,183,.17), rgba(245,224,183,.025) 64%, transparent 65%);
+        }
+        .hero-art::before, .hero-art::after {
+            position: absolute; inset: 10%; border: 1px solid rgba(246,213,143,.24);
+            border-radius: 50%; content: "";
+        }
+        .hero-art::after { inset: 22%; border-style: dashed; opacity: .7; }
+        .hero-lotus {
+            color: #f6d58f; font-size: clamp(5rem,12vw,8rem);
+            filter: drop-shadow(0 10px 32px rgba(246,213,143,.2));
+        }
+        .hero-art-label {
+            position: absolute; right: -.5rem; bottom: 13%; max-width: 180px;
+            padding: .8rem 1rem; border: 1px solid rgba(255,255,255,.12);
+            border-radius: 14px; background: rgba(22,51,44,.78);
+            color: rgba(255,255,255,.88); font-family: 'Noto Serif Devanagari', serif;
+            font-size: .9rem; text-align: center;
+        }
+        section { max-width: 1160px; padding: 4.5rem 1.5rem; }
+        section h2 {
+            display: table; margin: 0 auto 2.5rem; color: #28594d;
+            font-size: clamp(1.65rem,4vw,2.2rem); line-height: 1.5;
+        }
+        .card, .download-card, .thought-display, .question-box {
+            border: 1px solid rgba(40,89,77,.08); background: #fffefa;
+            box-shadow: 0 14px 38px rgba(33,53,47,.07);
+        }
+        .download-card { border-color: rgba(217,170,85,.52); }
+        .testing-status-section { border: 1px solid rgba(217,170,85,.25); }
+        .thought-container {
+            padding: 2.5rem 1.5rem; background: linear-gradient(145deg,#f0eee5,#f9f5eb);
+            border: 1px solid rgba(217,170,85,.22);
+        }
+        .thought-container h2 { margin-bottom: 2rem; }
+        footer { margin-top: 1rem; background: #193b34; }
+        #sahcharChatBtn {
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg,#397564,#244f45);
+            box-shadow: 0 8px 25px rgba(36,79,69,.32);
+        }
+        #sahcharHeader { background: linear-gradient(135deg,#28594d,#193b34); }
+        #sahcharMessages::-webkit-scrollbar-thumb { background: #397564; }
+        .sahcharMsg img:hover { border-color: #397564; }
+        .typing-indicator span { background: #397564; }
+        #sendBtn, #plusBtn, .feature-prompt-area button { background: #28594d; }
+        #sendBtn:hover, #plusBtn:hover, .feature-prompt-area button:hover { background: #193b34; }
+        #sahcharInputBox input:focus, .feature-prompt-area input:focus { border-color: #397564; }
+        .feature-modal-header h3, .feature-modal-close:hover, .feature-prompt-area label { color: #28594d; }
+        .feature-item-modal:hover { background: #28594d; border-color: #28594d; }
+        .feature-prompt-area { border-top-color: #d9aa55; }
+        @media (max-width: 800px) {
+            .site-hero { min-height: 0; padding: 1.1rem 1.25rem 3.5rem; }
+            .hero-nav { flex-wrap: wrap; }
+            .site-hero nav { width: 100%; justify-content: flex-start; }
+            .hero-content { grid-template-columns: 1fr; gap: 2rem; padding-top: 3.2rem; }
+            .hero-art { width: min(72vw,300px); }
+            .hero-art-label { right: -.8rem; bottom: 8%; }
+        }
+        @media (max-width: 480px) {
+            .site-hero nav { gap: .15rem 1rem; }
+            .site-hero nav a { font-size: .8rem; }
+            .hero-content { padding-top: 2.4rem; }
+            .hero-actions { display: grid; }
+            .hero-actions .btn { text-align: center; }
+            section { padding: 3.5rem 1.15rem; }
+            .thought-container { padding: 2rem 1rem; }
+            #sahcharChatBtn { right: 16px; bottom: 16px; width: 54px; height: 54px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: .01ms !important; transition-duration: .01ms !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">मुख्य सामग्री पर जाएँ</a>
 
     <!-- ============================================================ -->
     <!-- ===== TOP DOWNLOAD BANNER ===== -->
@@ -819,17 +981,42 @@
     <!-- ============================================================ -->
     <!-- ===== HEADER ===== -->
     <!-- ============================================================ -->
-    <header>
-        <h1>सहचर (Sahchar)</h1>
-        <p>सकारात्मक सोच • करुणा • सामाजिक सहयोग • बुद्ध की शिक्षाएँ</p>
-        <nav>
-            <a href="#">मुख्य पृष्ठ</a>
-            <a href="#">बुद्ध विचार</a>
-            <a href="#">सामाजिक सेवा</a>
-            <a href="#">गैलरी</a>
-            <a href="#">संपर्क</a>
-        </nav>
+    <header class="site-hero" id="home">
+        <div class="hero-nav">
+            <a class="brand" href="#home" aria-label="सहचर, मुख्य पृष्ठ">
+                <span class="brand-mark" aria-hidden="true">स</span>
+                <span>सहचर<small>SAHCHAR</small></span>
+            </a>
+            <nav aria-label="मुख्य नेविगेशन">
+                <a href="#home">मुख्य पृष्ठ</a>
+                <a href="#wisdom">बुद्ध विचार</a>
+                <a href="#service">सामाजिक सेवा</a>
+                <a href="#gallery">गैलरी</a>
+                <a href="#contact">संपर्क</a>
+            </nav>
+        </div>
+        <div class="hero-content">
+            <div class="hero-copy">
+                <p class="hero-eyebrow">करुणा · जागरूकता · साथ</p>
+                <h1>सहचर <span>मन की शांति का साथी</span></h1>
+                <p class="hero-description">
+                    बुद्ध की शिक्षाओं से प्रेरणा लें, हर दिन एक सकारात्मक विचार पाएँ
+                    और करुणा को अपने जीवन का हिस्सा बनाएँ।
+                </p>
+                <div class="hero-actions">
+                    <a class="btn" href="#app-download">SahcharAI ऐप देखें <span aria-hidden="true">↓</span></a>
+                    <a class="btn btn-outline" href="#wisdom">आज का विचार पढ़ें</a>
+                </div>
+                <p class="hero-note">एक बेहतर दिन की शुरुआत, एक शांत विचार से।</p>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <span class="hero-lotus">ॐ</span>
+                <span class="hero-art-label">“शांति भीतर से आती है।”</span>
+            </div>
+        </div>
     </header>
+
+    <main id="main-content">
 
     <!-- ============================================================ -->
     <!-- ===== SAHCHARAI APP DOWNLOAD SECTION ===== -->
@@ -906,7 +1093,7 @@
     <!-- ============================================================ -->
     <!-- ===== INTERACTIVE DAILY WISDOM ===== -->
     <!-- ============================================================ -->
-    <section class="thought-container">
+    <section class="thought-container" id="wisdom">
         <h2>🪷 Daily Buddha Wisdom</h2>
 
         <!-- Question Box -->
@@ -948,7 +1135,7 @@
     <!-- ===== OTHER SECTIONS ===== -->
     <!-- ============================================================ -->
 
-    <section>
+    <section id="about">
         <h2>हमारे बारे में</h2>
         <div class="card" style="text-align:center; max-width:800px; margin:auto;">
             <p style="font-size:1.15rem;">
@@ -977,12 +1164,12 @@
                 जीवन परिवर्तनशील है। इसे समझ लेने वाला दुख से मुक्त होने का मार्ग पा लेता है।
             </p>
             <div style="text-align:center;">
-                <a href="#" class="btn">और विचार पढ़ें</a>
+                <a href="#wisdom" class="btn">आज का विचार पढ़ें</a>
             </div>
         </div>
     </section>
 
-    <section>
+    <section id="videos">
         <h2>वीडियो गैलरी</h2>
         <p style="text-align:center; color:#555; margin-bottom:2rem;">
             हर वीडियो के साथ प्रेरक बुद्ध वचन – देखें और आत्मसात करें
@@ -990,7 +1177,7 @@
         <div class="video-gallery"></div>
     </section>
 
-    <section>
+    <section id="gallery">
         <h2>हमारी गैलरी</h2>
         <div class="gallery" id="image-gallery">
             <p style="grid-column: 1 / -1; text-align:center; color:#777; padding:2rem; font-style:italic;">
@@ -999,7 +1186,7 @@
         </div>
     </section>
 
-    <section>
+    <section id="service">
         <h2>सामाजिक सेवा</h2>
         <div class="card">
             <p style="font-size:1.1rem;">
@@ -1007,12 +1194,12 @@
                 और अन्य जनकल्याणकारी कार्यों में सक्रिय योगदान देते हैं।
             </p>
             <div style="text-align:center; margin-top:2rem;">
-                <a href="#" class="btn">हमारे कार्य जानें</a>
+                <a href="#contact" class="btn">हमसे जुड़ें</a>
             </div>
         </div>
     </section>
 
-    <section>
+    <section id="social">
         <h2>Facebook से नवीनतम पोस्ट</h2>
         <div class="fb-page-container">
             <div class="fb-page" 
@@ -1031,7 +1218,7 @@
         </div>
     </section>
 
-    <section>
+    <section id="contact">
         <h2>संपर्क करें</h2>
         <div class="card" style="text-align:center;">
             <p style="font-size:1.1rem; margin-bottom:1rem;">
@@ -1046,6 +1233,8 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         <p>© 2026 सहचर (Sahchar) | सभी अधिकार सुरक्षित | करुणा से प्रेरित</p>
     </footer>
@@ -1053,7 +1242,7 @@
     <!-- ============================================================ -->
     <!-- ===== CHATBOT ===== -->
     <!-- ============================================================ -->
-    <button id="sahcharChatBtn">🧘</button>
+    <button id="sahcharChatBtn" type="button" aria-label="सहचर AI चैट खोलें">🧘</button>
 
     <div id="sahcharChatBox">
         <div id="sahcharHeader">
