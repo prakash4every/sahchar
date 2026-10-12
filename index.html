@@ -1004,6 +1004,33 @@
             opacity: 1;
             transform: translateY(0);
         }
+        #whatsappFloatBtn {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-size: 26px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+        #whatsappFloatBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+        @media (max-width: 480px) {
+            #whatsappFloatBtn { right: 16px; bottom: 82px; width: 48px; height: 48px; font-size: 22px; }
+        }
     </style>
 </head>
 <body>
@@ -1252,6 +1279,9 @@
                 <a href="https://t.me/SahcharAIBot" target="_blank" class="btn" style="background: linear-gradient(135deg, #0088cc, #006699);">
                     ✈️ Telegram Bot
                 </a>
+                <a href="https://wa.me/919431435984?text=नमस्ते%20सहचर%20AI,%20मैं%20चैट%20करना%20चाहता हूँ।" target="_blank" class="btn" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+                    💬 WhatsApp Chatbot
+                </a>
                 <a href="https://www.facebook.com/prakash4every31" target="_blank" class="btn" style="background: linear-gradient(135deg, #1877f2, #145dbf);">
                     📘 Facebook Page
                 </a>
@@ -1272,8 +1302,11 @@
     </footer>
 
     <!-- ============================================================ -->
-    <!-- ===== CHATBOT ===== -->
+    <!-- ===== CHATBOT & WHATSAPP FLOAT ===== -->
     <!-- ============================================================ -->
+    <a id="whatsappFloatBtn" href="https://wa.me/919431435984?text=नमस्ते%20सहचर%20AI,%20मैं%20चैट%20करना%20चाहता हूँ।" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Chatbot से बात करें">
+        💬
+    </a>
     <button id="sahcharChatBtn" type="button" aria-label="सहचर AI चैट खोलें">🧘</button>
 
     <div id="sahcharChatBox">
