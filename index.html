@@ -990,6 +990,20 @@
             0%, 100% { box-shadow: 0 8px 25px rgba(36,79,69,0.32); }
             50% { box-shadow: 0 8px 35px rgba(217,170,85,0.6); }
         }
+        body {
+            background-color: #f7f5ef;
+            background-image: radial-gradient(at 0% 0%, rgba(40, 89, 77, 0.04) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(217, 170, 85, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -1997,6 +2011,20 @@
                 status.textContent = "GitHub release जानकारी अभी लोड नहीं हो सकी। आप GitHub Releases पेज पर नवीनतम Android app build देख सकते हैं।";
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('section, .card').forEach(el => {
+                el.classList.add('reveal');
+                observer.observe(el);
+            });
+        });
     </script>
 </body>
 </html>
