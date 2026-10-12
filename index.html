@@ -1004,6 +1004,50 @@
             opacity: 1;
             transform: translateY(0);
         }
+        .buddha-portrait-card {
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(40, 89, 77, 0.1);
+            border: 2px solid rgba(217, 170, 85, 0.3);
+        }
+        .buddha-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+        .buddha-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .buddha-portrait-card:hover .buddha-img {
+            transform: scale(1.04);
+        }
+        .buddha-img-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(36, 79, 69, 0.85);
+            backdrop-filter: blur(6px);
+            color: #f6d58f;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Noto Serif Devanagari', serif;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .buddha-portrait-card .thought-display {
+            background: transparent;
+            box-shadow: none;
+            padding: 1.8rem;
+        }
         #whatsappFloatBtn {
             position: fixed;
             bottom: 95px;
@@ -1136,10 +1180,29 @@
 
 
     <!-- ============================================================ -->
-    <!-- ===== INTERACTIVE DAILY WISDOM ===== -->
+    <!-- ===== INTERACTIVE DAILY WISDOM & THOUGHT OF THE DAY ===== -->
     <!-- ============================================================ -->
     <section class="thought-container" id="wisdom">
-        <h2>🪷 Daily Buddha Wisdom</h2>
+        <h2>🪷 Daily Buddha Wisdom & Thought of the Day</h2>
+
+        <!-- Buddha Portrait & Thought Card -->
+        <div class="buddha-portrait-card">
+            <div class="buddha-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=700&q=80" alt="भगवान गौतम बुद्ध" loading="lazy" class="buddha-img">
+                <div class="buddha-img-badge">✨ भगवान गौतम बुद्ध</div>
+            </div>
+
+            <!-- Thought Display -->
+            <div class="thought-display" id="thoughtDisplay">
+                <div class="thought-spinner" id="thoughtSpinner"></div>
+                <div id="thoughtContent">
+                    <div class="q-label" style="margin-bottom: 6px; color: var(--primary);">🌟 आज का विचार (Thought of the Day)</div>
+                    <p id="dailyThought">“जागरूकता ही मुक्ति का मार्ग है।”</p>
+                    <p id="thoughtAuthor">– गौतम बुद्ध</p>
+                    <p id="thoughtDate">शनिवार, 11 जुलाई 2026</p>
+                </div>
+            </div>
+        </div>
 
         <!-- Question Box -->
         <div class="question-box">
@@ -1154,16 +1217,6 @@
             <button class="wisdom-send-btn" id="wisdomSendBtn" onclick="askWisdomQuestion()" title="पूछें">➤</button>
         </div>
         <div class="wisdom-error" id="wisdomError">⚠️ कृपया कुछ लिखें।</div>
-
-        <!-- Thought Display -->
-        <div class="thought-display" id="thoughtDisplay">
-            <div class="thought-spinner" id="thoughtSpinner"></div>
-            <div id="thoughtContent">
-                <p id="dailyThought">“जागरूकता ही मुक्ति का मार्ग है।”</p>
-                <p id="thoughtAuthor">– गौतम बुद्ध</p>
-                <p id="thoughtDate">शनिवार, 11 जुलाई 2026</p>
-            </div>
-        </div>
 
         <!-- Buttons -->
         <div class="wisdom-buttons">
