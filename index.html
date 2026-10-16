@@ -1722,7 +1722,9 @@
                     const files = await response.json();
                     videoFiles = files.filter(file => file.name.toLowerCase().endsWith('.mp4')).map(f => ({
                         name: f.name,
-                        download_url: f.download_url
+                        download_url: f.download_url,
+                        quote: getRandomVideoMessage(),
+                        desc: f.name.replace('.mp4', '').replace(/[_-]/g, ' ')
                     }));
                 }
             } catch (e) {
@@ -1731,9 +1733,9 @@
 
             if (videoFiles.length === 0) {
                 videoFiles = [
-                    { name: "Peaceful Ocean Meditation", download_url: "https://vjs.zencdn.net/v/oceans.mp4" },
-                    { name: "Nature Blooming Wisdom", download_url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
-                    { name: "Cinematic Journey", download_url: "https://media.w3.org/2010/05/sintel/trailer.mp4" }
+                    { name: "Ocean Meditation", download_url: "https://vjs.zencdn.net/v/oceans.mp4", quote: "शांति भीतर से आती है, बाहर मत खोजो।", desc: "ध्यान और शांति का अनुभव" },
+                    { name: "Nature Blooming", download_url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", quote: "जागरूकता ही मुक्ति का मार्ग है।", desc: "प्रकृति और जीवन की खिले हुए फूल जैसी सुंदरता" },
+                    { name: "Cinematic Journey", download_url: "https://media.w3.org/2010/05/sintel/trailer.mp4", quote: "जो सोचते हैं वही बनते हैं।", desc: "जीवन की रोमांचक और प्रेरणादायक यात्रा" }
                 ];
             }
 
@@ -1741,17 +1743,15 @@
             videoFiles.forEach(file => {
                 const card = document.createElement('div');
                 card.className = 'video-card';
-                const message = getRandomVideoMessage();
-                let fileNameTitle = file.name.replace('.mp4', '').replace(/[_-]/g, ' ');
                 card.innerHTML = `
                     <video controls preload="none" poster="">
                         <source src="${file.download_url}" type="video/mp4">
                         ब्राउज़र वीडियो सपोर्ट नहीं करता।
                     </video>
                     <div class="video-info">
-                        <h4>🪷 ${message}</h4>
+                        <h4>“${file.quote}”</h4>
                         <div class="buddha-message">
-                            <small>✨ ${fileNameTitle}</small>
+                            <small>✨ ${file.desc}</small>
                         </div>
                     </div>
                 `;
