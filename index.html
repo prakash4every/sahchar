@@ -1642,7 +1642,7 @@
                 headers: {
                 'x-app-auth': 'sahchar-app-client-secure-2026', "Content-Type": "application/json", "Accept": "application/json" },
                 body: JSON.stringify({
-                    message: `बुद्ध की शिक्षाओं के अनुसार "${question}" का उत्तर दे। संक्षिप्त और प्रेरणादायक हो।`,
+                    message: question,
                     sessionId: "wisdom_" + Date.now()
                 })
             })
@@ -1653,14 +1653,13 @@
                 const date = today.toLocaleDateString('hi-IN', {
                     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
                 });
-                // Try to extract author
                 let thought = reply;
-                let author = "गौतम बुद्ध";
+                let author = "सहचर AI";
                 if (reply.includes('–') || reply.includes('-')) {
                     const parts = reply.split(/[–\-]/);
                     if (parts.length >= 2) {
                         thought = parts[0].trim();
-                        author = parts[1].trim() || "गौतम बुद्ध";
+                        author = parts[1].trim() || "सहचर AI";
                     }
                 }
                 displayWisdom(`❓ ${question}`, thought, author, date);
