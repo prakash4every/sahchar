@@ -1765,35 +1765,19 @@
         async function loadImages() {
             const gallery = document.getElementById('image-gallery');
             if (!gallery) return;
-            let imageFiles = [];
-            try {
-                const apiUrl = 'https://api.github.com/repos/prakash4every/sahchar/contents/images/gallery';
-                const response = await fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
-                if (response.ok) {
-                    const files = await response.json();
-                    imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)).map(f => ({
-                        name: f.name,
-                        download_url: f.download_url
-                    }));
-                }
-            } catch (e) {
-                console.warn("GitHub image fetch note:", e);
-            }
 
-            if (imageFiles.length === 0) {
-                imageFiles = [
-                    { name: "Buddha Statue Sarnath", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Buddha_statue_Sarnath.jpg/800px-Buddha_statue_Sarnath.jpg" },
-                    { name: "Buddha Statue Kusinara", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Buddha_statue_at_Kusinara.jpg/800px-Buddha_statue_at_Kusinara.jpg" },
-                    { name: "Buddha Kamakura", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Buddha_at_Kamakura.jpg/800px-Buddha_at_Kamakura.jpg" },
-                    { name: "Lingyin Temple Buddha", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Great_Buddha_at_Lingyin_Temple.jpg/800px-Great_Buddha_at_Lingyin_Temple.jpg" }
-                ];
-            }
+            const imageFiles = [
+                { name: "Buddha Statue Sarnath", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Buddha_statue_Sarnath.jpg/800px-Buddha_statue_Sarnath.jpg" },
+                { name: "Buddha Statue Kusinara", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Buddha_statue_at_Kusinara.jpg/800px-Buddha_statue_at_Kusinara.jpg" },
+                { name: "Buddha Kamakura", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Buddha_at_Kamakura.jpg/800px-Buddha_at_Kamakura.jpg" },
+                { name: "Lingyin Temple Buddha", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Great_Buddha_at_Lingyin_Temple.jpg/800px-Great_Buddha_at_Lingyin_Temple.jpg" }
+            ];
 
             gallery.innerHTML = '';
             imageFiles.forEach(file => {
                 const img = document.createElement('img');
                 img.src = file.download_url;
-                img.alt = file.name.replace(/\.[^/.]+$/, "").replace(/[_-]/g, ' ');
+                img.alt = file.name;
                 img.loading = 'lazy';
                 img.onerror = function() {
                     this.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Buddha_statue_Sarnath.jpg/800px-Buddha_statue_Sarnath.jpg";
