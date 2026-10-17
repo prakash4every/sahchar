@@ -1452,6 +1452,8 @@
         </div>
         <div id="sahcharInputBox">
             <input type="text" id="sahcharInput" aria-label="अपना प्रश्न पूछिए" placeholder="अपना प्रश्न पूछिए..." />
+            <input type="file" id="chatFileInput" accept="image/*,application/pdf" style="display:none" onchange="handleChatFileUpload(event)">
+            <button id="uploadBtn" onclick="document.getElementById('chatFileInput').click()" title="Upload Image or PDF">📎</button>
             <button id="plusBtn" onclick="openFeatureModal()" title="Features">+</button>
             <button id="micBtn" onclick="startSahcharVoice()" title="Voice Input">🎤</button>
             <button id="sendBtn" onclick="sendSahcharMsg()">➤</button>
@@ -1887,13 +1889,11 @@
             showTyping(true);
             addMsg("🎨 इमेज जनरेट हो रही है...", "bot", "🎨 Image");
             fetch(`${API_URL}/generate`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'x-app-auth': 'sahchar-app-client-secure-2026'
-            },
-            
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-app-auth": "sahchar-app-client-secure-2026"
+                },
                 body: JSON.stringify({ prompt: prompt, sessionId: "web_user_" + Date.now() })
             })
             .then(res => res.json())
@@ -1926,13 +1926,11 @@
             showTyping(true);
             addMsg("🎬 वीडियो जनरेट हो रहा है...", "bot", "🎬 Video");
             fetch(`${API_URL}/generate`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'x-app-auth': 'sahchar-app-client-secure-2026'
-            },
-            
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-app-auth": "sahchar-app-client-secure-2026"
+                },
                 body: JSON.stringify({ prompt: prompt, model: "video", sessionId: "web_user_" + Date.now() })
             })
             .then(res => res.json())
@@ -1942,7 +1940,7 @@
                 if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है')) {
                     msgs[msgs.length-1].remove();
                 }
-                const videoUrl = data.videoUrl;
+                const videoUrl = data.videoUrl || data.url;
                 if (videoUrl) {
                     addVideoMsg("✅ ये रहा आपका वीडियो:", videoUrl, "🎬 Video");
                     speakSahchar("ये रहा आपका वीडियो");
@@ -1959,6 +1957,47 @@
                 addMsg("❌ वीडियो जनरेट करने में त्रुटि हुई।", "bot", "🎬 Video");
                 console.error("Video gen error:", err);
             });
+        }
+
+        function handleChatFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const fileName = file.name;
+            const mimeType = file.type || "image/jpeg";
+            addMsg(`📄 Uploading ${fileName}...`, "user");
+            showTyping(true);
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64String = e.target.result.split(',')[1];
+                fetch(`${API_URL}/vision`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-app-auth": "sahchar-app-client-secure-2026"
+                    },
+                    body: JSON.stringify({
+                        image: base64String,
+                        mimeType: mimeType,
+                        message: "Analyze this file: " + fileName,
+                        sessionId: "web_user_" + Date.now()
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    showTyping(false);
+                    const reply = data.reply || data.message || "फ़ाइल का विश्लेषण सफल रहा। 🙏";
+                    addMsg(reply, "bot", "📄 Vision");
+                    speakSahchar(reply);
+                })
+                .catch(err => {
+                    showTyping(false);
+                    addMsg("❌ फ़ाइल विश्लेषण में त्रुटि हुई।", "bot");
+                    console.error("Vision upload error:", err);
+                });
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
         }
 
         function sendSahcharMsg() {
