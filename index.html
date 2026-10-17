@@ -1767,10 +1767,10 @@
             if (!gallery) return;
 
             const imageFiles = [
-                { name: "Buddha Statue Sarnath", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Buddha_statue_Sarnath.jpg/800px-Buddha_statue_Sarnath.jpg" },
-                { name: "Buddha Statue Kusinara", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Buddha_statue_at_Kusinara.jpg/800px-Buddha_statue_at_Kusinara.jpg" },
-                { name: "Buddha Kamakura", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Buddha_at_Kamakura.jpg/800px-Buddha_at_Kamakura.jpg" },
-                { name: "Lingyin Temple Buddha", download_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Great_Buddha_at_Lingyin_Temple.jpg/800px-Great_Buddha_at_Lingyin_Temple.jpg" }
+                { name: "Serene Meditation", download_url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" },
+                { name: "Peaceful Statue", download_url: "https://images.unsplash.com/photo-1508873696983-2df5c92091c7?auto=format&fit=crop&w=800&q=80" },
+                { name: "Temple Harmony", download_url: "https://images.unsplash.com/photo-1561736778-92e52b7769ef?auto=format&fit=crop&w=800&q=80" },
+                { name: "Buddha Wisdom", download_url: "https://images.unsplash.com/photo-1609137144813-7f9f7e972b97?auto=format&fit=crop&w=800&q=80" }
             ];
 
             gallery.innerHTML = '';
@@ -1779,9 +1779,6 @@
                 img.src = file.download_url;
                 img.alt = file.name;
                 img.loading = 'lazy';
-                img.onerror = function() {
-                    this.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Buddha_statue_Sarnath.jpg/800px-Buddha_statue_Sarnath.jpg";
-                };
                 gallery.appendChild(img);
             });
         }
