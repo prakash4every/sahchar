@@ -1933,7 +1933,14 @@
                 },
                 body: JSON.stringify({ prompt: prompt, model: "video", sessionId: "web_user_" + Date.now() })
             })
-            .then(res => res.json())
+            .then(async res => {
+                if (!res.ok) {
+                    const rawText = await res.text();
+                    console.error("Raw Video Error:", rawText);
+                    throw new Error("API limit or server error");
+                }
+                return res.json();
+            })
             .then(data => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
@@ -1954,7 +1961,7 @@
                 if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है')) {
                     msgs[msgs.length-1].remove();
                 }
-                addMsg("❌ वीडियो जनरेट करने में त्रुटि हुई।", "bot", "🎬 Video");
+                addMsg("⚠️ वीडियो जनरेट करने वाली सर्विस अभी व्यस्त है। कृपया कुछ देर बाद प्रयास करें।", "bot", "🎬 Video");
                 console.error("Video gen error:", err);
             });
         }
