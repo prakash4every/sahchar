@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sahchar.ai",
+      "sha256_cert_fingerprints": [
+        "AF:CE:A2:E3:0F:06:AF:69:DA:0A:63:33:67:18:1D:8A:BA:AD:67:3C:7E:59:6E:23:3F:AE:E7:B1:B1:41:E0:77"
+      ]
+    }
+  }
+]
