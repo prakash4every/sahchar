@@ -1964,19 +1964,23 @@
             });
         }
 
+        let isSendingMsg = false;
         function sendSahcharMsg() {
+            if (isSendingMsg) return;
             const msg = inputField.value.trim();
             if (!msg) return;
+            isSendingMsg = true;
             const feature = detectFeature(msg);
             addMsg(msg, "user");
             inputField.value = "";
             showTyping(true);
             let cleanMsg = msg.replace(/[\u{1F600}-\u{1F6FF}]/gu, '').trim();
-            if (!cleanMsg) { showTyping(false); addMsg("⚠️ कृपया टेक्स्ट लिखें।", "bot"); return; }
+            if (!cleanMsg) { showTyping(false); isSendingMsg = false; addMsg("⚠️ कृपया टेक्स्ट लिखें।", "bot"); return; }
 
             if (feature === "🎨 Image") {
                 let prompt = cleanMsg.replace(/तस्वीर\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/इमेज\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/image|picture|draw/gi, '').trim();
                 if (!prompt) prompt = cleanMsg;
+                isSendingMsg = false;
                 generateImage(prompt);
                 return;
             }
@@ -1984,6 +1988,7 @@
             if (feature === "🎬 Video") {
                 let prompt = cleanMsg.replace(/वीडियो\s*(बनाओ|दो|दिखाओ)/gi, '').replace(/video/gi, '').trim();
                 if (!prompt) prompt = cleanMsg;
+                isSendingMsg = false;
                 generateVideo(prompt);
                 return;
             }
@@ -1997,12 +2002,14 @@
             .then(res => res.json())
             .then(data => {
                 showTyping(false);
+                isSendingMsg = false;
                 const reply = data.reply || data.message || "क्षमा करें, उत्तर नहीं मिला। 🙏";
                 addMsg(reply, "bot", feature);
                 speakSahchar(reply);
             })
             .catch(err => {
                 showTyping(false);
+                isSendingMsg = false;
                 addMsg("सर्वर से संपर्क नहीं हो पाया। 🙏", "bot");
                 console.error("Chat error:", err);
             });
