@@ -1890,13 +1890,11 @@
             showTyping(true);
             addMsg("🎨 इमेज जनरेट हो रही है...", "bot", "🎨 Image");
             fetch(`${API_URL}/generate`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'x-app-auth': 'sahchar-app-client-secure-2026'
-            },
-            
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-app-auth': 'sahchar-app-client-secure-2026'
+                },
                 body: JSON.stringify({ prompt: prompt, sessionId: "web_user_" + Date.now() })
             })
             .then(res => res.json())
@@ -1929,13 +1927,11 @@
             showTyping(true);
             addMsg("🎬 वीडियो जनरेट हो रहा है...", "bot", "🎬 Video");
             fetch(`${API_URL}/generate`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'x-app-auth': 'sahchar-app-client-secure-2026'
-            },
-            
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-app-auth': 'sahchar-app-client-secure-2026'
+                },
                 body: JSON.stringify({ prompt: prompt, model: "video", sessionId: "web_user_" + Date.now() })
             })
             .then(res => res.json())
