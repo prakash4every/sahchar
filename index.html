@@ -675,6 +675,100 @@
         }
         #plusBtn:hover { background: #92400e; transform: scale(1.05) rotate(90deg); }
 
+        #attachBtn {
+            background: #e2e8f0;
+            color: #28594d;
+            font-size: 17px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        #attachBtn:hover {
+            background: #cbd5e1;
+            transform: scale(1.05);
+        }
+
+        #filePreviewBar {
+            padding: 6px 12px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .file-preview-content {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 85%;
+        }
+        #filePreviewName {
+            font-weight: 600;
+            color: #1e293b;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 150px;
+        }
+        #filePreviewSize { color: #64748b; font-size: 11px; }
+        #removeFileBtn {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        #removeFileBtn:hover { background: #fee2e2; }
+
+        .modal-upload-btn {
+            background: #28594d;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.2s;
+        }
+        .modal-upload-btn:hover { background: #193b34; }
+
+        .attached-img-thumb {
+            max-width: 170px;
+            max-height: 130px;
+            border-radius: 8px;
+            display: block;
+            margin-top: 6px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .attached-doc-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,0,0,0.15);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: inherit;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
         /* ===== FEATURE MODAL ===== */
         .feature-modal {
             display: none;
@@ -1450,11 +1544,21 @@
         <div class="typing-indicator" id="typingIndicator">
             <span></span><span></span><span></span>
         </div>
+        <div id="filePreviewBar" style="display:none;">
+            <div class="file-preview-content">
+                <span id="filePreviewIcon">📎</span>
+                <span id="filePreviewName"></span>
+                <span id="filePreviewSize"></span>
+            </div>
+            <button type="button" id="removeFileBtn" onclick="clearSelectedFile()" title="फ़ाइल हटाएं">✕</button>
+        </div>
         <div id="sahcharInputBox">
+            <input type="file" id="sahcharFileInput" accept="image/*,application/pdf,.doc,.docx,.txt" style="display:none;" onchange="handleFileSelection(event)" />
+            <button id="attachBtn" type="button" onclick="triggerFileInput()" title="फ़ोटो या दस्तावेज़ अपलोड करें">📎</button>
             <input type="text" id="sahcharInput" aria-label="अपना प्रश्न पूछिए" placeholder="अपना प्रश्न पूछिए..." />
-            <button id="plusBtn" onclick="openFeatureModal()" title="Features">+</button>
-            <button id="micBtn" onclick="startSahcharVoice()" title="Voice Input">🎤</button>
-            <button id="sendBtn" onclick="sendSahcharMsg()">➤</button>
+            <button id="plusBtn" type="button" onclick="openFeatureModal()" title="Features">+</button>
+            <button id="micBtn" type="button" onclick="startSahcharVoice()" title="Voice Input">🎤</button>
+            <button id="sendBtn" type="button" onclick="sendSahcharMsg()">➤</button>
         </div>
     </div>
 
@@ -1476,7 +1580,7 @@
                 <div class="feature-item-modal" onclick="selectFeature('🎬','Video Gen','वीडियो बनाओ')">
                     <span class="icon">🎬</span><span class="label">Video Gen</span><div class="desc">AI वीडियो बनाएं</div>
                 </div>
-                <div class="feature-item-modal" onclick="selectFeature('📄','Document','document analyze')">
+                <div class="feature-item-modal" onclick="selectFeature('📄','Document','दस्तावेज़ का विश्लेषण करें')">
                     <span class="icon">📄</span><span class="label">Document</span><div class="desc">दस्तावेज़ विश्लेषण</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('💾','Memory','पिछली बात')">
@@ -1493,7 +1597,11 @@
                 </div>
             </div>
             <div class="feature-prompt-area" id="featurePromptArea">
-                <label for="featurePromptInput" id="featurePromptLabel">🔍 Web Search: اپنا प्रश्न लिखें</label>
+                <label for="featurePromptInput" id="featurePromptLabel">🔍 Web Search: अपना प्रश्न लिखें</label>
+                <div id="modalFileUploadRow" style="display:none; margin-bottom:8px; align-items:center; gap:8px;">
+                    <button type="button" class="modal-upload-btn" onclick="triggerFileInput()">📤 फ़ाइल / फ़ोटो चुनें</button>
+                    <span id="modalFileName" style="font-size:0.75rem; color:#444; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:200px;">कोई फ़ाइल नहीं चुनी गई</span>
+                </div>
                 <div class="prompt-input-row">
                     <input type="text" id="featurePromptInput" aria-labelledby="featurePromptLabel" placeholder="जैसे: आज का मौसम" />
                     <button onclick="sendFeaturePrompt()">➤</button>
@@ -2013,11 +2121,148 @@
 
         let isSendingMsg = false;
         let currentAbortController = null;
+        let currentAttachedFile = null; // { name, sizeStr, type, base64, isImage }
+
+        function triggerFileInput() {
+            const fileInput = document.getElementById('sahcharFileInput');
+            if (fileInput) fileInput.click();
+        }
+
+        function handleFileSelection(event) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+
+            if (file.size > 20 * 1024 * 1024) {
+                alert("फ़ाइल बहुत बड़ी है (अधिकतम 20 MB समर्थित है)।");
+                event.target.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Data = e.target.result;
+                const isImage = file.type.startsWith('image/');
+                const sizeKb = Math.round(file.size / 1024);
+                const sizeStr = sizeKb > 1024 ? `${(sizeKb / 1024).toFixed(1)} MB` : `${sizeKb} KB`;
+
+                currentAttachedFile = {
+                    name: file.name,
+                    sizeStr: sizeStr,
+                    type: file.type || (isImage ? 'image/jpeg' : 'application/pdf'),
+                    base64: base64Data,
+                    isImage: isImage
+                };
+
+                const previewBar = document.getElementById('filePreviewBar');
+                if (previewBar) {
+                    previewBar.style.display = 'flex';
+                    document.getElementById('filePreviewIcon').textContent = isImage ? '🖼️' : '📄';
+                    document.getElementById('filePreviewName').textContent = file.name;
+                    document.getElementById('filePreviewSize').textContent = `(${sizeStr})`;
+                }
+
+                const modalFileName = document.getElementById('modalFileName');
+                if (modalFileName) {
+                    modalFileName.textContent = `${file.name} (${sizeStr})`;
+                    modalFileName.style.color = '#10b981';
+                    modalFileName.style.fontWeight = '600';
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearSelectedFile() {
+            currentAttachedFile = null;
+            const fileInput = document.getElementById('sahcharFileInput');
+            if (fileInput) fileInput.value = '';
+            const previewBar = document.getElementById('filePreviewBar');
+            if (previewBar) previewBar.style.display = 'none';
+            const modalFileName = document.getElementById('modalFileName');
+            if (modalFileName) {
+                modalFileName.textContent = 'कोई फ़ाइल नहीं चुनी गई';
+                modalFileName.style.color = '#444';
+                modalFileName.style.fontWeight = 'normal';
+            }
+        }
+
         function sendSahcharMsg(){
           if(isSendingMsg) return;
-          const msg=inputField.value.trim(); if(!msg) return;
-          const now=Date.now(); const last=parseInt(localStorage.getItem('sahchar_last_send')||'0'); if(now-last<1200) return; localStorage.setItem('sahchar_last_send',now.toString());
-          isSendingMsg=true; const btn=document.getElementById('sendBtn'); if(btn){btn.disabled=true; btn.style.opacity='0.5';}
+          const msg=inputField.value.trim();
+          if(!msg && !currentAttachedFile) return;
+
+          const now=Date.now();
+          const last=parseInt(localStorage.getItem('sahchar_last_send')||'0');
+          if(now-last<800) return;
+          localStorage.setItem('sahchar_last_send',now.toString());
+
+          isSendingMsg=true;
+          const btn=document.getElementById('sendBtn');
+          if(btn){btn.disabled=true; btn.style.opacity='0.5';}
+
+          // 📂 Handle Image or PDF/Doc Upload Analysis
+          if(currentAttachedFile) {
+            const attached = currentAttachedFile;
+            clearSelectedFile();
+            closeFeatureModal();
+
+            const userText = msg || (attached.isImage ? "इस चित्र का संपूर्ण विश्लेषण करें" : "इस दस्तावेज़ का संपूर्ण विश्लेषण करें");
+            inputField.value = '';
+
+            const userMsgElem = document.createElement("div");
+            userMsgElem.className = "sahcharMsg sahcharUserMsg";
+            if (attached.isImage) {
+                userMsgElem.innerHTML = `<div>${userText}</div><img src="${attached.base64}" class="attached-img-thumb" alt="${attached.name}" onclick="window.open('${attached.base64}', '_blank')"/>`;
+            } else {
+                userMsgElem.innerHTML = `<div>${userText}</div><div class="attached-doc-pill">📄 ${attached.name} (${attached.sizeStr})</div>`;
+            }
+            messagesDiv.appendChild(userMsgElem);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            showTyping(true);
+
+            const isDoc = !attached.isImage || attached.type === 'application/pdf' || attached.name.toLowerCase().endsWith('.pdf') || attached.name.toLowerCase().endsWith('.doc') || attached.name.toLowerCase().endsWith('.docx') || attached.name.toLowerCase().endsWith('.txt');
+            const endpoint = isDoc ? `${API_URL}/document` : `${API_URL}/vision`;
+            const rawBase64 = attached.base64.includes(',') ? attached.base64.split(',')[1] : attached.base64;
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-app-auth': 'sahchar-app-client-secure-2026',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    image: rawBase64,
+                    imageBase64: rawBase64,
+                    documentBase64: rawBase64,
+                    mimeType: attached.type,
+                    message: userText,
+                    sessionId: getPersistentSessionId(),
+                    deviceId: getPersistentSessionId()
+                })
+            })
+            .then(r => {
+                if(!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json();
+            })
+            .then(d => {
+                showTyping(false);
+                isSendingMsg = false;
+                if(btn) { btn.disabled = false; btn.style.opacity = '1'; }
+                const replyText = d.reply || d.message || "विश्लेषण पूर्ण हुआ।";
+                addMsg(replyText, 'bot', isDoc ? '📄 Document' : '👁️ Vision');
+                speakSahchar(replyText.substring(0, 150));
+            })
+            .catch(err => {
+                showTyping(false);
+                isSendingMsg = false;
+                if(btn) { btn.disabled = false; btn.style.opacity = '1'; }
+                console.error("Attachment analysis error:", err);
+                addMsg("फ़ाइल का विश्लेषण करने में समस्या आई। कृपया पुनः प्रयास करें। 🙏", 'bot');
+            });
+            return;
+          }
+
           const feature=detectFeature(msg); addMsg(msg,'user'); inputField.value=''; showTyping(true);
           let cleanMsg=msg; try{cleanMsg=msg.replace(/[\u{1F600}-\u{1F6FF}]/gu,'').trim();}catch(e){cleanMsg=msg;}
           if(!cleanMsg){showTyping(false); isSendingMsg=false; if(btn){btn.disabled=false; btn.style.opacity='1';} return;}
@@ -2078,17 +2323,35 @@
             document.getElementById("featurePromptInput").placeholder = `जैसे: ${prompt}`;
             document.getElementById("selectedFeatureName").textContent = label;
             document.getElementById("featurePromptArea").classList.add("active");
+
+            const uploadRow = document.getElementById("modalFileUploadRow");
+            if (uploadRow) {
+                if (label === "Document" || label === "Image Gen" || label.includes("Vision")) {
+                    uploadRow.style.display = "flex";
+                } else {
+                    uploadRow.style.display = "none";
+                }
+            }
+
             document.getElementById("featurePromptInput").focus();
         }
 
         function sendFeaturePrompt() {
             const input = document.getElementById("featurePromptInput");
             const prompt = input.value.trim();
-            if (!prompt || !selectedFeature) return;
+            if (!prompt && !currentAttachedFile) return;
             closeFeatureModal();
-            if (selectedFeature.label === "Image Gen") {
+
+            if (currentAttachedFile) {
+                inputField.value = prompt;
+                sendSahcharMsg();
+                input.value = "";
+                return;
+            }
+
+            if (selectedFeature?.label === "Image Gen") {
                 inputField.value = `तस्वीर बनाओ ${prompt}`;
-            } else if (selectedFeature.label === "Video Gen") {
+            } else if (selectedFeature?.label === "Video Gen") {
                 inputField.value = `वीडियो बनाओ ${prompt}`;
             } else {
                 inputField.value = prompt;
