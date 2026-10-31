@@ -1968,26 +1968,125 @@
         function addMsg(text, type, feature = null, imageUrl = null) {
             const msg = document.createElement("div");
             msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
-            if (imageUrl) {
+
+            let actualImageUrl = imageUrl;
+            let displayText = text || "";
+
+            // Auto-detect IMAGE_URL or VIDEO_URL in text
+            if (!actualImageUrl && typeof displayText === 'string' && displayText.includes('IMAGE_URL:')) {
+                const match = displayText.match(/IMAGE_URL:(https?:\/\/[^\s\n]+)/);
+                if (match) {
+                    actualImageUrl = match[1];
+                    displayText = displayText.replace(match[0], '').trim();
+                    if (!displayText) displayText = "✅ ये रही आपकी तस्वीर:";
+                }
+            }
+
+            if (typeof displayText === 'string' && displayText.includes('VIDEO_URL:')) {
+                const match = displayText.match(/VIDEO_URL:(https?:\/\/[^\s\n]+)/);
+                if (match) {
+                    const vidUrl = match[1];
+                    const vidText = displayText.replace(match[0], '').trim();
+                    return addVideoMsg(vidText || "✅ ये रहा आपका वीडियो:", vidUrl, feature || "🎬 Video");
+                }
+            }
+
+            if (actualImageUrl) {
                 const textSpan = document.createElement("span");
-                textSpan.innerHTML = text;
+                textSpan.innerHTML = displayText;
                 msg.appendChild(textSpan);
+
+                const card = document.createElement("div");
+                card.className = "sahchar-image-card";
+                card.style.position = "relative";
+                card.style.marginTop = "8px";
+                card.style.borderRadius = "12px";
+                card.style.overflow = "hidden";
+                card.style.background = "#f1f5f9";
+                card.style.minHeight = "180px";
+                card.style.display = "flex";
+                card.style.flexDirection = "column";
+
+                const loader = document.createElement("div");
+                loader.style.position = "absolute";
+                loader.style.inset = "0";
+                loader.style.display = "flex";
+                loader.style.alignItems = "center";
+                loader.style.justifyContent = "center";
+                loader.style.color = "#64748b";
+                loader.style.fontSize = "0.85rem";
+                loader.innerHTML = "<span>🎨 तस्वीर लोड हो रही है...</span>";
+                card.appendChild(loader);
+
                 const img = document.createElement("img");
-                img.src = imageUrl;
+                img.src = actualImageUrl;
                 img.alt = "Generated Image";
-                img.loading = "lazy";
-                img.onclick = () => window.open(imageUrl, '_blank');
-                msg.appendChild(img);
+                img.loading = "eager";
+                img.style.width = "100%";
+                img.style.maxHeight = "320px";
+                img.style.objectFit = "cover";
+                img.style.borderRadius = "12px";
+                img.style.display = "none";
+                img.style.cursor = "pointer";
+
+                img.onload = () => {
+                    loader.style.display = "none";
+                    img.style.display = "block";
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                };
+
+                img.onerror = function() {
+                    loader.style.display = "none";
+                    if (!this.dataset.retried) {
+                        this.dataset.retried = "true";
+                        const cleanBase = actualImageUrl.split('?')[0];
+                        this.src = `${cleanBase}?nologo=true&seed=${Date.now()}&key=pk_0w2LPBXK01kut6A6`;
+                    } else {
+                        const fallbackDiv = document.createElement("div");
+                        fallbackDiv.style.padding = "16px";
+                        fallbackDiv.style.textAlign = "center";
+                        fallbackDiv.innerHTML = `<span style="color:#d97706;font-size:0.9rem;">🖼️ छवि तैयार है!</span><br><a href="${actualImageUrl}" target="_blank" style="display:inline-block;margin-top:6px;padding:6px 12px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600;">यहाँ क्लिक करके देखें ↗</a>`;
+                        card.appendChild(fallbackDiv);
+                    }
+                };
+
+                img.onclick = () => window.open(actualImageUrl, '_blank');
+                card.appendChild(img);
+
+                const actions = document.createElement("div");
+                actions.style.display = "flex";
+                actions.style.gap = "8px";
+                actions.style.marginTop = "6px";
+                actions.style.padding = "4px 0";
+
+                const viewBtn = document.createElement("a");
+                viewBtn.href = actualImageUrl;
+                viewBtn.target = "_blank";
+                viewBtn.textContent = "🔍 बड़ा देखें";
+                viewBtn.style.cssText = "font-size:0.75rem;padding:3px 10px;background:rgba(0,0,0,0.06);border-radius:6px;color:#1e293b;text-decoration:none;font-weight:500;";
+
+                const dlBtn = document.createElement("a");
+                dlBtn.href = actualImageUrl;
+                dlBtn.download = "sahchar-image.jpg";
+                dlBtn.target = "_blank";
+                dlBtn.textContent = "⬇️ डाउनलोड";
+                dlBtn.style.cssText = "font-size:0.75rem;padding:3px 10px;background:rgba(0,0,0,0.06);border-radius:6px;color:#1e293b;text-decoration:none;font-weight:500;";
+
+                actions.appendChild(viewBtn);
+                actions.appendChild(dlBtn);
+                card.appendChild(actions);
+
+                msg.appendChild(card);
             } else if (feature && type === "bot") {
                 const span = document.createElement("span");
-                span.innerHTML = text;
+                span.innerHTML = displayText;
                 msg.appendChild(span);
                 const tag = document.createElement("span");
                 tag.className = "feature-tag";
                 tag.textContent = feature;
                 msg.appendChild(tag);
             } else {
-                msg.innerText = text;
+                msg.innerText = displayText;
             }
             messagesDiv.appendChild(msg);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -2005,8 +2104,8 @@
             video.style.maxWidth = "100%";
             video.style.borderRadius = "12px";
             video.style.marginTop = "6px";
-            video.style.maxHeight = "200px";
-            video.preload = "metadata";
+            video.style.maxHeight = "220px";
+            video.preload = "auto";
             msg.appendChild(video);
             if (feature) {
                 const tag = document.createElement("span");
@@ -2060,7 +2159,7 @@
             .then(data => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
+                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
                     msgs[msgs.length-1].remove();
                 }
                 const imageUrl = data.imageUrl || data.url;
@@ -2074,7 +2173,7 @@
             .catch(err => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
+                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
                     msgs[msgs.length-1].remove();
                 }
                 addMsg("❌ इमेज जनरेट करने में त्रुटि हुई।", "bot", "🎨 Image");
@@ -2097,12 +2196,12 @@
             .then(data => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
+                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
                     msgs[msgs.length-1].remove();
                 }
-                const videoUrl = data.videoUrl;
+                const videoUrl = data.videoUrl || data.url;
                 if (videoUrl) {
-                    addVideoMsg("✅ ये रहा आपका वीडियो:", videoUrl, "🎬 Video");
+                    addVideoMsg("✅ ये रहा आपका वीडियो:\n" + (data.story || ""), videoUrl, "🎬 Video");
                     speakSahchar("ये रहा आपका वीडियो");
                 } else {
                     addMsg("❌ वीडियो जनरेट नहीं हो पाया।", "bot", "🎬 Video");
@@ -2111,7 +2210,7 @@
             .catch(err => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
+                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
                     msgs[msgs.length-1].remove();
                 }
                 addMsg("❌ वीडियो जनरेट करने में त्रुटि हुई।", "bot", "🎬 Video");
