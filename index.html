@@ -675,100 +675,6 @@
         }
         #plusBtn:hover { background: #92400e; transform: scale(1.05) rotate(90deg); }
 
-        #attachBtn {
-            background: #e2e8f0;
-            color: #28594d;
-            font-size: 17px;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        #attachBtn:hover {
-            background: #cbd5e1;
-            transform: scale(1.05);
-        }
-
-        #filePreviewBar {
-            padding: 6px 12px;
-            background: #f8fafc;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 12px;
-            flex-shrink: 0;
-        }
-        .file-preview-content {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            overflow: hidden;
-            white-space: nowrap;
-            max-width: 85%;
-        }
-        #filePreviewName {
-            font-weight: 600;
-            color: #1e293b;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 150px;
-        }
-        #filePreviewSize { color: #64748b; font-size: 11px; }
-        #removeFileBtn {
-            background: none;
-            border: none;
-            color: #ef4444;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        #removeFileBtn:hover { background: #fee2e2; }
-
-        .modal-upload-btn {
-            background: #28594d;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            transition: background 0.2s;
-        }
-        .modal-upload-btn:hover { background: #193b34; }
-
-        .attached-img-thumb {
-            max-width: 170px;
-            max-height: 130px;
-            border-radius: 8px;
-            display: block;
-            margin-top: 6px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        .attached-doc-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0,0,0,0.15);
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: inherit;
-            margin-top: 6px;
-            font-weight: 500;
-        }
-
         /* ===== FEATURE MODAL ===== */
         .feature-modal {
             display: none;
@@ -1431,6 +1337,30 @@
         </div>
     </section>
 
+    
+    <!-- ============================================================ -->
+    <!-- ===== AI THOUGHT & FACEBOOK POST WIDGET ===== -->
+    <!-- ============================================================ -->
+    <section style="padding: 3rem 1rem; max-width: 900px; margin: 0 auto; text-align: center;">
+        <div class="card" style="background: white; border-radius: 24px; padding: 2.5rem; box-shadow: var(--shadow);">
+            <h3 style="font-family: 'Noto Serif Devanagari', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 0.8rem;">🌿 नया AI विचार और Facebook ऑटो-पोस्ट</h3>
+            <p style="color: var(--text-light); margin-bottom: 1.8rem;">एक क्लिक में नया AI बुद्ध विचार (नए सुंदर लेआउट के साथ) बनाएं, और सीधे Facebook पेज पर साझा करें।</p>
+
+            <div id="aiThoughtPreviewContainer" style="display: none; margin-bottom: 1.5rem; text-align: center;">
+                <img id="aiThoughtImg" src="" alt="Buddha Thought Preview" style="width: 100%; max-width: 450px; height: auto; border-radius: 16px; box-shadow: 0 12px 30px rgba(0,0,0,0.2); margin: 0 auto 1rem; display: block;" />
+                <p id="aiThoughtText" style="font-family: 'Noto Serif Devanagari', serif; font-size: 1.25rem; font-weight: 600; color: var(--primary); max-width: 650px; margin: 0 auto 1.2rem; line-height: 1.6;"></p>
+                <div id="aiPostStatus" style="font-weight: 500; margin-bottom: 1rem; font-size: 0.95rem;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <button id="generateThoughtBtn" class="btn" onclick="generateAIThoughtForWeb()">✨ नया AI विचार बनाएं</button>
+                <button id="regenerateThoughtBtn" class="btn wisdom-btn-secondary" style="display: none; background: #e2e8f0; color: var(--text-dark);" onclick="generateAIThoughtForWeb()">🔄 Dobara Banayein</button>
+                <button id="postToFbBtn" class="btn" style="display: none; background: #2563eb;" onclick="postThoughtToFacebook()">📘 Facebook पे Post Karein</button>
+            </div>
+            <div id="aiThoughtSpinner" class="thought-spinner" style="margin-top: 1rem;"></div>
+        </div>
+    </section>
+  
     <section id="videos">
         <h2>वीडियो गैलरी</h2>
         <p style="text-align:center; color:#555; margin-bottom:2rem;">
@@ -1544,21 +1474,11 @@
         <div class="typing-indicator" id="typingIndicator">
             <span></span><span></span><span></span>
         </div>
-        <div id="filePreviewBar" style="display:none;">
-            <div class="file-preview-content">
-                <span id="filePreviewIcon">📎</span>
-                <span id="filePreviewName"></span>
-                <span id="filePreviewSize"></span>
-            </div>
-            <button type="button" id="removeFileBtn" onclick="clearSelectedFile()" title="फ़ाइल हटाएं">✕</button>
-        </div>
         <div id="sahcharInputBox">
-            <input type="file" id="sahcharFileInput" accept="image/*,application/pdf,.doc,.docx,.txt" style="display:none;" onchange="handleFileSelection(event)" />
-            <button id="attachBtn" type="button" onclick="triggerFileInput()" title="फ़ोटो या दस्तावेज़ अपलोड करें">📎</button>
             <input type="text" id="sahcharInput" aria-label="अपना प्रश्न पूछिए" placeholder="अपना प्रश्न पूछिए..." />
-            <button id="plusBtn" type="button" onclick="openFeatureModal()" title="Features">+</button>
-            <button id="micBtn" type="button" onclick="startSahcharVoice()" title="Voice Input">🎤</button>
-            <button id="sendBtn" type="button" onclick="sendSahcharMsg()">➤</button>
+            <button id="plusBtn" onclick="openFeatureModal()" title="Features">+</button>
+            <button id="micBtn" onclick="startSahcharVoice()" title="Voice Input">🎤</button>
+            <button id="sendBtn" onclick="sendSahcharMsg()">➤</button>
         </div>
     </div>
 
@@ -1580,11 +1500,11 @@
                 <div class="feature-item-modal" onclick="selectFeature('🎬','Video Gen','वीडियो बनाओ')">
                     <span class="icon">🎬</span><span class="label">Video Gen</span><div class="desc">AI वीडियो बनाएं</div>
                 </div>
-                <div class="feature-item-modal" onclick="selectFeature('📄','Document','दस्तावेज़ का विश्लेषण करें')">
+                <div class="feature-item-modal" onclick="selectFeature('📄','Document','document analyze')">
                     <span class="icon">📄</span><span class="label">Document</span><div class="desc">दस्तावेज़ विश्लेषण</div>
                 </div>
-                <div class="feature-item-modal" onclick="selectFeature('💾','Memory','पिछली बातें याद करो या फ़ोन नंबर लिंक करो')">
-                    <span class="icon">💾</span><span class="label">Memory</span><div class="desc">साझा याददाश्त (5-in-1)</div>
+                <div class="feature-item-modal" onclick="selectFeature('💾','Memory','पिछली बात')">
+                    <span class="icon">💾</span><span class="label">Memory</span><div class="desc">पिछली बातें याद</div>
                 </div>
                 <div class="feature-item-modal" onclick="selectFeature('🧠','Self-Learn','सीखो')">
                     <span class="icon">🧠</span><span class="label">Self-Learn</span><div class="desc">खुद सीखना</div>
@@ -1597,11 +1517,7 @@
                 </div>
             </div>
             <div class="feature-prompt-area" id="featurePromptArea">
-                <label for="featurePromptInput" id="featurePromptLabel">🔍 Web Search: अपना प्रश्न लिखें</label>
-                <div id="modalFileUploadRow" style="display:none; margin-bottom:8px; align-items:center; gap:8px;">
-                    <button type="button" class="modal-upload-btn" onclick="triggerFileInput()">📤 फ़ाइल / फ़ोटो चुनें</button>
-                    <span id="modalFileName" style="font-size:0.75rem; color:#444; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:200px;">कोई फ़ाइल नहीं चुनी गई</span>
-                </div>
+                <label for="featurePromptInput" id="featurePromptLabel">🔍 Web Search: اپنا प्रश्न लिखें</label>
                 <div class="prompt-input-row">
                     <input type="text" id="featurePromptInput" aria-labelledby="featurePromptLabel" placeholder="जैसे: आज का मौसम" />
                     <button onclick="sendFeaturePrompt()">➤</button>
@@ -1921,11 +1837,11 @@
 
             // 2. Fetch fresh Facebook page gallery images in background from Motivational Video Page (prakash4every31)
             try {
-                const res = await fetch(`${API_URL}/gallery`, {
+                const res = await fetch(`${API_URL}/gallery-sync`, {
                     headers: { 'x-app-auth': 'sahchar-app-client-secure-2026' }
                 });
                 const data = await res.json();
-                if (data.success && data.images && data.images.length > 0) {
+                if (data.success && data.items && data.items.length > 0) {
                     gallery.innerHTML = '';
                     data.images.forEach(file => {
                         const img = document.createElement('img');
@@ -1944,6 +1860,94 @@
         }
 
         // ============================================================ //
+        
+        let lastGeneratedThought = "";
+        let lastGeneratedImageUrl = "";
+
+        function generateAIThoughtForWeb() {
+            const btn = document.getElementById('generateThoughtBtn');
+            const regenBtn = document.getElementById('regenerateThoughtBtn');
+            const postBtn = document.getElementById('postToFbBtn');
+            const spinner = document.getElementById('aiThoughtSpinner');
+            const previewContainer = document.getElementById('aiThoughtPreviewContainer');
+            const statusDiv = document.getElementById('aiPostStatus');
+
+            btn.disabled = true;
+            if (regenBtn) regenBtn.disabled = true;
+            if (postBtn) postBtn.style.display = 'none';
+            spinner.classList.add('active');
+            statusDiv.textContent = '';
+            previewContainer.style.display = 'none';
+
+            fetch(`${API_URL}/generate-thought`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                spinner.classList.remove('active');
+                btn.disabled = false;
+                if (regenBtn) regenBtn.disabled = false;
+                if (data.success && data.imageUrl && data.thought) {
+                    lastGeneratedThought = data.thought;
+                    lastGeneratedImageUrl = data.imageUrl;
+
+                    document.getElementById('aiThoughtImg').src = data.imageUrl;
+                    document.getElementById('aiThoughtText').textContent = `“${data.thought}”`;
+                    previewContainer.style.display = 'block';
+                    if (regenBtn) regenBtn.style.display = 'inline-block';
+                    if (postBtn) postBtn.style.display = 'inline-block';
+                    btn.textContent = '✨ नया AI विचार बनाएं';
+                } else {
+                    alert('विचार उत्पन्न करने में विफल: ' + (data.error || 'अज्ञात त्रुटि'));
+                }
+            })
+            .catch(err => {
+                spinner.classList.remove('active');
+                btn.disabled = false;
+                if (regenBtn) regenBtn.disabled = false;
+                alert('कनेक्शन त्रुटि: ' + err.message);
+            });
+        }
+
+        function postThoughtToFacebook() {
+            if (!lastGeneratedThought || !lastGeneratedImageUrl) {
+                alert('कृपया पहले नया विचार उत्पन्न करें।');
+                return;
+            }
+            const postBtn = document.getElementById('postToFbBtn');
+            const statusDiv = document.getElementById('aiPostStatus');
+            postBtn.disabled = true;
+            postBtn.textContent = '⏳ Facebook पर पोस्ट हो रहा है...';
+            statusDiv.style.color = '#b45309';
+            statusDiv.textContent = 'फेसबुक पेज पर पोस्ट भेजा जा रहा है...';
+
+            fetch(`${API_URL}/daily-post`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ thought: lastGeneratedThought, imageUrl: lastGeneratedImageUrl })
+            })
+            .then(res => res.json())
+            .then(data => {
+                postBtn.disabled = false;
+                postBtn.textContent = '📘 Facebook पे Post Karein';
+                if (data.success || data.postId) {
+                    statusDiv.style.color = '#10b981';
+                    statusDiv.innerHTML = `✅ Facebook पे post हो गया! <a href="${data.link || ('https://facebook.com/' + data.postId)}" target="_blank" style="color:#2563eb; text-decoration:underline; font-weight:bold;">यहाँ देखें</a>`;
+                } else {
+                    statusDiv.style.color = '#dc2626';
+                    statusDiv.textContent = '❌ पोस्ट विफल: ' + JSON.stringify(data.error || data);
+                }
+            })
+            .catch(err => {
+                postBtn.disabled = false;
+                postBtn.textContent = '📘 Facebook पे Post Karein';
+                statusDiv.style.color = '#dc2626';
+                statusDiv.textContent = '❌ त्रुटि: ' + err.message;
+            });
+        }
+  
+
         // ===== CHATBOT SCRIPT ===== //
         // ============================================================ //
 
@@ -1968,125 +1972,26 @@
         function addMsg(text, type, feature = null, imageUrl = null) {
             const msg = document.createElement("div");
             msg.className = "sahcharMsg " + (type === "user" ? "sahcharUserMsg" : "sahcharBotMsg");
-
-            let actualImageUrl = imageUrl;
-            let displayText = text || "";
-
-            // Auto-detect IMAGE_URL or VIDEO_URL in text
-            if (!actualImageUrl && typeof displayText === 'string' && displayText.includes('IMAGE_URL:')) {
-                const match = displayText.match(/IMAGE_URL:(https?:\/\/[^\s\n]+)/);
-                if (match) {
-                    actualImageUrl = match[1];
-                    displayText = displayText.replace(match[0], '').trim();
-                    if (!displayText) displayText = "✅ ये रही आपकी तस्वीर:";
-                }
-            }
-
-            if (typeof displayText === 'string' && displayText.includes('VIDEO_URL:')) {
-                const match = displayText.match(/VIDEO_URL:(https?:\/\/[^\s\n]+)/);
-                if (match) {
-                    const vidUrl = match[1];
-                    const vidText = displayText.replace(match[0], '').trim();
-                    return addVideoMsg(vidText || "✅ ये रहा आपका वीडियो:", vidUrl, feature || "🎬 Video");
-                }
-            }
-
-            if (actualImageUrl) {
+            if (imageUrl) {
                 const textSpan = document.createElement("span");
-                textSpan.innerHTML = displayText;
+                textSpan.innerHTML = text;
                 msg.appendChild(textSpan);
-
-                const card = document.createElement("div");
-                card.className = "sahchar-image-card";
-                card.style.position = "relative";
-                card.style.marginTop = "8px";
-                card.style.borderRadius = "12px";
-                card.style.overflow = "hidden";
-                card.style.background = "#f1f5f9";
-                card.style.minHeight = "180px";
-                card.style.display = "flex";
-                card.style.flexDirection = "column";
-
-                const loader = document.createElement("div");
-                loader.style.position = "absolute";
-                loader.style.inset = "0";
-                loader.style.display = "flex";
-                loader.style.alignItems = "center";
-                loader.style.justifyContent = "center";
-                loader.style.color = "#64748b";
-                loader.style.fontSize = "0.85rem";
-                loader.innerHTML = "<span>🎨 तस्वीर लोड हो रही है...</span>";
-                card.appendChild(loader);
-
                 const img = document.createElement("img");
-                img.src = actualImageUrl;
+                img.src = imageUrl;
                 img.alt = "Generated Image";
-                img.loading = "eager";
-                img.style.width = "100%";
-                img.style.maxHeight = "320px";
-                img.style.objectFit = "cover";
-                img.style.borderRadius = "12px";
-                img.style.display = "none";
-                img.style.cursor = "pointer";
-
-                img.onload = () => {
-                    loader.style.display = "none";
-                    img.style.display = "block";
-                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-                };
-
-                img.onerror = function() {
-                    loader.style.display = "none";
-                    if (!this.dataset.retried) {
-                        this.dataset.retried = "true";
-                        const cleanBase = actualImageUrl.split('?')[0];
-                        this.src = `${cleanBase}?nologo=true&seed=${Date.now()}&key=pk_0w2LPBXK01kut6A6`;
-                    } else {
-                        const fallbackDiv = document.createElement("div");
-                        fallbackDiv.style.padding = "16px";
-                        fallbackDiv.style.textAlign = "center";
-                        fallbackDiv.innerHTML = `<span style="color:#d97706;font-size:0.9rem;">🖼️ छवि तैयार है!</span><br><a href="${actualImageUrl}" target="_blank" style="display:inline-block;margin-top:6px;padding:6px 12px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600;">यहाँ क्लिक करके देखें ↗</a>`;
-                        card.appendChild(fallbackDiv);
-                    }
-                };
-
-                img.onclick = () => window.open(actualImageUrl, '_blank');
-                card.appendChild(img);
-
-                const actions = document.createElement("div");
-                actions.style.display = "flex";
-                actions.style.gap = "8px";
-                actions.style.marginTop = "6px";
-                actions.style.padding = "4px 0";
-
-                const viewBtn = document.createElement("a");
-                viewBtn.href = actualImageUrl;
-                viewBtn.target = "_blank";
-                viewBtn.textContent = "🔍 बड़ा देखें";
-                viewBtn.style.cssText = "font-size:0.75rem;padding:3px 10px;background:rgba(0,0,0,0.06);border-radius:6px;color:#1e293b;text-decoration:none;font-weight:500;";
-
-                const dlBtn = document.createElement("a");
-                dlBtn.href = actualImageUrl;
-                dlBtn.download = "sahchar-image.jpg";
-                dlBtn.target = "_blank";
-                dlBtn.textContent = "⬇️ डाउनलोड";
-                dlBtn.style.cssText = "font-size:0.75rem;padding:3px 10px;background:rgba(0,0,0,0.06);border-radius:6px;color:#1e293b;text-decoration:none;font-weight:500;";
-
-                actions.appendChild(viewBtn);
-                actions.appendChild(dlBtn);
-                card.appendChild(actions);
-
-                msg.appendChild(card);
+                img.loading = "lazy";
+                img.onclick = () => window.open(imageUrl, '_blank');
+                msg.appendChild(img);
             } else if (feature && type === "bot") {
                 const span = document.createElement("span");
-                span.innerHTML = displayText;
+                span.innerHTML = text;
                 msg.appendChild(span);
                 const tag = document.createElement("span");
                 tag.className = "feature-tag";
                 tag.textContent = feature;
                 msg.appendChild(tag);
             } else {
-                msg.innerText = displayText;
+                msg.innerText = text;
             }
             messagesDiv.appendChild(msg);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -2104,8 +2009,8 @@
             video.style.maxWidth = "100%";
             video.style.borderRadius = "12px";
             video.style.marginTop = "6px";
-            video.style.maxHeight = "220px";
-            video.preload = "auto";
+            video.style.maxHeight = "200px";
+            video.preload = "metadata";
             msg.appendChild(video);
             if (feature) {
                 const tag = document.createElement("span");
@@ -2159,7 +2064,7 @@
             .then(data => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
                     msgs[msgs.length-1].remove();
                 }
                 const imageUrl = data.imageUrl || data.url;
@@ -2173,7 +2078,7 @@
             .catch(err => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
                     msgs[msgs.length-1].remove();
                 }
                 addMsg("❌ इमेज जनरेट करने में त्रुटि हुई।", "bot", "🎨 Image");
@@ -2196,12 +2101,12 @@
             .then(data => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
                     msgs[msgs.length-1].remove();
                 }
-                const videoUrl = data.videoUrl || data.url;
+                const videoUrl = data.videoUrl;
                 if (videoUrl) {
-                    addVideoMsg("✅ ये रहा आपका वीडियो:\n" + (data.story || ""), videoUrl, "🎬 Video");
+                    addVideoMsg("✅ ये रहा आपका वीडियो:", videoUrl, "🎬 Video");
                     speakSahchar("ये रहा आपका वीडियो");
                 } else {
                     addMsg("❌ वीडियो जनरेट नहीं हो पाया।", "bot", "🎬 Video");
@@ -2210,7 +2115,7 @@
             .catch(err => {
                 showTyping(false);
                 const msgs = messagesDiv.querySelectorAll('.sahcharMsg');
-                if (msgs.length > 0 && (msgs[msgs.length-1].innerText.includes('जनरेट हो रही है') || msgs[msgs.length-1].innerText.includes('जनरेट हो रहा है'))) {
+                if (msgs.length > 0 && msgs[msgs.length-1].innerText.includes('जनरेट हो रही है')) {
                     msgs[msgs.length-1].remove();
                 }
                 addMsg("❌ वीडियो जनरेट करने में त्रुटि हुई।", "bot", "🎬 Video");
@@ -2220,148 +2125,11 @@
 
         let isSendingMsg = false;
         let currentAbortController = null;
-        let currentAttachedFile = null; // { name, sizeStr, type, base64, isImage }
-
-        function triggerFileInput() {
-            const fileInput = document.getElementById('sahcharFileInput');
-            if (fileInput) fileInput.click();
-        }
-
-        function handleFileSelection(event) {
-            const file = event.target.files?.[0];
-            if (!file) return;
-
-            if (file.size > 20 * 1024 * 1024) {
-                alert("फ़ाइल बहुत बड़ी है (अधिकतम 20 MB समर्थित है)।");
-                event.target.value = '';
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64Data = e.target.result;
-                const isImage = file.type.startsWith('image/');
-                const sizeKb = Math.round(file.size / 1024);
-                const sizeStr = sizeKb > 1024 ? `${(sizeKb / 1024).toFixed(1)} MB` : `${sizeKb} KB`;
-
-                currentAttachedFile = {
-                    name: file.name,
-                    sizeStr: sizeStr,
-                    type: file.type || (isImage ? 'image/jpeg' : 'application/pdf'),
-                    base64: base64Data,
-                    isImage: isImage
-                };
-
-                const previewBar = document.getElementById('filePreviewBar');
-                if (previewBar) {
-                    previewBar.style.display = 'flex';
-                    document.getElementById('filePreviewIcon').textContent = isImage ? '🖼️' : '📄';
-                    document.getElementById('filePreviewName').textContent = file.name;
-                    document.getElementById('filePreviewSize').textContent = `(${sizeStr})`;
-                }
-
-                const modalFileName = document.getElementById('modalFileName');
-                if (modalFileName) {
-                    modalFileName.textContent = `${file.name} (${sizeStr})`;
-                    modalFileName.style.color = '#10b981';
-                    modalFileName.style.fontWeight = '600';
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function clearSelectedFile() {
-            currentAttachedFile = null;
-            const fileInput = document.getElementById('sahcharFileInput');
-            if (fileInput) fileInput.value = '';
-            const previewBar = document.getElementById('filePreviewBar');
-            if (previewBar) previewBar.style.display = 'none';
-            const modalFileName = document.getElementById('modalFileName');
-            if (modalFileName) {
-                modalFileName.textContent = 'कोई फ़ाइल नहीं चुनी गई';
-                modalFileName.style.color = '#444';
-                modalFileName.style.fontWeight = 'normal';
-            }
-        }
-
         function sendSahcharMsg(){
           if(isSendingMsg) return;
-          const msg=inputField.value.trim();
-          if(!msg && !currentAttachedFile) return;
-
-          const now=Date.now();
-          const last=parseInt(localStorage.getItem('sahchar_last_send')||'0');
-          if(now-last<800) return;
-          localStorage.setItem('sahchar_last_send',now.toString());
-
-          isSendingMsg=true;
-          const btn=document.getElementById('sendBtn');
-          if(btn){btn.disabled=true; btn.style.opacity='0.5';}
-
-          // 📂 Handle Image or PDF/Doc Upload Analysis
-          if(currentAttachedFile) {
-            const attached = currentAttachedFile;
-            clearSelectedFile();
-            closeFeatureModal();
-
-            const userText = msg || (attached.isImage ? "इस चित्र का संपूर्ण विश्लेषण करें" : "इस दस्तावेज़ का संपूर्ण विश्लेषण करें");
-            inputField.value = '';
-
-            const userMsgElem = document.createElement("div");
-            userMsgElem.className = "sahcharMsg sahcharUserMsg";
-            if (attached.isImage) {
-                userMsgElem.innerHTML = `<div>${userText}</div><img src="${attached.base64}" class="attached-img-thumb" alt="${attached.name}" onclick="window.open('${attached.base64}', '_blank')"/>`;
-            } else {
-                userMsgElem.innerHTML = `<div>${userText}</div><div class="attached-doc-pill">📄 ${attached.name} (${attached.sizeStr})</div>`;
-            }
-            messagesDiv.appendChild(userMsgElem);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-            showTyping(true);
-
-            const isDoc = !attached.isImage || attached.type === 'application/pdf' || attached.name.toLowerCase().endsWith('.pdf') || attached.name.toLowerCase().endsWith('.doc') || attached.name.toLowerCase().endsWith('.docx') || attached.name.toLowerCase().endsWith('.txt');
-            const endpoint = isDoc ? `${API_URL}/document` : `${API_URL}/vision`;
-            const rawBase64 = attached.base64.includes(',') ? attached.base64.split(',')[1] : attached.base64;
-
-            fetch(endpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-app-auth': 'sahchar-app-client-secure-2026',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    image: rawBase64,
-                    imageBase64: rawBase64,
-                    documentBase64: rawBase64,
-                    mimeType: attached.type,
-                    message: userText,
-                    sessionId: getPersistentSessionId(),
-                    deviceId: getPersistentSessionId()
-                })
-            })
-            .then(r => {
-                if(!r.ok) throw new Error('HTTP ' + r.status);
-                return r.json();
-            })
-            .then(d => {
-                showTyping(false);
-                isSendingMsg = false;
-                if(btn) { btn.disabled = false; btn.style.opacity = '1'; }
-                const replyText = d.reply || d.message || "विश्लेषण पूर्ण हुआ।";
-                addMsg(replyText, 'bot', isDoc ? '📄 Document' : '👁️ Vision');
-                speakSahchar(replyText.substring(0, 150));
-            })
-            .catch(err => {
-                showTyping(false);
-                isSendingMsg = false;
-                if(btn) { btn.disabled = false; btn.style.opacity = '1'; }
-                console.error("Attachment analysis error:", err);
-                addMsg("फ़ाइल का विश्लेषण करने में समस्या आई। कृपया पुनः प्रयास करें। 🙏", 'bot');
-            });
-            return;
-          }
-
+          const msg=inputField.value.trim(); if(!msg) return;
+          const now=Date.now(); const last=parseInt(localStorage.getItem('sahchar_last_send')||'0'); if(now-last<1200) return; localStorage.setItem('sahchar_last_send',now.toString());
+          isSendingMsg=true; const btn=document.getElementById('sendBtn'); if(btn){btn.disabled=true; btn.style.opacity='0.5';}
           const feature=detectFeature(msg); addMsg(msg,'user'); inputField.value=''; showTyping(true);
           let cleanMsg=msg; try{cleanMsg=msg.replace(/[\u{1F600}-\u{1F6FF}]/gu,'').trim();}catch(e){cleanMsg=msg;}
           if(!cleanMsg){showTyping(false); isSendingMsg=false; if(btn){btn.disabled=false; btn.style.opacity='1';} return;}
@@ -2422,35 +2190,17 @@
             document.getElementById("featurePromptInput").placeholder = `जैसे: ${prompt}`;
             document.getElementById("selectedFeatureName").textContent = label;
             document.getElementById("featurePromptArea").classList.add("active");
-
-            const uploadRow = document.getElementById("modalFileUploadRow");
-            if (uploadRow) {
-                if (label === "Document" || label === "Image Gen" || label.includes("Vision")) {
-                    uploadRow.style.display = "flex";
-                } else {
-                    uploadRow.style.display = "none";
-                }
-            }
-
             document.getElementById("featurePromptInput").focus();
         }
 
         function sendFeaturePrompt() {
             const input = document.getElementById("featurePromptInput");
             const prompt = input.value.trim();
-            if (!prompt && !currentAttachedFile) return;
+            if (!prompt || !selectedFeature) return;
             closeFeatureModal();
-
-            if (currentAttachedFile) {
-                inputField.value = prompt;
-                sendSahcharMsg();
-                input.value = "";
-                return;
-            }
-
-            if (selectedFeature?.label === "Image Gen") {
+            if (selectedFeature.label === "Image Gen") {
                 inputField.value = `तस्वीर बनाओ ${prompt}`;
-            } else if (selectedFeature?.label === "Video Gen") {
+            } else if (selectedFeature.label === "Video Gen") {
                 inputField.value = `वीडियो बनाओ ${prompt}`;
             } else {
                 inputField.value = prompt;
